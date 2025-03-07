@@ -1,7 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Toaster } from '@/components/ui/sonner'
@@ -24,17 +23,10 @@ export default function RootLayout({
   return (
     <html lang={lang} suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
           <Navbar currentLanguage={lang} />
           <main>{children}</main>
           <Footer  />
           <Toaster />
-        </ThemeProvider>
       </body>
     </html>
   )
