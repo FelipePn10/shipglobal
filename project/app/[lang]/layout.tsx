@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'ShipGlobal - Seu Redirecionamento Internacional',
-  description: 'Compre em qualquer lugar do mundo e receba no Brasil. Serviço completo de redirecionamento com endereços em 14 países.',
+  description: 'Compre em qualquer lugar do mundo e receba no Brasil. Serviço completo de redirecionamento com endereços em 17 países.',
   keywords: 'redirecionamento internacional, compras internacionais, personal shopper, consolidação de pacotes',
 }
 

@@ -32,11 +32,11 @@ export default function Home({ params }: { params: { lang: string } }) {
     en: {
       title: "Your International Purchases",
       subtitle: "Without Borders",
-      description: "Shop anywhere in the world and receive in Brazil with ease. Addresses in 14 countries, package consolidation, and personalized service.",
+      description: "Shop anywhere in the world and receive in Brazil with ease. Addresses in 17 countries, package consolidation, and personalized service.",
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
-          title: "Addresses in 14 Countries",
+          title: "Addresses in 17 Countries",
           description: "Receive your purchases at dedicated addresses in major global markets"
         },
         {
@@ -59,11 +59,11 @@ export default function Home({ params }: { params: { lang: string } }) {
     pt: {
       title: "Suas Compras Internacionais",
       subtitle: "Sem Fronteiras",
-      description: "Compre em qualquer lugar do mundo de qualquer marca e receba no Brasil com facilidade. Endereços em 14 países, consolidação de pacotes e atendimento personalizado.",
+      description: "Compre em qualquer lugar do mundo de qualquer marca e receba no Brasil com facilidade. Endereços em 17 países, consolidação de pacotes e atendimento personalizado.",
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
-          title: "Endereços em 14 Países",
+          title: "Endereços em 17 Países",
           description: "Receba suas compras em endereços dedicados nos principais mercados globais"
         },
         {
@@ -86,11 +86,11 @@ export default function Home({ params }: { params: { lang: string } }) {
     es: {
       title: "Sus Compras Internacionales",
       subtitle: "Sin Fronteras",
-      description: "Compre en cualquier lugar del mundo y reciba en Brasil con facilidad. Direcciones en 14 países, consolidación de paquetes y atención personalizada.",
+      description: "Compre en cualquier lugar del mundo y reciba en Brasil con facilidad. Direcciones en 17 países, consolidación de paquetes y atención personalizada.",
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
-          title: "Direcciones en 14 Países",
+          title: "Direcciones en 17 Países",
           description: "Reciba sus compras en direcciones dedicadas en los principales mercados globales"
         },
         {
