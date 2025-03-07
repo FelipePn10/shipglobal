@@ -4,10 +4,11 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Package, Menu, X } from 'lucide-react'
+import { Package, Menu, X, Globe } from 'lucide-react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [language, setLanguage] = useState('English') // Estado para o idioma selecionado
 
   const menuItems = [
     { href: '/como-funciona', label: 'Como Funciona' },
@@ -16,6 +17,8 @@ export function Navbar() {
     { href: '/localizacoes', label: 'Localizações' },
     { href: '/contato', label: 'Contato' },
   ]
+
+  const languages = ['English', 'Português', 'Español'] // Lista de idiomas disponíveis
 
   return (
     <nav className="fixed w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 z-50 border-b">
@@ -38,16 +41,46 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            
+
+            {/* Dropdown de idiomas */}
+            <div className="relative">
+              <button
+                className="flex items-center space-x-2 text-sm font-medium hover:text-primary"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <Globe className="h-5 w-5" />
+                <span>{language}</span>
+              </button>
+
+              {/* Menu suspenso de idiomas */}
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg"
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => {
+                        setLanguage(lang)
+                        setIsOpen(false)
+                      }}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </div>
+
             <Button>Área do Cliente</Button>
           </div>
 
           <div className="md:hidden flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(!isOpen)}
-            >
+            <Button onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
@@ -72,6 +105,43 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
+
+          {/* Dropdown de idiomas para mobile */}
+          <div className="px-3 py-2">
+            <div className="relative">
+              <button
+                className="flex items-center space-x-2 text-base font-medium hover:text-primary"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <Globe className="h-5 w-5" />
+                <span>{language}</span>
+              </button>
+
+              {/* Menu suspenso de idiomas para mobile */}
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg"
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang}
+                      className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => {
+                        setLanguage(lang)
+                        setIsOpen(false)
+                      }}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </div>
+          </div>
+
           <div className="px-3 py-2">
             <Button className="w-full">Área do Cliente</Button>
           </div>

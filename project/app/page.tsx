@@ -1,13 +1,15 @@
-"use client"
+"use client";
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Package2, Truck, Clock, Shield } from 'lucide-react'
-import { ShippingCalculator } from '@/components/shipping-calculator'
-import { TestimonialSlider } from '@/components/testimonial-slider'
-import { CoverageMap } from '@/components/coverage-map'
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Package2, Truck, Clock, Shield } from 'lucide-react';
+import { ShippingCalculator } from '@/components/shipping-calculator';
+import { TestimonialSlider } from '@/components/testimonial-slider';
+import { CoverageMap } from '@/components/coverage-map';
+import OneStopService from '@/components/onetopservice';
+import BrandsCarousel from '@/components/brand-carousel';
+import ShippingServices from '@/components/shipping-service';
 
 export default function Home() {
   const benefits = [
@@ -31,12 +33,14 @@ export default function Home() {
       title: "Proteção Garantida",
       description: "Seus pacotes protegidos com seguro completo e garantia de entrega"
     }
-  ]
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-32 pb-20 overflow-hidden" style={{ 
+
+        }}>
         <div className="absolute inset-0 bg-gradient-to-b from-accent/50 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 relative">
           <motion.div
@@ -66,22 +70,41 @@ export default function Home() {
         </div>
       </section>
 
+      <section>
+        <div>
+          <BrandsCarousel />
+        </div>
+      </section>
+
       {/* Coverage Map Section */}
-      <section className="section-container bg-accent/30">
-        <div className="section-content">
-          <div className="text-center mb-16">
-            <h2 className="section-title">Cobertura Global</h2>
-            <p className="section-description">
-              Endereços dedicados nos principais mercados mundiais para suas compras internacionais
-            </p>
-          </div>
+      <section className="bg-accent/30 py-16">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-semibold mb-4">Cobertura Global</h2>
+          <p className="text-xl text-muted-foreground mb-12">
+            Endereços dedicados nos principais mercados mundiais para suas compras internacionais
+          </p>
           <CoverageMap />
         </div>
       </section>
 
+      <section>
+        <div>
+          <ShippingServices />
+        </div>
+      </section>
+
+      {/* OneStopService Section */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+            <OneStopService />
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
-      <section className="section-container bg-background">
-        <div className="section-content">
+      <section className="bg-background py-16">
+        <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -111,30 +134,26 @@ export default function Home() {
       </section>
 
       {/* Shipping Calculator Section */}
-      <section className="section-container bg-accent/30">
-        <div className="section-content">
-          <div className="text-center mb-16">
-            <h2 className="section-title">Calcule o Envio</h2>
-            <p className="section-description">
-              Simule o custo do seu envio internacional em tempo real
-            </p>
-          </div>
+      <section className="bg-accent/30 py-16">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-semibold mb-4">Calcule o Envio</h2>
+          <p className="text-xl text-muted-foreground mb-12">
+            Simule o custo do seu envio internacional em tempo real
+          </p>
           <ShippingCalculator />
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="section-container bg-background">
-        <div className="section-content">
-          <div className="text-center mb-16">
-            <h2 className="section-title">O Que Dizem Nossos Clientes</h2>
-            <p className="section-description">
-              Histórias reais de clientes que confiam em nossos serviços
-            </p>
-          </div>
+      <section className="bg-background py-16">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-semibold mb-4">O Que Dizem Nossos Clientes</h2>
+          <p className="text-xl text-muted-foreground mb-12">
+            Histórias reais de clientes que confiam em nossos serviços
+          </p>
           <TestimonialSlider />
         </div>
       </section>
     </div>
-  )
+  );
 }
