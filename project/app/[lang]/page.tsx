@@ -11,36 +11,114 @@ import OneStopService from '@/components/onetopservice';
 import BrandsCarousel from '@/components/brand-carousel';
 import ShippingServices from '@/components/shipping-service';
 
-export default function Home() {
-  const benefits = [
-    {
-      icon: <Package2 className="h-8 w-8" />,
-      title: "Endereços em 14 Países",
-      description: "Receba suas compras em endereços dedicados nos principais mercados globais"
+export default function Home({ params }: { params: { lang: string } }) {
+  const { lang } = params;
+
+  // Defina os textos com base no idioma
+  type ContentType = {
+    [key: string]: {
+      title: string;
+      subtitle: string;
+      description: string;
+      benefits: {
+        icon: JSX.Element;
+        title: string;
+        description: string;
+      }[];
+    };
+  };
+
+  const content: ContentType = {
+    en: {
+      title: "Your International Purchases",
+      subtitle: "Without Borders",
+      description: "Shop anywhere in the world and receive in Brazil with ease. Addresses in 14 countries, package consolidation, and personalized service.",
+      benefits: [
+        {
+          icon: <Package2 className="h-8 w-8" />,
+          title: "Addresses in 14 Countries",
+          description: "Receive your purchases at dedicated addresses in major global markets"
+        },
+        {
+          icon: <Truck className="h-8 w-8" />,
+          title: "Fast and Secure Shipping",
+          description: "Express delivery with full tracking and included insurance"
+        },
+        {
+          icon: <Clock className="h-8 w-8" />,
+          title: "24/7 Support",
+          description: "Specialized support available every day, anytime"
+        },
+        {
+          icon: <Shield className="h-8 w-8" />,
+          title: "Guaranteed Protection",
+          description: "Your packages protected with full insurance and delivery guarantee"
+        }
+      ]
     },
-    {
-      icon: <Truck className="h-8 w-8" />,
-      title: "Envio Rápido e Seguro",
-      description: "Entrega expressa com rastreamento completo e seguro incluso"
+    pt: {
+      title: "Suas Compras Internacionais",
+      subtitle: "Sem Fronteiras",
+      description: "Compre em qualquer lugar do mundo e receba no Brasil com facilidade. Endereços em 14 países, consolidação de pacotes e atendimento personalizado.",
+      benefits: [
+        {
+          icon: <Package2 className="h-8 w-8" />,
+          title: "Endereços em 14 Países",
+          description: "Receba suas compras em endereços dedicados nos principais mercados globais"
+        },
+        {
+          icon: <Truck className="h-8 w-8" />,
+          title: "Envio Rápido e Seguro",
+          description: "Entrega expressa com rastreamento completo e seguro incluso"
+        },
+        {
+          icon: <Clock className="h-8 w-8" />,
+          title: "Atendimento 24/7",
+          description: "Suporte especializado disponível todos os dias, a qualquer hora"
+        },
+        {
+          icon: <Shield className="h-8 w-8" />,
+          title: "Proteção Garantida",
+          description: "Seus pacotes protegidos com seguro completo e garantia de entrega"
+        }
+      ]
     },
-    {
-      icon: <Clock className="h-8 w-8" />,
-      title: "Atendimento 24/7",
-      description: "Suporte especializado disponível todos os dias, a qualquer hora"
-    },
-    {
-      icon: <Shield className="h-8 w-8" />,
-      title: "Proteção Garantida",
-      description: "Seus pacotes protegidos com seguro completo e garantia de entrega"
+    es: {
+      title: "Sus Compras Internacionales",
+      subtitle: "Sin Fronteras",
+      description: "Compre en cualquier lugar del mundo y reciba en Brasil con facilidad. Direcciones en 14 países, consolidación de paquetes y atención personalizada.",
+      benefits: [
+        {
+          icon: <Package2 className="h-8 w-8" />,
+          title: "Direcciones en 14 Países",
+          description: "Reciba sus compras en direcciones dedicadas en los principales mercados globales"
+        },
+        {
+          icon: <Truck className="h-8 w-8" />,
+          title: "Envío Rápido y Seguro",
+          description: "Entrega expresa con seguimiento completo y seguro incluido"
+        },
+        {
+          icon: <Clock className="h-8 w-8" />,
+          title: "Atención 24/7",
+          description: "Soporte especializado disponible todos los días, a cualquier hora"
+        },
+        {
+          icon: <Shield className="h-8 w-8" />,
+          title: "Protección Garantizada",
+          description: "Sus paquetes protegidos con seguro completo y garantía de entrega"
+        }
+      ]
     }
-  ];
+  };
+
+
+const { title, subtitle, description, benefits } = content[lang] || content.en;
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden" style={{ 
-
-        }}>
+      <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/50 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 relative">
           <motion.div
@@ -50,20 +128,19 @@ export default function Home() {
             className="text-center"
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">
-              Suas Compras Internacionais
+              {title}
               <br />
-              <span className="text-primary">Sem Fronteiras</span>
+              <span className="text-primary">{subtitle}</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12">
-              Compre em qualquer lugar do mundo e receba no Brasil com facilidade.
-              Endereços em 14 países, consolidação de pacotes e atendimento personalizado.
+              {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button size="lg" className="text-lg px-8 py-6">
-                Começar Agora
+                {lang === 'en' ? 'Get Started' : lang === 'pt' ? 'Começar Agora' : 'Comenzar Ahora'}
               </Button>
               <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                Como Funciona
+                {lang === 'en' ? 'How It Works' : lang === 'pt' ? 'Como Funciona' : 'Cómo Funciona'}
               </Button>
             </div>
           </motion.div>

@@ -1,0 +1,32 @@
+{
+  "navbar": {
+    "howItWorks": "How It Works",
+    "services": "Services",
+    "pricing": "Pricing",
+    "locations": "Locations",
+    "contact": "Contact",
+    "clientArea": "Client Area"
+  },
+   "footer": {
+    "about": "About",
+    "howItWorks": "How It Works",
+    "reviews": "Reviews",
+    "jobs": "Jobs",
+    "services": "Services",
+    "personalShopper": "Personal Shopper",
+    "consolidation": "Consolidation",
+    "repackaging": "Repackaging",
+    "returns": "Returns",
+    "support": "Support",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "blog": "Blog",
+    "hours": "Hours",
+    "legal": "Legal",
+    "terms": "Terms of Use",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "lgpd": "LGPD",
+    "rightsReserved": "All rights reserved."
+    }
+}

@@ -2,30 +2,48 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Package, Menu, X, Globe } from 'lucide-react'
+import i18n from '@/i18n'
+import { motion } from 'framer-motion'
 
-export function Navbar() {
+interface NavbarProps {
+  currentLanguage: string
+}
+
+export function Navbar({ currentLanguage }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [language, setLanguage] = useState('English') // Estado para o idioma selecionado
+  const router = useRouter()
 
-  const menuItems = [
-    { href: '/como-funciona', label: 'Como Funciona' },
-    { href: '/servicos', label: 'Serviços' },
-    { href: '/precos', label: 'Preços' },
-    { href: '/localizacoes', label: 'Localizações' },
-    { href: '/contato', label: 'Contato' },
+  // Idiomas suportados
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'pt', name: 'Português' },
+    { code: 'es', name: 'Español' },
   ]
 
-  const languages = ['English', 'Português', 'Español'] // Lista de idiomas disponíveis
+  // Função para trocar o idioma
+  const changeLanguage = (code: string) => {
+    router.push(`/${code}`) // Redireciona para a rota do idioma selecionado
+    setIsOpen(false) // Fecha o dropdown
+  }
+
+  // Itens do menu
+  const menuItems = [
+    { href: `/${currentLanguage}/como-funciona`, label: 'Como Funciona' },
+    { href: `/${currentLanguage}/servicos`, label: 'Serviços' },
+    { href: `/${currentLanguage}/precos`, label: 'Preços' },
+    { href: `/${currentLanguage}/localizacoes`, label: 'Localizações' },
+    { href: `/${currentLanguage}/contato`, label: 'Contato' },
+  ]
 
   return (
     <nav className="fixed w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 z-50 border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href={`/${i18n.language}`} className="flex items-center space-x-2">
               <Package className="h-6 w-6" />
               <span className="font-bold text-xl">ShipGlobal</span>
             </Link>
@@ -49,7 +67,7 @@ export function Navbar() {
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Globe className="h-5 w-5" />
-                <span>{language}</span>
+                <span>{languages.find((lang) => lang.code === currentLanguage)?.name}</span>
               </button>
 
               {/* Menu suspenso de idiomas */}
@@ -62,14 +80,11 @@ export function Navbar() {
                 >
                   {languages.map((lang) => (
                     <button
-                      key={lang}
+                      key={lang.code}
                       className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => {
-                        setLanguage(lang)
-                        setIsOpen(false)
-                      }}
+                      onClick={() => changeLanguage(lang.code)}
                     >
-                      {lang}
+                      {lang.name}
                     </button>
                   ))}
                 </motion.div>
@@ -114,7 +129,7 @@ export function Navbar() {
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Globe className="h-5 w-5" />
-                <span>{language}</span>
+                <span>{languages.find((lang) => lang.code === currentLanguage)?.name}</span>
               </button>
 
               {/* Menu suspenso de idiomas para mobile */}
@@ -127,14 +142,11 @@ export function Navbar() {
                 >
                   {languages.map((lang) => (
                     <button
-                      key={lang}
+                      key={lang.code}
                       className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => {
-                        setLanguage(lang)
-                        setIsOpen(false)
-                      }}
+                      onClick={() => changeLanguage(lang.code)}
                     >
-                      {lang}
+                      {lang.name}
                     </button>
                   ))}
                 </motion.div>
