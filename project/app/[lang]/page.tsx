@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Package2, Truck, Clock, Shield } from 'lucide-react';
+import { Package2, Truck, Clock, Shield, ArrowRight } from 'lucide-react';
 import { ShippingCalculator } from '@/components/shipping-calculator';
 import { TestimonialSlider } from '@/components/testimonial-slider';
 import { CoverageMap } from '@/components/coverage-map';
@@ -115,6 +115,10 @@ export default function Home({ params }: { params: { lang: string } }) {
 
 const { title, subtitle, description, benefits } = content[lang] || content.en;
 
+const cta = {
+  primary: lang === 'en' ? 'Get Started' : lang === 'pt' ? 'Começar Agora' : 'Comenzar Ahora'
+};
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -206,6 +210,26 @@ const { title, subtitle, description, benefits } = content[lang] || content.en;
                 </motion.div>
               </Card>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-r from-primary to-indigo-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <h2 className="text-4xl font-bold mb-6">
+              {lang === 'en' ? 'Ready to Start Shopping Globally?' : 
+               lang === 'pt' ? 'Pronto para Comprar Globalmente?' : 
+               '¿Listo para Comprar Globalmente?'}
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              {lang === 'en' ? 'Join thousands of customers enjoying hassle-free international shopping' : 
+               lang === 'pt' ? 'Junte-se a milhares de clientes aproveitando compras internacionais sem complicações' : 
+               'Únete a miles de clientes disfrutando de compras internacionales sin complicaciones'}
+            </p>
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-6 rounded-xl hover:bg-white/90 transition-all">
+              {cta.primary} <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </motion.div>
         </div>
       </section>
