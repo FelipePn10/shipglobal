@@ -3,13 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
-import { Package, Sun, Moon, Menu, X } from 'lucide-react'
+import { Package, Menu, X } from 'lucide-react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
 
   const menuItems = [
     { href: '/como-funciona', label: 'Como Funciona' },
@@ -20,7 +18,7 @@ export function Navbar() {
   ]
 
   return (
-    <nav className="fixed w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b">
+    <nav className="fixed w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 z-50 border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -40,11 +38,6 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            
-            <Button variant="outline" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
             
             <Button>Área do Cliente</Button>
           </div>
