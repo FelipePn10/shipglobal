@@ -357,7 +357,18 @@ const cta = {
   </div>
 </section>
 
-      <section className="py-20 bg-gradient-to-r from-primary to-indigo-600 text-white">
+      {/* Shipping Calculator Section */}
+      <section className="bg-accent/30 py-16">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-semibold mb-4">Calcule o Envio</h2>
+          <p className="text-xl text-muted-foreground mb-12">
+            Simule o custo do seu envio internacional em tempo real
+          </p>
+          <ShippingCalculator />
+        </div>
+      </section>
+
+            <section className="py-20 bg-gradient-to-r from-primary to-indigo-600 text-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="text-4xl font-bold mb-6">
@@ -374,17 +385,6 @@ const cta = {
               {cta.primary} <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Shipping Calculator Section */}
-      <section className="bg-accent/30 py-16">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-semibold mb-4">Calcule o Envio</h2>
-          <p className="text-xl text-muted-foreground mb-12">
-            Simule o custo do seu envio internacional em tempo real
-          </p>
-          <ShippingCalculator />
         </div>
       </section>
 
