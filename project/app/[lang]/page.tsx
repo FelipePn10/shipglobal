@@ -59,7 +59,7 @@ export default function Home({ params }: { params: { lang: string } }) {
     pt: {
       title: "Suas Compras Internacionais",
       subtitle: "Sem Fronteiras",
-      description: "Compre em qualquer lugar do mundo e receba no Brasil com facilidade. Endereços em 14 países, consolidação de pacotes e atendimento personalizado.",
+      description: "Compre em qualquer lugar do mundo de qualquer marca e receba no Brasil com facilidade. Endereços em 14 países, consolidação de pacotes e atendimento personalizado.",
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
