@@ -43,7 +43,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-blue-500 border-t">
+    <footer className="bg-gradient-to-r from-blue-500 to-blue-800 border-t">
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {footerSections.map((section) => (
