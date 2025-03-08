@@ -7,37 +7,44 @@ import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-// Tipos
-interface Dimensions {
+type Dimensions = {
   length: string;
   width: string;
   height: string;
-}
+};
 
-interface Country {
-  value: string;
-  label: string;
-  flag: string;
-}
-
-interface ShippingMethod {
-  value: string;
-  label: string;
-  icon: React.ReactNode;
-}
-
-interface DeliveryTime {
-  min: number;
-  max: number;
-}
-
-interface CalculationResult {
+type CalculationResult = {
   price: string;
   currency: string;
-  deliveryTime: DeliveryTime;
+  deliveryTime: { min: number; max: number };
   weightUsed: string;
   isVolumetric: boolean;
-}
+};
+
+// Lista de 17 países solicitados
+const countries = [
+  { value: 'US', label: 'United States (EUA)' },
+  { value: 'GB', label: 'United Kingdom (Reino Unido)' },
+  { value: 'CN', label: 'China' },
+  { value: 'JP', label: 'Japan (Japão)' },
+  { value: 'DE', label: 'Germany (Alemanha)' },
+  { value: 'AU', label: 'Australia (Austrália)' },
+  { value: 'CA', label: 'Canada (Canadá)' },
+  { value: 'ES', label: 'Spain (Espanha)' },
+  { value: 'FR', label: 'France (França)' },
+  { value: 'IT', label: 'Italy (Itália)' },
+  { value: 'PT', label: 'Portugal' },
+  { value: 'PY', label: 'Paraguay (Paraguai)' },
+  { value: 'TR', label: 'Turkey (Turquia)' },
+  { value: 'BR', label: 'Brazil (Brasil)' },
+  { value: 'TH', label: 'Thailand (Tailândia)' },
+  { value: 'BE', label: 'Belgium (Bélgica)' },
+];
+
+const shippingMethods = [
+  { value: 'standard', label: 'Standard Shipping', icon: <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h1l1 2h13l1-2h1M5 10V7a2 2 0 012-2h10a2 2 0 012 2v3M5 10v10a2 2 0 002 2h10a2 2 0 002-2V10M9 21h6" /></svg> },
+  { value: 'express', label: 'Express Shipping', icon: <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h1l1 2h13l1-2h1M5 10V7a2 2 0 012-2h10a2 2 0 012 2v3M5 10v10a2 2 0 002 2h10a2 2 0 002-2V10M9 21h6" /></svg> },
+];
 
 export function ShippingCalculator() {
   const [weight, setWeight] = useState<string>('');
@@ -49,125 +56,75 @@ export function ShippingCalculator() {
   const [activeTab, setActiveTab] = useState<'weight' | 'dimensions'>('weight');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const countries: Country[] = [
-    { value: 'us', label: 'Estados Unidos', flag: '' },
-    { value: 'uk', label: 'Reino Unido', flag: '' },
-    { value: 'cn', label: 'China', flag: '' },
-    { value: 'jp', label: 'Japão', flag: '' },
-    { value: 'br', label: 'Brasil', flag: '' },
-    { value: 'de', label: 'Alemanha', flag: '' },
-    { value: 'fr', label: 'França', flag: '' },
-    { value: 'it', label: 'Itália', flag: '' },
-  ];
-
-  const shippingMethods: ShippingMethod[] = [
-    { 
-      value: 'express', 
-      label: 'Expresso (3-5 dias)',
-      icon: (
-        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      )
-    },
-    { 
-      value: 'priority', 
-      label: 'Prioritário (5-7 dias)',
-      icon: (
-        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
-        </svg>
-      )
-    },
-    { 
-      value: 'economic', 
-      label: 'Econômico (10-15 dias)',
-      icon: (
-        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-  ];
-
-  // Validação do formulário
   useEffect(() => {
     if (activeTab === 'weight') {
       setIsFormValid(!!weight && !!fromCountry && !!toCountry && !!shippingMethod);
     } else {
       setIsFormValid(
-        !!dimensions.length && 
-        !!dimensions.width && 
-        !!dimensions.height && 
-        !!fromCountry && 
-        !!toCountry && 
-        !!shippingMethod
+        !!dimensions.length && !!dimensions.width && !!dimensions.height && !!fromCountry && !!toCountry && !!shippingMethod
       );
     }
   }, [weight, dimensions, fromCountry, toCountry, shippingMethod, activeTab]);
 
-  // Simulação de cálculo de frete
-  const calculateShipping = () => {
+  const handleCalculateShipping = async () => {
     setIsCalculating(true);
+    setError(null);
+    setCalculationResult(null); // Limpa o resultado anterior
 
-    setTimeout(() => {
-      const baseRates: Record<string, number> = {
-        express: 45.99,
-        priority: 29.99,
-        economic: 19.99
+    try {
+      const fromAddress = {
+        name: 'Remetente',
+        street1: '123 Main St',
+        city: 'San Francisco',
+        state: 'CA',
+        zip: '94107',
+        country: fromCountry,
       };
-      
-      const countryMultipliers: Record<string, number> = {
-        us: 1.2,
-        uk: 1.3,
-        cn: 1.4,
-        jp: 1.5,
-        br: 1.0,
-        de: 1.3,
-        fr: 1.2,
-        it: 1.25
-      };
-      
-      let volumetricWeight = 0;
-      let actualWeight = parseFloat(weight) || 0;
-      
-      if (activeTab === 'dimensions') {
-        volumetricWeight = (
-          parseFloat(dimensions.length) * 
-          parseFloat(dimensions.width) * 
-          parseFloat(dimensions.height)
-        ) / 5000;
-      }
-      
-      const calculationWeight = activeTab === 'dimensions' 
-        ? Math.max(volumetricWeight, 0.5) 
-        : Math.max(actualWeight, 0.5);
-      
-      const basePrice = baseRates[shippingMethod] || 0;
-      const originMultiplier = countryMultipliers[fromCountry] || 1;
-      const destMultiplier = countryMultipliers[toCountry] || 1;
-      
-      const totalPrice = basePrice * calculationWeight * originMultiplier * destMultiplier;
-      
-      const deliveryTimes: Record<string, DeliveryTime> = {
-        express: { min: 3, max: 5 },
-        priority: { min: 5, max: 7 },
-        economic: { min: 10, max: 15 }
-      };
-      
-      const deliveryTime = deliveryTimes[shippingMethod];
 
-      setCalculationResult({
-        price: totalPrice.toFixed(2),
-        currency: 'R$',
-        deliveryTime,
-        weightUsed: calculationWeight.toFixed(2),
-        isVolumetric: activeTab === 'dimensions' && volumetricWeight > actualWeight
+      const toAddress = {
+        name: 'Destinatário',
+        street1: '456 Elm St',
+        city: 'São Paulo',
+        state: 'SP',
+        zip: '01310-000',
+        country: toCountry,
+      };
+
+      const parcel = {
+        length: dimensions.length || '10',
+        width: dimensions.width || '10',
+        height: dimensions.height || '10',
+        distance_unit: 'cm',
+        weight: weight || '1',
+        mass_unit: 'kg',
+      };
+
+      const response = await fetch('/api/shipping/calculate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fromAddress,
+          toAddress,
+          parcel,
+          shippingMethod,
+        }),
       });
-      
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setCalculationResult(data);
+      } else {
+        setError(data.error || 'Erro ao calcular o frete');
+      }
+    } catch (error) {
+      console.error('Erro ao calcular o frete:', error);
+      setError('Erro ao conectar com o servidor');
+    } finally {
       setIsCalculating(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -189,7 +146,7 @@ export function ShippingCalculator() {
             Calcule o custo de envio internacional com base no peso ou dimensões do seu pacote
           </p>
         </CardHeader>
-        
+
         <CardContent className="p-6">
           <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'weight' | 'dimensions')} className="mb-6">
             <TabsList className="grid w-full grid-cols-2">
@@ -244,7 +201,7 @@ export function ShippingCalculator() {
                 ))}
               </select>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">País de Destino</label>
               <select
@@ -264,16 +221,12 @@ export function ShippingCalculator() {
 
           <div className="mt-6">
             <label className="block text-sm font-medium text-gray-700 mb-1">Método de Envio</label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {shippingMethods.map((method) => (
                 <Button
                   key={method.value}
                   variant={shippingMethod === method.value ? "default" : "outline"}
-                  className={`flex items-center justify-center py-6 ${
-                    shippingMethod === method.value 
-                      ? "bg-indigo-600 hover:bg-indigo-700" 
-                      : "hover:bg-gray-50"
-                  }`}
+                  className={`flex items-center justify-center py-6 ${shippingMethod === method.value ? "bg-indigo-600 hover:bg-indigo-700" : "hover:bg-gray-50"}`}
                   onClick={() => setShippingMethod(method.value)}
                 >
                   {method.icon}
@@ -289,21 +242,33 @@ export function ShippingCalculator() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-6 p-4 bg-gray-50 rounded-lg"
+                className="mt-6 p-6 bg-indigo-50 rounded-lg border border-indigo-200"
               >
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Resultado do Cálculo</h3>
-                <div className="space-y-2">
-                  <p className="text-gray-700">
-                    <span className="font-medium">Custo Total:</span> {calculationResult.currency} {calculationResult.price}
+                <h3 className="text-lg font-semibold text-indigo-900 mb-4">Resultado do Cálculo</h3>
+                <div className="grid grid-cols-1 gap-3 text-gray-800">
+                  <p className="flex justify-between">
+                    <span className="font-medium">Custo:</span>
+                    <span>{calculationResult.currency} {calculationResult.price}</span>
                   </p>
-                  <p className="text-gray-700">
-                    <span className="font-medium">Tempo de Entrega:</span> {calculationResult.deliveryTime.min} a {calculationResult.deliveryTime.max} dias
+                  <p className="flex justify-between">
+                    <span className="font-medium">Prazo de Entrega:</span>
+                    <span>{calculationResult.deliveryTime.min} - {calculationResult.deliveryTime.max} dias</span>
                   </p>
-                  <p className="text-gray-700">
-                    <span className="font-medium">Peso Considerado:</span> {calculationResult.weightUsed} kg
-                    {calculationResult.isVolumetric && " (volumétrico)"}
+                  <p className="flex justify-between">
+                    <span className="font-medium">Peso Considerado:</span>
+                    <span>{calculationResult.weightUsed} kg {calculationResult.isVolumetric ? '(volumétrico)' : ''}</span>
                   </p>
                 </div>
+              </motion.div>
+            )}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-6 p-4 bg-red-50 text-red-700 rounded-lg"
+              >
+                <p>{error}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -311,7 +276,7 @@ export function ShippingCalculator() {
 
         <CardFooter className="p-6 bg-gray-50 flex justify-end">
           <Button
-            onClick={calculateShipping}
+            onClick={handleCalculateShipping}
             disabled={!isFormValid || isCalculating}
             className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400"
           >
