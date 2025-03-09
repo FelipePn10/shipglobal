@@ -32,6 +32,11 @@ export function Navbar({ currentLanguage }: NavbarProps) {
     setIsLangOpen(false) // Fecha o dropdown
   }
 
+  // Redirecionar para a página de autenticação
+  const goToAuthPage = () => {
+    router.push(`/${currentLanguage}/auth`)
+  }
+
   // Itens do menu
   const menuItems = [
     { href: `/${currentLanguage}/como-funciona`, label: 'Como Funciona' },
@@ -156,7 +161,11 @@ export function Navbar({ currentLanguage }: NavbarProps) {
               <Search className="h-5 w-5 text-gray-500" />
             </button>
 
-            <Button className="ml-2 bg-blue-600 hover:bg-blue-700">
+            {/* Botão de área do cliente atualizado para redirecionar para a página de autenticação */}
+            <Button 
+              className="ml-2 bg-blue-600 hover:bg-blue-700"
+              onClick={goToAuthPage}
+            >
               <User className="mr-2 h-4 w-4" />
               Área do Cliente
             </Button>
@@ -265,7 +274,11 @@ export function Navbar({ currentLanguage }: NavbarProps) {
               </div>
 
               <div className="px-3 py-2">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                {/* Botão de área do cliente atualizado para redirecionar para a página de autenticação */}
+                <Button 
+                  className="w-full bg-blue-600 hover:bg-blue-700"
+                  onClick={goToAuthPage}
+                >
                   <User className="mr-2 h-4 w-4" />
                   Área do Cliente
                 </Button>
