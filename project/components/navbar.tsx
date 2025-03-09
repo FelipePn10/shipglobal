@@ -39,7 +39,7 @@ export function Navbar({ currentLanguage }: NavbarProps) {
 
   // Itens do menu
   const menuItems = [
-    { href: `/${currentLanguage}/como-funciona`, label: 'Como Funciona' },
+    { href: `/${currentLanguage}/operation`, label: 'Como Funciona' },
     { href: `/${currentLanguage}/servicos`, label: 'Serviços', hasSubmenu: true, 
       submenu: [
         { href: `/${currentLanguage}/servicos/personal-shopper`, label: 'Personal Shopper' },
@@ -49,8 +49,8 @@ export function Navbar({ currentLanguage }: NavbarProps) {
       ] 
     },
     { href: `/${currentLanguage}/precos`, label: 'Preços' },
-    { href: `/${currentLanguage}/localizacoes`, label: 'Localizações' },
-    { href: `/${currentLanguage}/contato`, label: 'Contato' },
+    { href: `/${currentLanguage}/location`, label: 'Localizações' },
+    { href: `/${currentLanguage}/contact`, label: 'Contato' },
   ]
 
   // Detectar scroll para alterar aparência da navbar
