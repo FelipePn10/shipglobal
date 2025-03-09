@@ -13,11 +13,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// Defina AuthPageProps para incluir params
 interface AuthPageProps {
-  currentLanguage: string
+  params: {
+    lang: string; // O idioma atual vem de params.lang
+  };
 }
 
-export default function AuthPage({ currentLanguage }: AuthPageProps) {
+export default function AuthPage({ params }: AuthPageProps) {
+  const currentLanguage = params.lang; // Extraia o idioma de params
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('login')
