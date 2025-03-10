@@ -199,12 +199,12 @@ export default function AuthPage({ params }: AuthPageProps) {
     }
 
     try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
-        callbackUrl: `/${currentLanguage}/dashboard`, // Redireciona para a página correta
-      });
+     const result = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+      callbackUrl: `/${currentLanguage}/dashboard`,
+    });
 
       if (result?.error) {
         setError(result.error);
