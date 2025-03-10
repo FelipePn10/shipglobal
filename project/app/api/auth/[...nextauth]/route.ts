@@ -1,4 +1,4 @@
-// @ts-nocheck  // Ignora verificações de tipo para este arquivo
-import handler from '../../../../src/auth/auth';
+// @ts-nocheck
+import handler from '../../../../src/auth';
 
 export { handler as GET, handler as POST };

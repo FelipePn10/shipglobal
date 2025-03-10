@@ -1,16 +1,17 @@
 "use client"
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Package, Mail, Lock, Eye, EyeOff, ArrowRight, Globe } from 'lucide-react'
-import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react'; // Importe a função signIn
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Package, Mail, Lock, Eye, EyeOff, ArrowRight, Globe } from 'lucide-react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface AuthPageProps {
   params: {
@@ -167,7 +168,6 @@ export default function AuthPage({ params }: AuthPageProps) {
   { code: 'VA', name: 'Vatican City' }
 ];
 
-
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -177,93 +177,91 @@ export default function AuthPage({ params }: AuthPageProps) {
     return password.length >= 8;
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setError(null);
 
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+  const formData = new FormData(e.currentTarget as HTMLFormElement);
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
 
-    if (!validateEmail(email)) {
-      setError('Por favor, insira um email válido.');
-      setIsLoading(false);
-      return;
+  if (!validateEmail(email)) {
+    setError('Por favor, insira um email válido.');
+    setIsLoading(false);
+    return;
+  }
+
+  if (!validatePassword(password)) {
+    setError('A senha deve ter pelo menos 8 caracteres.');
+    setIsLoading(false);
+    return;
+  }
+
+  try {
+    const result = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+      callbackUrl: `/${currentLanguage}/dashboard`, // Redireciona para a página correta
+    });
+
+    if (result?.error) {
+      setError(result.error);
+    } else {
+      router.push(result?.url || `/${currentLanguage}/dashboard`);
     }
-
-    if (!validatePassword(password)) {
-      setError('A senha deve ter pelo menos 8 caracteres.');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/auth/callback/credentials', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        router.push(`/${currentLanguage}/dashboard`);
-      } else {
-        const errorData = await response.json();
-        setError(errorData.error || 'Erro ao fazer login');
-      }
-    } catch (error) {
-      setError('Erro ao conectar ao servidor');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (error) {
+    setError('Erro ao conectar ao servidor');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+  e.preventDefault();
+  setIsLoading(true);
+  setError(null);
 
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
-    const email = formData.get('reg-email') as string;
-    const password = formData.get('reg-password') as string;
-    const firstName = formData.get('firstName') as string;
-    const lastName = formData.get('lastName') as string;
+  const formData = new FormData(e.currentTarget as HTMLFormElement);
+  const email = formData.get('reg-email') as string;
+  const password = formData.get('reg-password') as string;
+  const firstName = formData.get('firstName') as string;
+  const lastName = formData.get('lastName') as string;
 
-    if (!validateEmail(email)) {
-      setError('Por favor, insira um email válido.');
-      setIsLoading(false);
-      return;
+  if (!validateEmail(email)) {
+    setError('Por favor, insira um email válido.');
+    setIsLoading(false);
+    return;
+  }
+
+  if (!validatePassword(password)) {
+    setError('A senha deve ter pelo menos 8 caracteres.');
+    setIsLoading(false);
+    return;
+  }
+
+  try {
+    const response = await fetch(`/${currentLanguage}/api/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, name: `${firstName} ${lastName}` }),
+    });
+
+    if (response.ok) {
+      router.push(`/${currentLanguage}/dashboard`);
+    } else {
+      const errorData = await response.json();
+      setError(errorData.error || 'Erro ao registrar');
     }
-
-    if (!validatePassword(password)) {
-      setError('A senha deve ter pelo menos 8 caracteres.');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password, name: `${firstName} ${lastName}` }),
-      });
-
-      if (response.ok) {
-        router.push(`/${currentLanguage}/dashboard`);
-      } else {
-        const errorData = await response.json();
-        setError(errorData.error || 'Erro ao registrar');
-      }
-    } catch (error) {
-      setError('Erro ao conectar ao servidor');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (error) {
+    setError('Erro ao conectar ao servidor');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-20 px-4 sm:px-6 flex items-center justify-center">
@@ -549,5 +547,5 @@ export default function AuthPage({ params }: AuthPageProps) {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

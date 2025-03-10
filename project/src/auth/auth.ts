@@ -37,7 +37,6 @@ export const authOptions = {
           throw new Error('Senha incorreta.');
         }
 
-        // Retorne o usuário sem a senha
         return {
           id: user.id.toString(),
           email: user.email,
@@ -48,7 +47,7 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: 'jwt' as const,
+    strategy: 'jwt' as 'jwt' | 'database',
   },
   callbacks: {
     async jwt({ token, user }: { token: any, user?: any }) {
@@ -72,6 +71,7 @@ export const authOptions = {
     signIn: '/auth/login', // Página de login personalizada
     error: '/auth/error',   // Página de erro personalizada
   },
+  basePath: '/api/auth', // Define o caminho base para as rotas do NextAuth.js
 };
 
 const handler = NextAuth(authOptions);
