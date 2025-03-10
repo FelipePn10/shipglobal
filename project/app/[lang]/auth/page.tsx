@@ -168,7 +168,7 @@ export default function AuthPage({ params }: AuthPageProps) {
   { code: 'VA', name: 'Vatican City' }
 ];
 
-  const validateEmail = (email: string) => {
+ const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
@@ -177,92 +177,92 @@ export default function AuthPage({ params }: AuthPageProps) {
     return password.length >= 8;
   };
 
-const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setError(null);
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-  const formData = new FormData(e.currentTarget as HTMLFormElement);
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
-  if (!validateEmail(email)) {
-    setError('Por favor, insira um email válido.');
-    setIsLoading(false);
-    return;
-  }
-
-  if (!validatePassword(password)) {
-    setError('A senha deve ter pelo menos 8 caracteres.');
-    setIsLoading(false);
-    return;
-  }
-
-  try {
-    const result = await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
-      callbackUrl: `/${currentLanguage}/dashboard`, // Redireciona para a página correta
-    });
-
-    if (result?.error) {
-      setError(result.error);
-    } else {
-      router.push(result?.url || `/${currentLanguage}/dashboard`);
+    if (!validateEmail(email)) {
+      setError('Por favor, insira um email válido.');
+      setIsLoading(false);
+      return;
     }
-  } catch (error) {
-    setError('Erro ao conectar ao servidor');
-  } finally {
-    setIsLoading(false);
-  }
-};
+
+    if (!validatePassword(password)) {
+      setError('A senha deve ter pelo menos 8 caracteres.');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+        callbackUrl: `/${currentLanguage}/dashboard`, // Redireciona para a página correta
+      });
+
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        router.push(result?.url || `/${currentLanguage}/dashboard`);
+      }
+    } catch (error) {
+      setError('Erro ao conectar ao servidor');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setError(null);
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-  const formData = new FormData(e.currentTarget as HTMLFormElement);
-  const email = formData.get('reg-email') as string;
-  const password = formData.get('reg-password') as string;
-  const firstName = formData.get('firstName') as string;
-  const lastName = formData.get('lastName') as string;
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const email = formData.get('reg-email') as string;
+    const password = formData.get('reg-password') as string;
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
 
-  if (!validateEmail(email)) {
-    setError('Por favor, insira um email válido.');
-    setIsLoading(false);
-    return;
-  }
-
-  if (!validatePassword(password)) {
-    setError('A senha deve ter pelo menos 8 caracteres.');
-    setIsLoading(false);
-    return;
-  }
-
-  try {
-    const response = await fetch(`/${currentLanguage}/api/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password, name: `${firstName} ${lastName}` }),
-    });
-
-    if (response.ok) {
-      router.push(`/${currentLanguage}/dashboard`);
-    } else {
-      const errorData = await response.json();
-      setError(errorData.error || 'Erro ao registrar');
+    if (!validateEmail(email)) {
+      setError('Por favor, insira um email válido.');
+      setIsLoading(false);
+      return;
     }
-  } catch (error) {
-    setError('Erro ao conectar ao servidor');
-  } finally {
-    setIsLoading(false);
-  }
-};
 
+    if (!validatePassword(password)) {
+      setError('A senha deve ter pelo menos 8 caracteres.');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(`/${currentLanguage}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, name: `${firstName} ${lastName}` }),
+      });
+
+      if (response.ok) {
+        router.push(`/${currentLanguage}/dashboard`);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Erro ao registrar');
+      }
+    } catch (error) {
+      setError('Erro ao conectar ao servidor');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-20 px-4 sm:px-6 flex items-center justify-center">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">

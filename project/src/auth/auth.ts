@@ -15,55 +15,42 @@ export const authOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error('Email e senha são obrigatórios.');
-        }
-
+      async authorize(credentials, req) {
+        if (!credentials) return null;
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-
-        if (!user) {
-          throw new Error('Usuário não encontrado.');
+        if (user && await bcrypt.compare(credentials.password, user.password)) {
+          return {
+            id: user.id.toString(),
+            email: user.email,
+            name: user.name,
+            nationality: user.nationality,
+            phone: user.phone,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+            addressId: user.addressId,
+          };
         }
-
-        const isValidPassword = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isValidPassword) {
-          throw new Error('Senha incorreta.');
-        }
-
-        return {
-          id: user.id.toString(),
-          email: user.email,
-          name: user.name,
-        };
+        return null;
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: 'jwt' as 'jwt' | 'database',
+    strategy: 'jwt' as 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }: { token: any, user?: any }) {
+    async jwt({ token, user }: { token: any, user: any }) {
       if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
+        token.user = user;
       }
       return token;
     },
     async session({ session, token }: { session: any, token: any }) {
-      session.user = {
-        id: token.id as string,
-        email: token.email as string,
-        name: token.name as string,
-      };
+      if (token) {
+        session.user = token.user;
+      }
       return session;
     },
   },
@@ -71,7 +58,6 @@ export const authOptions = {
     signIn: '/auth/login', // Página de login personalizada
     error: '/auth/error',   // Página de erro personalizada
   },
-  basePath: '/api/auth', // Define o caminho base para as rotas do NextAuth.js
 };
 
 const handler = NextAuth(authOptions);
