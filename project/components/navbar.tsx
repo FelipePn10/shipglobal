@@ -42,8 +42,8 @@ export function Navbar({ currentLanguage }: NavbarProps) {
     { href: `/${currentLanguage}/operation`, label: 'Como Funciona' },
     { href: `/${currentLanguage}/servicos`, label: 'Serviços', hasSubmenu: true, 
       submenu: [
-        { href: `/${currentLanguage}/servicos/personal-shopper`, label: 'Personal Shopper' },
-        { href: `/${currentLanguage}/servicos/consolidacao`, label: 'Consolidação' },
+        { href: `/${currentLanguage}/personalshopper`, label: 'Personal Shopper' },
+        { href: `/${currentLanguage}/consolidacao`, label: 'Consolidação' },
         { href: `/${currentLanguage}/servicos/reembalagem`, label: 'Reembalagem' },
         { href: `/${currentLanguage}/servicos/devolucoes`, label: 'Devoluções' }
       ] 
