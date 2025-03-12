@@ -5,7 +5,7 @@ import { CardContent, CardFooter } from '@/components/ui/card';
 import { TabsContent } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
@@ -16,7 +16,6 @@ interface RegisterFormProps {
   isLoading: boolean;
   error: string | null;
   activeTab: 'login' | 'register';
-  handleTabChange: (value: string) => void; // Ajustado para string
   handlePasswordToggle: () => void;
   handleRegister: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -28,7 +27,6 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   isLoading,
   error,
   activeTab,
-  handleTabChange,
   handlePasswordToggle,
   handleRegister,
 }) => {
@@ -57,12 +55,12 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="reg-email">Email</Label>
+                <Label htmlFor="email">Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                   <Input
-                    id="reg-email"
-                    name="reg-email"
+                    id="email"
+                    name="email"
                     type="email"
                     placeholder="seu@email.com"
                     className="pl-10"
@@ -72,12 +70,26 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="reg-password">Senha</Label>
+                <Label htmlFor="phone">Telefone (Opcional)</Label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+55 123 456 7890"
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password">Senha</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                   <Input
-                    id="reg-password"
-                    name="reg-password"
+                    id="password"
+                    name="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Mínimo 8 caracteres"
                     className="pl-10"
@@ -94,10 +106,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="country">País de Origem</Label>
-                <Select name="country" required>
+                <Label htmlFor="nationality">Nacionalidade</Label>
+                <Select name="nationality" required>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione seu país" />
+                    <SelectValue placeholder="Selecione sua nacionalidade" />
                   </SelectTrigger>
                   <SelectContent>
                     {countries.map((country) => (
@@ -107,6 +119,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="address">Endereço (Opcional)</Label>
+                <Input
+                  id="address"
+                  name="address"
+                  placeholder="Rua Exemplo, 123"
+                />
               </div>
 
               <div className="pt-2">

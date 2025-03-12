@@ -1,11 +1,18 @@
-// useDashboard.ts
-import { useState, useEffect } from 'react';
-import { CurrencyCode, countryAddresses, translations, Translations, LanguageCode } from './dashboardData';
+import { useState, useMemo } from 'react';
+import { CurrencyCode, LanguageCode } from './dashboardData';
 
+// Tipagem para os dados do usuário
 interface UserData {
-  suite: string;
   name: string;
-  address: typeof countryAddresses[string];
+  email: string;
+  suite: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+  };
   stats: {
     products: number;
     packages: number;
@@ -14,61 +21,50 @@ interface UserData {
   };
 }
 
-export const useDashboard = () => {
-  const [language, setLanguage] = useState<LanguageCode>('pt');
-  const [currency, setCurrency] = useState<CurrencyCode>('EUR');
-  const [selectedCountry, setSelectedCountry] = useState('United States');
-  const [userData, setUserData] = useState<UserData>({
-    suite: '6037',
-    name: '',
-    address: countryAddresses['United States'],
-    stats: {
-      products: 0,
-      packages: 0,
-      services: 0,
-      shipments: 0,
-    },
-  });
+// Traduções simples
+const translations: Record<string, Record<string, string>> = {
+  en: {
+    dashboard: 'Dashboard',
+    products: 'Products',
+    packages: 'Packages',
+    services: 'Services',
+    shipments: 'Shipments',
+    selectCountry: 'Select Country',
+    yourAddress: 'Your Address',
+    currencies: 'Currencies',
+    latestShipments: 'Latest Shipments',
+    noShipments: 'No shipments yet',
+    freeStorage: 'days free storage',
+  },
+  pt: {
+    dashboard: 'Painel',
+    products: 'Produtos',
+    packages: 'Pacotes',
+    services: 'Serviços',
+    shipments: 'Envios',
+    selectCountry: 'Selecionar País',
+    yourAddress: 'Seu Endereço',
+    currencies: 'Moedas',
+    latestShipments: 'Últimos Envios',
+    noShipments: 'Nenhum envio ainda',
+    freeStorage: 'dias de armazenamento grátis',
+  },
+};
 
-  const fetchUserData = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          suite: '6037',
-          name: 'Felipe',
-          stats: {
-            products: 0,
-            packages: 0,
-            services: 0,
-            shipments: 0,
-          },
-        });
-      }, 1000);
-    });
-  };
+export const useDashboard = ({
+  initialUserData,
+  lang,
+}: {
+  initialUserData: UserData;
+  lang: string;
+}) => {
+  const [language, setLanguage] = useState<LanguageCode>((lang as LanguageCode) || 'en');
+  const [currency, setCurrency] = useState<CurrencyCode>('USD');
+  const [selectedCountry, setSelectedCountry] = useState<string>('United States');
 
-  useEffect(() => {
-    fetchUserData().then((data: any) => {
-      setUserData((prevData) => ({
-        ...prevData,
-        ...data,
-        address: countryAddresses[selectedCountry],
-      }));
-    });
-  }, []);
-
-  useEffect(() => {
-    setUserData((prevData) => ({
-      ...prevData,
-      address: {
-        ...countryAddresses[selectedCountry],
-        street: `${countryAddresses[selectedCountry].street} ${prevData.suite}`,
-      },
-    }));
-  }, [selectedCountry]);
-
-  const t = (key: keyof Translations): string =>
-    translations[key]?.[language] ?? translations[key]?.['en'] ?? key;
+  const t = useMemo(() => {
+    return (key: string) => translations[language]?.[key] || key;
+  }, [language]);
 
   return {
     language,
@@ -77,7 +73,7 @@ export const useDashboard = () => {
     setCurrency,
     selectedCountry,
     setSelectedCountry,
-    userData,
+    userData: initialUserData,
     t,
   };
 };

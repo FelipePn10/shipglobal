@@ -65,11 +65,13 @@ export const useAuth = (lang: string) => {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get('reg-email') as string;
-    const password = formData.get('reg-password') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
     const firstName = formData.get('firstName') as string;
     const lastName = formData.get('lastName') as string;
-    const country = formData.get('country') as string;
+    const phone = formData.get('phone') as string | null;
+    const nationality = formData.get('nationality') as string;
+    const address = formData.get('address') as string | null;
 
     if (!validateEmail(email)) {
       setError('Por favor, insira um email válido.');
@@ -83,26 +85,40 @@ export const useAuth = (lang: string) => {
       return;
     }
 
-    if (!country) {
-      setError('Por favor, selecione um país.');
+    if (!nationality) {
+      setError('Por favor, selecione uma nacionalidade.');
       setIsLoading(false);
       return;
     }
 
     try {
-      const response = await fetch(`/${lang}/api/auth/register`, {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, name: `${firstName} ${lastName}`, country }),
+        body: JSON.stringify({ email, password, name: `${firstName} ${lastName}`, phone, nationality, address }),
       });
 
+      console.log('Resposta do servidor:', response.status, response.statusText); // Log para depuração
+
       if (response.ok) {
-        router.push(`/${lang}/dashboard`);
+        const signInResult = await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+          callbackUrl: `/${lang}/dashboard`,
+        });
+
+        if (signInResult?.error) {
+          setError(signInResult.error);
+        } else {
+          router.push(signInResult?.url || `/${lang}/dashboard`);
+        }
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Erro ao registrar');
       }
     } catch (err) {
+      console.error('Erro na requisição:', err);
       setError('Erro ao conectar ao servidor');
     } finally {
       setIsLoading(false);
