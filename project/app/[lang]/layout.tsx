@@ -20,12 +20,14 @@ export default function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string }; // Tipo síncrono para Server Component
+  params: { lang: string };
 }) {
+  const paramsPromise = Promise.resolve(params);
+
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body className={inter.className}>
-        <Navbar params={Promise.resolve(params)} /> {/* Envolve params em Promise.resolve */}
+        <Navbar params={paramsPromise} />
         <main>{children}</main>
         <Footer />
         <Toaster />
