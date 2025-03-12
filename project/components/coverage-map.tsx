@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
@@ -18,7 +18,7 @@ export function CoverageMap() {
   const [isInfoVisible, setIsInfoVisible] = useState(false)
   
   // Dados das localizações com informações mais detalhadas
-  const locations: LocationData[] = [
+  const locations = useMemo(() => [
     { 
       id: "usa", 
       title: "EUA", 
@@ -211,7 +211,7 @@ export function CoverageMap() {
       price: "A partir de €8.75",
       description: "Hub estratégico central na Europa com benefícios fiscais para envios internacionais."
     },
-  ]
+  ], []);
 
   const filteredLocations = searchQuery 
     ? locations.filter(loc => 
@@ -221,18 +221,18 @@ export function CoverageMap() {
       )
     : locations;
 
+
   useEffect(() => {
-    // Dispose do mapa anterior, se existir
     if (mapRef.current) {
-      mapRef.current.dispose()
+      mapRef.current.dispose();
     }
 
     // Cria a raiz do amCharts
-    const root = am5.Root.new("chartdiv")
-    mapRef.current = root
+    const root = am5.Root.new("chartdiv");
+    mapRef.current = root;
 
     // Configurar tema e preferência de cor
-    root.setThemes([am5themes_Animated.new(root)])
+    root.setThemes([am5themes_Animated.new(root)]);
     
     // Configurações adicionais para responsividade
     root.fps = 60;
@@ -250,13 +250,13 @@ export function CoverageMap() {
         homeZoomLevel: 1.2,
         homeGeoPoint: { longitude: 10, latitude: 25 }
       })
-    )
+    );
 
     // Configura o fundo do mapa com gradiente
     chart.set("background", am5.Rectangle.new(root, {
       fill: am5.color(0xF8FAFC),
       fillOpacity: 1
-    }))
+    }));
 
     // Adiciona a série de polígonos (países)
     const polygonSeries = chart.series.push(
@@ -266,7 +266,7 @@ export function CoverageMap() {
         fill: am5.color(0xE2E8F0),
         stroke: am5.color(0xFFFFFF)
       })
-    )
+    );
 
     // Efeito de hover nos países
     polygonSeries.mapPolygons.template.setAll({
@@ -274,11 +274,11 @@ export function CoverageMap() {
       interactive: true,
       cursorOverStyle: "pointer",
       tooltipText: "{name}"
-    })
+    });
 
     polygonSeries.mapPolygons.template.states.create("hover", {
       fill: am5.color(0x94A3B8)
-    })
+    });
 
     // Destaca os países com localizações
     const includedCountries = locations.map(loc => loc.id.toUpperCase());
@@ -305,7 +305,7 @@ export function CoverageMap() {
         latitudeField: "latitude",
         longitudeField: "longitude"
       })
-    )
+    );
 
     // Template do tooltip
     const tooltipHTML = `
@@ -428,8 +428,8 @@ export function CoverageMap() {
       if (mapRef.current) {
         mapRef.current.dispose();
       }
-    }
-  }, []);
+    };
+  }, [locations]);
 
   const handleLocationSelect = (location: LocationData) => {
     setSelectedLocation(location);

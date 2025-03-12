@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from 'next/image';
 import { motion } from "framer-motion";
 
 const ShippingServices: React.FC = () => {
@@ -12,37 +13,37 @@ const ShippingServices: React.FC = () => {
       name: "FedEx", 
       logo: "project/public/image/R.png",
       description: "Entrega expressa internacional com rastreamento em tempo real",
-      color: "#4d148c" // Roxo da FedEx
+      color: "#4d148c"
     },
     { 
       name: "DHL", 
       logo: "/logos/dhl.png",
       description: "Logística global com prazos de entrega garantidos",
-      color: "#ffcc00" // Amarelo da DHL
+      color: "#ffcc00"
     },
     { 
       name: "Express", 
       logo: "/logos/express.png",
       description: "Serviço econômico com ampla cobertura internacional",
-      color: "#007bff" // Azul genérico
+      color: "#007bff"
     },
     { 
       name: "DPD", 
       logo: "/logos/dpd.png",
       description: "Especialistas em logística com grande cobertura europeia",
-      color: "#dc0032" // Vermelho da DPD
+      color: "#dc0032"
     },
     { 
       name: "ARS", 
       logo: "/logos/ars.png",
       description: "Soluções de envio flexíveis para diferentes necessidades",
-      color: "#ff6b00" // Laranja genérico
+      color: "#ff6b00"
     },
     { 
       name: "Aramex", 
       logo: "/logos/aramex.png",
       description: "Serviço premium com foco em mercados emergentes",
-      color: "#ee1c25" // Vermelho da Aramex
+      color: "#ee1c25"
     },
   ];
 
@@ -120,10 +121,13 @@ const ShippingServices: React.FC = () => {
                         className={`h-20 w-20 rounded-full flex items-center justify-center border-2`}
                         style={{ borderColor: service.color }}
                       >
-                        <img
+                        <Image
                           src={service.logo}
                           alt={service.name}
-                          className="h-12 w-auto object-contain"
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                          priority={index < 3} // Priority loading for first 3 images
                         />
                       </div>
                     </div>

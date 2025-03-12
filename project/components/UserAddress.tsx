@@ -68,8 +68,8 @@ export const UserAddress: React.FC<UserAddressProps> = ({
         <div className="flex items-start space-x-3 bg-blue-50 p-3 rounded-lg text-blue-700 text-sm">
           <AlertCircle className="h-5 w-5 flex-shrink-0" />
           <div>
-            <p className="font-medium"><span className='font-bold'>Informação importante</span></p>
-            <p className="mt-1">Sempre inclua o número da sua suite ao final do endereço ou no campo 'Endereço 2'.</p>
+            <p className="font-medium"><span className="font-bold">Informação importante</span></p>
+            <p className="mt-1">Sempre inclua o número da sua suite ao final do endereço ou no campo &apos;Endereço 2&apos;.</p>
           </div>
         </div>
       </CardContent>

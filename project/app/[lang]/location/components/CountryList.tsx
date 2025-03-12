@@ -63,8 +63,8 @@ export const CountryList: React.FC<CountryListProps> = ({
           ) : (
             <div className="col-span-3 text-center py-10">
               <Info className="w-12 h-12 mx-auto text-gray-300 mb-2" />
-              <p className="text-gray-500">Nenhum país encontrado com o termo "{searchTerm}".</p>
-            </div>
+              <p className="text-gray-500">Nenhum país encontrado com o termo &quot;{searchTerm}&quot;.</p>
+          </div>
           )}
         </div>
       ) : (
