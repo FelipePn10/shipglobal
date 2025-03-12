@@ -1,86 +1,93 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Package, Menu, X, Globe, ChevronDown, User, Search } from 'lucide-react'
-import i18n from '@/i18n'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Package, Menu, X, Globe, ChevronDown, User, Search } from "lucide-react";
+import i18n from "@/i18n";
+import { motion, AnimatePresence } from "framer-motion";
+import { use } from "react";
 
 interface NavbarProps {
-  currentLanguage: string
+  params: Promise<{ lang: string }>;
 }
 
-export function Navbar({ currentLanguage }: NavbarProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isLangOpen, setIsLangOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const langMenuRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
+export function Navbar({ params }: NavbarProps) {
+  const { lang } = use(params);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   // Idiomas suportados
   const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'pt', name: 'Português' },
-    { code: 'es', name: 'Español' },
-  ]
+    { code: "en", name: "English" },
+    { code: "pt", name: "Português" },
+    { code: "es", name: "Español" },
+  ];
 
   // Função para trocar o idioma
   const changeLanguage = (code: string) => {
-    router.push(`/${code}`) // Redireciona para a rota do idioma selecionado
-    setIsLangOpen(false) // Fecha o dropdown
-  }
+    router.push(`/${code}`);
+    setIsLangOpen(false);
+  };
 
   // Redirecionar para a página de autenticação
   const goToAuthPage = () => {
-    router.push(`/${currentLanguage}/auth`)
-  }
+    router.push(`/${lang}/auth`);
+  };
 
   // Itens do menu
   const menuItems = [
-    { href: `/${currentLanguage}/operation`, label: 'Como Funciona' },
-    { href: `/${currentLanguage}/servicos`, label: 'Serviços', hasSubmenu: true, 
+    { href: `/${lang}/operation`, label: "Como Funciona" },
+    {
+      href: `/${lang}/servicos`,
+      label: "Serviços",
+      hasSubmenu: true,
       submenu: [
-        { href: `/${currentLanguage}/personalshopper`, label: 'Personal Shopper' },
-        { href: `/${currentLanguage}/consolidacao`, label: 'Consolidação' },
-        { href: `/${currentLanguage}/servicos/reembalagem`, label: 'Reembalagem' },
-        { href: `/${currentLanguage}/servicos/devolucoes`, label: 'Devoluções' }
-      ] 
+        { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
+        { href: `/${lang}/consolidacao`, label: "Consolidação" },
+        { href: `/${lang}/servicos/reembalagem`, label: "Reembalagem" },
+        { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
+      ],
     },
-    { href: `/${currentLanguage}/precos`, label: 'Preços' },
-    { href: `/${currentLanguage}/location`, label: 'Localizações' },
-    { href: `/${currentLanguage}/contact`, label: 'Contato' },
-  ]
+    { href: `/${lang}/precos`, label: "Preços" },
+    { href: `/${lang}/location`, label: "Localizações" },
+    { href: `/${lang}/contact`, label: "Contato" },
+  ];
 
   // Detectar scroll para alterar aparência da navbar
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Fechar dropdown de idioma ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
-        setIsLangOpen(false)
+        setIsLangOpen(false);
       }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur shadow-md' : 'bg-white/80'
-    } supports-[backdrop-filter]:bg-white/60 border-b border-gray-200`}>
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white/95 backdrop-blur shadow-md" : "bg-white/80"
+      } supports-[backdrop-filter]:bg-white/60 border-b border-gray-200`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href={`/${currentLanguage}`} className="flex items-center space-x-2">
+            <Link href={`/${lang}`} className="flex items-center space-x-2">
               <Package className="h-6 w-6 text-blue-600" />
               <span className="font-bold text-xl">ShipGlobal</span>
             </Link>
@@ -128,7 +135,8 @@ export function Navbar({ currentLanguage }: NavbarProps) {
                 onClick={() => setIsLangOpen(!isLangOpen)}
               >
                 <Globe className="h-4 w-4" />
-                <span>{languages.find((lang) => lang.code === currentLanguage)?.name}</span>
+                {/* Corrigido: lang.code === lang para language.code === lang */}
+                <span>{languages.find((language) => language.code === lang)?.name || "Language"}</span>
                 <ChevronDown className="h-3 w-3" />
               </button>
 
@@ -142,13 +150,13 @@ export function Navbar({ currentLanguage }: NavbarProps) {
                     transition={{ duration: 0.2 }}
                     className="absolute right-0 mt-1 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"
                   >
-                    {languages.map((lang) => (
+                    {languages.map((language) => (
                       <button
-                        key={lang.code}
+                        key={language.code}
                         className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50 hover:text-blue-600"
-                        onClick={() => changeLanguage(lang.code)}
+                        onClick={() => changeLanguage(language.code)}
                       >
-                        {lang.name}
+                        {language.name}
                       </button>
                     ))}
                   </motion.div>
@@ -162,10 +170,7 @@ export function Navbar({ currentLanguage }: NavbarProps) {
             </button>
 
             {/* Botão de área do cliente atualizado para redirecionar para a página de autenticação */}
-            <Button 
-              className="ml-2 bg-blue-600 hover:bg-blue-700"
-              onClick={goToAuthPage}
-            >
+            <Button className="ml-2 bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
               <User className="mr-2 h-4 w-4" />
               Área do Cliente
             </Button>
@@ -176,7 +181,7 @@ export function Navbar({ currentLanguage }: NavbarProps) {
             <button className="p-2 rounded-full hover:bg-gray-100">
               <Search className="h-5 w-5 text-gray-500" />
             </button>
-            <Button 
+            <Button
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               variant="outline"
@@ -203,7 +208,7 @@ export function Navbar({ currentLanguage }: NavbarProps) {
                 <div key={item.href}>
                   {item.hasSubmenu ? (
                     <div className="px-3 py-2">
-                      <button 
+                      <button
                         className="flex items-center justify-between w-full text-base font-medium"
                         onClick={() => {
                           // Aqui você pode adicionar lógica para abrir/fechar submenus no mobile
@@ -245,7 +250,8 @@ export function Navbar({ currentLanguage }: NavbarProps) {
                 >
                   <div className="flex items-center">
                     <Globe className="h-5 w-5 mr-2" />
-                    <span>{languages.find((lang) => lang.code === currentLanguage)?.name}</span>
+                    {/* Corrigido: lang.code === lang para language.code === lang */}
+                    <span>{languages.find((language) => language.code === lang)?.name || "Language"}</span>
                   </div>
                   <ChevronDown className="h-4 w-4" />
                 </button>
@@ -259,13 +265,13 @@ export function Navbar({ currentLanguage }: NavbarProps) {
                       transition={{ duration: 0.2 }}
                       className="mt-2 border-l-2 border-gray-200 pl-4"
                     >
-                      {languages.map((lang) => (
+                      {languages.map((language) => (
                         <button
-                          key={lang.code}
+                          key={language.code}
                           className="block w-full py-2 text-left text-sm text-gray-700"
-                          onClick={() => changeLanguage(lang.code)}
+                          onClick={() => changeLanguage(language.code)}
                         >
-                          {lang.name}
+                          {language.name}
                         </button>
                       ))}
                     </motion.div>
@@ -275,10 +281,7 @@ export function Navbar({ currentLanguage }: NavbarProps) {
 
               <div className="px-3 py-2">
                 {/* Botão de área do cliente atualizado para redirecionar para a página de autenticação */}
-                <Button 
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                  onClick={goToAuthPage}
-                >
+                <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
                   <User className="mr-2 h-4 w-4" />
                   Área do Cliente
                 </Button>
@@ -288,5 +291,5 @@ export function Navbar({ currentLanguage }: NavbarProps) {
         )}
       </AnimatePresence>
     </nav>
-  )
+  );
 }

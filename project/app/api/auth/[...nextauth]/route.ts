@@ -1,20 +1,18 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs'; 
 
-// Importar tipos do NextAuth
 import { Session, JWT } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 
-// Definir a interface para o usuário retornado pelo Prisma, compatível com AdapterUser
 interface User {
   id: number;
   email: string;
   name?: string | null;
   password: string;
   nationality: string;
-  phone?: string | null; 
+  phone?: string | null;
   emailVerified?: Date | null;
 }
 
@@ -92,3 +90,4 @@ export const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

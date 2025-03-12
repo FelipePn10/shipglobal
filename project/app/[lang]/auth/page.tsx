@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { use } from 'react'; // Importe o hook use
 import { useAuth } from './hooks/useAuth';
 import { AuthLayout } from './components/AuthLayout';
 import { BrandingSection } from './components/BrandingSection';
@@ -9,7 +10,8 @@ import { RegisterForm } from './components/RegisterForm';
 import { countries } from './data/countries';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-export default function AuthPage({ params }: { params: { lang: string } }) {
+export default function AuthPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = use(params); // Desembrulha o params com React.use()
   const {
     currentLanguage,
     showPassword,
@@ -20,7 +22,7 @@ export default function AuthPage({ params }: { params: { lang: string } }) {
     handlePasswordToggle,
     handleLogin,
     handleRegister,
-  } = useAuth(params.lang);
+  } = useAuth(lang); // Passe o lang desembrulhado para useAuth
 
   return (
     <AuthLayout>

@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import { use } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -11,10 +12,9 @@ import OneStopService from '@/components/onetopservice';
 import BrandsCarousel from '@/components/brand-carousel';
 import ShippingServices from '@/components/shipping-service';
 
-export default function Home({ params }: { params: { lang: string } }) {
-  const { lang } = params;
+export default function Home({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = use(params);
 
-  // Defina os textos com base no idioma
   type ContentType = {
     [key: string]: {
       title: string;
@@ -30,92 +30,92 @@ export default function Home({ params }: { params: { lang: string } }) {
 
   const content: ContentType = {
     en: {
-      title: "Your International Purchases",
-      subtitle: "Without Borders",
-      description: "Shop anywhere in the world and receive in Brazil with ease. Addresses in 17 countries, package consolidation, and personalized service.",
+      title: 'Your International Purchases',
+      subtitle: 'Without Borders',
+      description: 'Shop anywhere in the world and receive in Brazil with ease. Addresses in 17 countries, package consolidation, and personalized service.',
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
-          title: "Addresses in 17 Countries",
-          description: "Receive your purchases at dedicated addresses in major global markets"
+          title: 'Addresses in 17 Countries',
+          description: 'Receive your purchases at dedicated addresses in major global markets',
         },
         {
           icon: <Truck className="h-8 w-8" />,
-          title: "Fast and Secure Shipping",
-          description: "Express delivery with full tracking and included insurance"
+          title: 'Fast and Secure Shipping',
+          description: 'Express delivery with full tracking and included insurance',
         },
         {
           icon: <Clock className="h-8 w-8" />,
-          title: "24/7 Support",
-          description: "Specialized support available every day, anytime"
+          title: '24/7 Support',
+          description: 'Specialized support available every day, anytime',
         },
         {
           icon: <Shield className="h-8 w-8" />,
-          title: "Guaranteed Protection",
-          description: "Your packages protected with full insurance and delivery guarantee"
-        }
-      ]
+          title: 'Guaranteed Protection',
+          description: 'Your packages protected with full insurance and delivery guarantee',
+        },
+      ],
     },
     pt: {
-      title: "Suas Compras Internacionais",
-      subtitle: "Sem Fronteiras",
-      description: "Compre em qualquer lugar do mundo de qualquer marca e receba no Brasil com facilidade. Endereços em 17 países, consolidação de pacotes e atendimento personalizado.",
+      title: 'Suas Compras Internacionais',
+      subtitle: 'Sem Fronteiras',
+      description: 'Compre em qualquer lugar do mundo de qualquer marca e receba no Brasil com facilidade. Endereços em 17 países, consolidação de pacotes e atendimento personalizado.',
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
-          title: "Endereços em 17 Países",
-          description: "Receba suas compras em endereços dedicados nos principais mercados globais"
+          title: 'Endereços em 17 Países',
+          description: 'Receba suas compras em endereços dedicados nos principais mercados globais',
         },
         {
           icon: <Truck className="h-8 w-8" />,
-          title: "Envio Rápido e Seguro",
-          description: "Entrega expressa com rastreamento completo e seguro incluso"
+          title: 'Envio Rápido e Seguro',
+          description: 'Entrega expressa com rastreamento completo e seguro incluso',
         },
         {
           icon: <Clock className="h-8 w-8" />,
-          title: "Atendimento 24/7",
-          description: "Suporte especializado disponível todos os dias, a qualquer hora"
+          title: 'Atendimento 24/7',
+          description: 'Suporte especializado disponível todos os dias, a qualquer hora',
         },
         {
           icon: <Shield className="h-8 w-8" />,
-          title: "Proteção Garantida",
-          description: "Seus pacotes protegidos com seguro completo e garantia de entrega"
-        }
-      ]
+          title: 'Proteção Garantida',
+          description: 'Seus pacotes protegidos com seguro completo e garantia de entrega',
+        },
+      ],
     },
     es: {
-      title: "Sus Compras Internacionales",
-      subtitle: "Sin Fronteras",
-      description: "Compre en cualquier lugar del mundo y reciba en Brasil con facilidad. Direcciones en 17 países, consolidación de paquetes y atención personalizada.",
+      title: 'Sus Compras Internacionales',
+      subtitle: 'Sin Fronteiras',
+      description: 'Compre en cualquier lugar del mundo y reciba en Brasil con facilidad. Direcciones en 17 países, consolidación de paquetes y atención personalizada.',
       benefits: [
         {
           icon: <Package2 className="h-8 w-8" />,
-          title: "Direcciones en 17 Países",
-          description: "Reciba sus compras en direcciones dedicadas en los principales mercados globales"
+          title: 'Direcciones en 17 Países',
+          description: 'Reciba sus compras en direcciones dedicadas en los principales mercados globales',
         },
         {
           icon: <Truck className="h-8 w-8" />,
-          title: "Envío Rápido y Seguro",
-          description: "Entrega expresa con seguimiento completo y seguro incluido"
+          title: 'Envío Rápido y Seguro',
+          description: 'Entrega expresa con seguimiento completo y seguro incluido',
         },
         {
           icon: <Clock className="h-8 w-8" />,
-          title: "Atención 24/7",
-          description: "Soporte especializado disponible todos los días, a cualquier hora"
+          title: 'Atención 24/7',
+          description: 'Soporte especializado disponible todos los días, a qualquer hora',
         },
         {
           icon: <Shield className="h-8 w-8" />,
-          title: "Protección Garantizada",
-          description: "Sus paquetes protegidos con seguro completo y garantía de entrega"
-        }
-      ]
-    }
+          title: 'Protección Garantizada',
+          description: 'Sus paquetes protegidos con seguro completo y garantía de entrega',
+        },
+      ],
+    },
   };
 
   const { title, subtitle, description, benefits } = content[lang] || content.en;
 
   const cta = {
-    primary: lang === 'en' ? 'Get Started' : lang === 'pt' ? 'Começar Agora' : 'Comenzar Ahora'
+    primary: lang === 'en' ? 'Get Started' : lang === 'pt' ? 'Começar Agora' : 'Comenzar Ahora',
   };
 
   return (
@@ -232,10 +232,10 @@ export default function Home({ params }: { params: { lang: string } }) {
                 <motion.div
                   whileHover={{
                     y: -10,
-                    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                    backgroundColor: "var(--background-card-hover)"
+                    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                    backgroundColor: 'var(--background-card-hover)',
                   }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   className="h-full border bg-card rounded-2xl overflow-hidden"
                 >
                   <div className="h-2 bg-gradient-to-r from-primary to-primary/60"></div>
@@ -263,14 +263,14 @@ export default function Home({ params }: { params: { lang: string } }) {
                     >
                       <motion.a
                         whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
+                        transition={{ type: 'spring', stiffness: 400 }}
                         href="#"
                         className="inline-flex items-center text-sm font-medium text-primary"
                       >
                         Saiba mais
                         <motion.svg
                           animate={{ x: [0, 3, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
+                          transition={{ duration: 1.5, repeat: Infinity, repeatType: 'loop' }}
                           className="ml-1 h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -307,7 +307,7 @@ export default function Home({ params }: { params: { lang: string } }) {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               <a
                 href="#contact"
@@ -330,19 +330,31 @@ export default function Home({ params }: { params: { lang: string } }) {
           >
             <div className="flex items-center">
               <svg className="h-5 w-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span>Mais de 10.000 clientes satisfeitos</span>
             </div>
             <div className="flex items-center">
               <svg className="h-5 w-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span>Presença em 50+ países</span>
             </div>
             <div className="flex items-center">
               <svg className="h-5 w-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span>Suporte 24/7</span>
             </div>
@@ -357,9 +369,11 @@ export default function Home({ params }: { params: { lang: string } }) {
             {lang === 'en' ? 'Calculate Your Shipping' : lang === 'pt' ? 'Calcule o Envio' : 'Calcula tu Envío'}
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
-            {lang === 'en' ? 'Simulate your international shipping cost in real-time' : 
-             lang === 'pt' ? 'Simule o custo do seu envio internacional em tempo real' : 
-             'Simula el costo de tu envío internacional en tiempo real'}
+            {lang === 'en'
+              ? 'Simulate your international shipping cost in real-time'
+              : lang === 'pt'
+              ? 'Simule o custo do seu envio internacional em tempo real'
+              : 'Simula el costo de tu envío internacional en tiempo real'}
           </p>
           <ShippingCalculator />
         </div>
@@ -369,14 +383,14 @@ export default function Home({ params }: { params: { lang: string } }) {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="text-4xl font-bold mb-6">
-              {lang === 'en' ? 'Ready to Start Shopping Globally?' : 
-               lang === 'pt' ? 'Pronto para Comprar Globalmente?' : 
-               '¿Listo para Comprar Globalmente?'}
+              {lang === 'en' ? 'Ready to Start Shopping Globally?' : lang === 'pt' ? 'Pronto para Comprar Globalmente?' : '¿Listo para Comprar Globalmente?'}
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              {lang === 'en' ? 'Join thousands of customers enjoying hassle-free international shopping' : 
-               lang === 'pt' ? 'Junte-se a milhares de clientes aproveitando compras internacionais sem complicações' : 
-               'Únete a miles de clientes disfrutando de compras internacionales sin complicaciones'}
+              {lang === 'en'
+                ? 'Join thousands of customers enjoying hassle-free international shopping'
+                : lang === 'pt'
+                ? 'Junte-se a milhares de clientes aproveitando compras internacionais sem complicações'
+                : 'Únete a miles de clientes disfrutando de compras internacionales sin complicaciones'}
             </p>
             <Button size="lg" variant="secondary" className="text-lg px-8 py-6 rounded-xl hover:bg-white/90 transition-all">
               {cta.primary} <ArrowRight className="ml-2 h-5 w-5" />
@@ -392,9 +406,11 @@ export default function Home({ params }: { params: { lang: string } }) {
             {lang === 'en' ? 'What Our Clients Say' : lang === 'pt' ? 'O Que Dizem Nossos Clientes' : 'Qué Dicen Nuestros Clientes'}
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
-            {lang === 'en' ? 'Real stories from clients who trust our services' : 
-             lang === 'pt' ? 'Histórias reais de clientes que confiam em nossos serviços' : 
-             'Historias reales de clientes que confían en nuestros servicios'}
+            {lang === 'en'
+              ? 'Real stories from clients who trust our services'
+              : lang === 'pt'
+              ? 'Histórias reais de clientes que confiam em nossos serviços'
+              : 'Historias reales de clientes que confían en nuestros servicios'}
           </p>
           <TestimonialSlider />
         </div>
