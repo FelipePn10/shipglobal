@@ -1,4 +1,5 @@
 export interface Country {
+  [x: string]: string;
   id: number;
   name: string;
   englishName: string;

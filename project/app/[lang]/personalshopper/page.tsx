@@ -7,6 +7,7 @@ import { ShoppingBag, Globe, CreditCard, TruckIcon, CheckCircle } from 'lucide-r
 const PersonalShopperPage = () => {
   const [activeTab, setActiveTab] = useState('como-funciona');
 
+const [selectedPlan, setSelectedPlan] = useState('premium');
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section */}
@@ -898,22 +899,43 @@ const PersonalShopperPage = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Plano de Interesse</label>
-                    <div className="space-y-3">
-                      <label className="flex items-center">
-                        <input type="radio" name="plano" value="basico" className="h-5 w-5 text-blue-600 focus:ring-blue-500" />
-                        <span className="ml-2 text-gray-700">Plano Básico (10%)</span>
-                      </label>
-                      <label className="flex items-center">
-                        <input type="radio" name="plano" value="premium" className="h-5 w-5 text-blue-600 focus:ring-blue-500" checked />
-                        <span className="ml-2 text-gray-700">Plano Premium (8%)</span>
-                      </label>
-                      <label className="flex items-center">
-                        <input type="radio" name="plano" value="empresarial" className="h-5 w-5 text-blue-600 focus:ring-blue-500" />
-                        <span className="ml-2 text-gray-700">Plano Empresarial (6%)</span>
-                      </label>
-                    </div>
-                  </div>
+  <label className="block text-sm font-medium text-gray-700 mb-3">Plano de Interesse</label>
+  <div className="space-y-3">
+    <label className="flex items-center">
+      <input
+        type="radio"
+        name="plano"
+        value="basico"
+        className="h-5 w-5 text-blue-600 focus:ring-blue-500"
+        checked={selectedPlan === 'basico'}
+        onChange={() => setSelectedPlan('basico')}
+      />
+      <span className="ml-2 text-gray-700">Plano Básico (10%)</span>
+    </label>
+    <label className="flex items-center">
+      <input
+        type="radio"
+        name="plano"
+        value="premium"
+        className="h-5 w-5 text-blue-600 focus:ring-blue-500"
+        checked={selectedPlan === 'premium'}
+        onChange={() => setSelectedPlan('premium')}
+      />
+      <span className="ml-2 text-gray-700">Plano Premium (8%)</span>
+    </label>
+    <label className="flex items-center">
+      <input
+        type="radio"
+        name="plano"
+        value="empresarial"
+        className="h-5 w-5 text-blue-600 focus:ring-blue-500"
+        checked={selectedPlan === 'empresarial'}
+        onChange={() => setSelectedPlan('empresarial')}
+      />
+      <span className="ml-2 text-gray-700">Plano Empresarial (6%)</span>
+    </label>
+  </div>
+</div>
                   
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
