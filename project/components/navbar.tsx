@@ -49,7 +49,7 @@ export function Navbar({ params }: NavbarProps) {
       submenu: [
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
         { href: `/${lang}/consolidacao`, label: "Consolidação" },
-        { href: `/${lang}/servicos/reembalagem`, label: "Reembalagem" },
+        { href: `/${lang}/repackaging`, label: "Reembalagem" },
         { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
       ],
     },
@@ -280,7 +280,6 @@ export function Navbar({ params }: NavbarProps) {
               </div>
 
               <div className="px-3 py-2">
-                {/* Botão de área do cliente atualizado para redirecionar para a página de autenticação */}
                 <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
                   <User className="mr-2 h-4 w-4" />
                   Área do Cliente

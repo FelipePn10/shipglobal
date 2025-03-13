@@ -26,7 +26,7 @@ export default async function DashboardPage({ params }: { params: { lang: string
   const userData = {
     name: user.name || 'Usuário',
     email: user.email,
-    suite: 'SGL' + user.id.toString().padStart(4, '0'), // Exemplo: SGL0001
+    suite: 'SGL' + user.id.toString().padStart(4, '0'),
     address: user.address
       ? {
           street: user.address.street,
@@ -44,6 +44,5 @@ export default async function DashboardPage({ params }: { params: { lang: string
     },
   };
 
-  // Passamos os dados para o Client Component
   return <DashboardClient initialUserData={userData} lang={params.lang} />;
 }
