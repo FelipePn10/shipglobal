@@ -49,7 +49,7 @@ export function Navbar({ params }: NavbarProps) {
       submenu: [
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
         { href: `/${lang}/consolidacao`, label: "Consolidação" },
-        { href: `/${lang}/repackaging`, label: "Reembalagem" },
+        //{ href: `/${lang}/repackaging`, label: "Reembalagem" },
         { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
       ],
     },

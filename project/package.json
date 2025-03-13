@@ -10,6 +10,7 @@
   "dependencies": {
     "@amcharts/amcharts5": "^5.8.2",
     "@amcharts/amcharts5-geodata": "^5.1.2",
+    "@headlessui/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.0",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@next/swc-wasm-nodejs": "13.5.1",
@@ -59,7 +60,7 @@
     "encoding": "^0.1.13",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.1",
-    "framer-motion": "^11.18.2",
+    "framer-motion": "^12.5.0",
     "i18next": "^24.2.2",
     "i18next-http-backend": "^3.0.2",
     "image-minimizer-webpack-plugin": "^4.1.3",
