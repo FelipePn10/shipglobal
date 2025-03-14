@@ -23,7 +23,7 @@ export default async function RootLayout({
   params: { lang: string };
 }) {
   const lang = params.lang;
-
+  
   return (
     <html lang={lang} suppressHydrationWarning>
       <body className={inter.className}>

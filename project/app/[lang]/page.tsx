@@ -1,9 +1,8 @@
 'use client';
 
-import { use } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Package2, Truck, Clock, Shield, ArrowRight } from 'lucide-react';
 import { ShippingCalculator } from '@/components/shipping-calculator';
 import { TestimonialSlider } from '@/components/testimonial-slider';
@@ -13,8 +12,9 @@ import BrandsCarousel from '@/components/brand-carousel';
 import ShippingServices from '@/components/shipping-service';
 import Link from 'next/link';
 
-export default function Home({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = use(params);
+// Importante: Na versão atualizada do Next.js, os params não precisam ser awaited em uma página client
+export default function Home({ params }: { params: { lang: string } }) {
+  const { lang } = params;
 
   type ContentType = {
     [key: string]: {

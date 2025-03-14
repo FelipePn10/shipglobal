@@ -1,44 +1,72 @@
-import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+"use client";
+import React, { useEffect, useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useTranslation } from 'react-i18next'; // Corrigido de 'next-i18next' para 'react-i18next'
 
-interface StatsCardProps {
-  title: string;
-  value: number;
+interface ServiceCardProps {
+  color: string;
   icon: React.ReactNode;
-  color: 'blue' | 'rose' | 'amber' | 'emerald';
+  title: string;
+  description: string;
+  index: number;
+  path: string;
 }
 
-export const StatsCard: React.FC<StatsCardProps> = ({ title, value, icon, color }) => {
-  const getColorClasses = () => {
-    switch (color) {
-      case 'blue':
-        return { bg: 'bg-blue-100', text: 'text-blue-600', icon: 'bg-blue-500' };
-      case 'rose':
-        return { bg: 'bg-rose-100', text: 'text-rose-600', icon: 'bg-rose-500' };
-      case 'amber':
-        return { bg: 'bg-amber-100', text: 'text-amber-600', icon: 'bg-amber-500' };
-      case 'emerald':
-        return { bg: 'bg-emerald-100', text: 'text-emerald-600', icon: 'bg-emerald-500' };
-      default:
-        return { bg: 'bg-gray-100', text: 'text-gray-600', icon: 'bg-gray-500' };
+const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, description, index, path }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const controls = useAnimation();
+  const router = useRouter();
+  const { t } = useTranslation('common');
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
     }
+  }, [isInView, controls]);
+
+  const handleLearnMore = () => {
+    router.push(path);
   };
-  
-  const colors = getColorClasses();
-  
+
   return (
-    <Card className={`${colors.bg} border-0`}>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className={`${colors.text} text-sm font-medium mb-1`}>{title}</p>
-            <p className="text-3xl font-bold">{value}</p>
-          </div>
-          <div className={`${colors.icon} text-white p-3 rounded-lg`}>
-            {icon}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={{
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.6,
+            delay: index * 0.2,
+            ease: "easeOut"
+          }
+        }
+      }}
+      className={`flex flex-col md:flex-row items-start gap-6 p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 ${color}`}
+    >
+      <div className={`flex-shrink-0 rounded-full p-4 ${color.replace('border-l', 'bg')}`}>
+        {icon}
+      </div>
+     
+      <div className="flex flex-col">
+        <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+        <p className="mt-3 text-base text-gray-600">{description}</p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleLearnMore}
+          className={`mt-4 self-start px-4 py-2 rounded-full text-sm font-medium text-white ${color.replace('border-l', 'bg')}`}
+        >
+          {t('service.learnMore', 'Learn More')} {/* Adicionando fallback text */}
+        </motion.button>
+      </div>
+    </motion.div>
   );
 };
+
+export default ServiceCard;
