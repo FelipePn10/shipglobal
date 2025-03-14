@@ -1,4 +1,5 @@
-{"footer": {
+{
+  "footer": {
     "about": "Sobre",
     "howItWorks": "Cómo Funciona",
     "reviews": "Reseñas",
@@ -19,5 +20,99 @@
     "cookies": "Cookies",
     "lgpd": "LGPD",
     "rightsReserved": "Todos los derechos reservados."
+  },
+  "pricing": {
+    "title": "Planes y Precios",
+    "description": "Elige el plan que mejor se adapte a tus necesidades de compras internacionales. Los suscriptores desbloquean beneficios exclusivos.",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "save20": "Ahorra 20%",
+    "plans": {
+      "basic": {
+        "name": "Básico",
+        "description": "Ideal para quienes comienzan con compras internacionales",
+        "period": "gratis",
+        "benefits": {
+          "countries": "Acceso a todos los 17 países",
+          "countriesDesc": "Compra en cualquiera de nuestras tiendas internacionales",
+          "shipping": "Envío mundial",
+          "shippingDesc": "Envía a cualquier lugar del mundo",
+          "fees": "Tarifas estándar",
+          "feesDesc": "Tarifas estándar de envío y reenvío"
+        }
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Perfecto para quienes compran internacionalmente con regularidad",
+        "period": "por {period}",
+        "popular": "Más Popular",
+        "benefits": {
+          "countries": "Acceso a todos los 17 países",
+          "countriesDesc": "Compra en cualquiera de nuestras tiendas internacionales",
+          "shipping": "Envío mundial",
+          "shippingDesc": "Envía a cualquier lugar del mundo",
+          "discount": "10% de descuento en envíos",
+          "discountDesc": "Ahorro en todos tus envíos",
+          "support": "Soporte prioritario",
+          "supportDesc": "Atención preferencial para tus consultas",
+          "gifts": "Regalos exclusivos",
+          "giftsDesc": "Recibe regalos en fechas especiales"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "La elección definitiva para entusiastas de las compras internacionales",
+        "period": "por {period}",
+        "benefits": {
+          "countries": "Acceso a todos los 17 países",
+          "countriesDesc": "Compra en cualquiera de nuestras tiendas internacionales",
+          "shipping": "Envío mundial",
+          "shippingDesc": "Envía a cualquier lugar del mundo",
+          "discount": "20% de descuento en envíos",
+          "discountDesc": "Ahorro máximo en todos tus envíos",
+          "support": "Soporte VIP 24/7",
+          "supportDesc": "Atención exclusiva en cualquier momento",
+          "cashback": "Reembolso en compras",
+          "cashbackDesc": "3% de reembolso en todas tus compras",
+          "exclusive": "Beneficios exclusivos",
+          "exclusiveDesc": "Descuentos con socios y promociones exclusivas"
+        }
+      }
+    },
+    "startNow": "Comenzar Ahora",
+    "subscribe": "Suscribirse al Plan",
+    "benefits": "Beneficios Incluidos",
+    "globalCoverage": {
+      "title": "Cobertura Global",
+      "description": "Nuestros servicios están disponibles en 17 países, ¡permitiéndote comprar desde donde quieras y enviar a cualquier parte del mundo!",
+      "moreCountries": "+5 países"
+    },
+    "contact": {
+      "title": "¿Todavía tienes dudas?",
+      "description": "¡Estamos aquí para ayudarte! Contacta con nuestro equipo de atención al cliente.",
+      "contactUs": "Contáctanos",
+      "viewFAQ": "Ver Preguntas Frecuentes"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "description": "Encuentra respuestas a las preguntas más comunes sobre nuestros planes y servicios.",
+      "items": {
+        "faq1Question": "¿Es necesario tener una suscripción para usar ShipGlobal?",
+        "faq1Answer": "No, nuestro plan básico es completamente gratuito. Puedes usar nuestros servicios sin costo adicional, pero los planes pagos ofrecen beneficios exclusivos y descuentos significativos.",
+        "faq2Question": "¿Puedo cancelar mi suscripción en cualquier momento?",
+        "faq2Answer": "Sí, puedes cancelar tu suscripción en cualquier momento sin costos adicionales. El acceso a los beneficios continuará hasta el final del período pagado.",
+        "faq3Question": "¿Qué métodos de pago se aceptan?",
+        "faq3Answer": "Aceptamos tarjetas de crédito, débito, PayPal, Pix y boleto bancario para pagos en Brasil. Para otros países, aceptamos tarjetas internacionales y PayPal.",
+        "faq4Question": "¿Cómo funciona el descuento en envíos?",
+        "faq4Answer": "Los descuentos se aplican automáticamente al momento del pago cuando estás conectado a tu cuenta con una suscripción activa. El descuento se calcula sobre el costo total del envío.",
+        "faq5Question": "¿Puedo cambiar de plan después de suscribirme?",
+        "faq5Answer": "Sí, puedes hacer un upgrade o downgrade de tu plan en cualquier momento. Los cambios entran en vigor de inmediato, con ajustes proporcionales al costo."
+      }
+    },
+    "cta": {
+      "title": "¡Comienza tu viaje global hoy!",
+      "description": "Únete a miles de clientes satisfechos que ya han desbloqueado el poder de las compras internacionales con ShipGlobal.",
+      "tryFree": "Prueba Gratis"
+    }
   }
 }

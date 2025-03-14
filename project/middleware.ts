@@ -2,19 +2,33 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  const { pathname } = request.nextUrl;
 
-  // Ignora rotas do NextAuth.js e outras rotas de API
-  if (pathname.startsWith('/api/auth') || pathname.startsWith('/api/')) {
+  // Skip middleware for API routes, static files, and images
+  if (
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next/static') ||
+    pathname.startsWith('/_next/image') ||
+    pathname === '/favicon.ico'
+  ) {
     return NextResponse.next();
   }
 
-  // Redireciona a raiz (`/`) para o idioma padrão (`/en`)
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/en', request.url));
+  // Define supported languages
+  const supportedLanguages = ['en', 'pt', 'es'];
+  const defaultLanguage = 'en';
+
+  // Extract the language from the pathname
+  const pathParts = pathname.split('/');
+  const lang = pathParts[1]; // First segment after the root (e.g., "en" in "/en/price")
+
+  // If no language prefix or unsupported language, redirect to default language
+  if (!lang || !supportedLanguages.includes(lang)) {
+    const newPath = `/${defaultLanguage}${pathname === '/' ? '' : pathname}`;
+    return NextResponse.redirect(new URL(newPath, request.url));
   }
 
-  // Continua com a requisição normal
+  // Proceed with the request if language is valid
   return NextResponse.next();
 }
 

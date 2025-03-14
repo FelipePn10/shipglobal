@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Caution: This should be removed after fixing TypeScript errors
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

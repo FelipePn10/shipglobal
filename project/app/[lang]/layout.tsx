@@ -20,14 +20,12 @@ export default function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
-  const paramsPromise = Promise.resolve(params);
-
   return (
-    <html lang={params.lang} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning> {/* Fallback to 'en' until params is resolved */}
       <body className={inter.className}>
-        <Navbar params={paramsPromise} />
+        <Navbar params={params} /> {/* Pass the Promise directly */}
         <main>{children}</main>
         <Footer />
         <Toaster />

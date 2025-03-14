@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Package, Menu, X, Globe, ChevronDown, User, Search } from "lucide-react";
-import i18n from "@/i18n";
+import i18next from "@/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { use } from "react";
 
@@ -14,32 +14,35 @@ interface NavbarProps {
 }
 
 export function Navbar({ params }: NavbarProps) {
-  const { lang } = use(params);
+  const { lang } = use(params); // Resolve the params Promise
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const langMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Idiomas suportados
+  // Supported languages
   const languages = [
     { code: "en", name: "English" },
     { code: "pt", name: "Português" },
     { code: "es", name: "Español" },
   ];
 
-  // Função para trocar o idioma
+  // Function to change the language
   const changeLanguage = (code: string) => {
-    router.push(`/${code}`);
+    i18next.changeLanguage(code).catch((err) => {
+      console.error("Failed to change language:", err);
+    });
+    router.push(`/${code}`); // Navigate to the root of the new language
     setIsLangOpen(false);
   };
 
-  // Redirecionar para a página de autenticação
+  // Redirect to the authentication page
   const goToAuthPage = () => {
     router.push(`/${lang}/auth`);
   };
 
-  // Itens do menu
+  // Menu items
   const menuItems = [
     { href: `/${lang}/operation`, label: "Como Funciona" },
     {
@@ -49,7 +52,7 @@ export function Navbar({ params }: NavbarProps) {
       submenu: [
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
         { href: `/${lang}/consolidacao`, label: "Consolidação" },
-        //{ href: `/${lang}/repackaging`, label: "Reembalagem" },
+        // { href: `/${lang}/repackaging`, label: "Reembalagem" }, // Commented out
         { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
       ],
     },
@@ -58,7 +61,7 @@ export function Navbar({ params }: NavbarProps) {
     { href: `/${lang}/contact`, label: "Contato" },
   ];
 
-  // Detectar scroll para alterar aparência da navbar
+  // Detect scroll to change navbar appearance
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -67,7 +70,7 @@ export function Navbar({ params }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fechar dropdown de idioma ao clicar fora
+  // Close language dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
@@ -111,7 +114,7 @@ export function Navbar({ params }: NavbarProps) {
                   </Link>
                 )}
 
-                {/* Submenu para desktop */}
+                {/* Submenu for desktop */}
                 {item.hasSubmenu && (
                   <div className="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     {item.submenu?.map((subItem) => (
@@ -128,19 +131,18 @@ export function Navbar({ params }: NavbarProps) {
               </div>
             ))}
 
-            {/* Dropdown de idiomas para desktop */}
+            {/* Language dropdown for desktop */}
             <div className="relative" ref={langMenuRef}>
               <button
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium hover:text-blue-600 hover:bg-gray-50 rounded-md"
                 onClick={() => setIsLangOpen(!isLangOpen)}
               >
                 <Globe className="h-4 w-4" />
-                {/* Corrigido: lang.code === lang para language.code === lang */}
                 <span>{languages.find((language) => language.code === lang)?.name || "Language"}</span>
                 <ChevronDown className="h-3 w-3" />
               </button>
 
-              {/* Menu suspenso de idiomas */}
+              {/* Language dropdown menu */}
               <AnimatePresence>
                 {isLangOpen && (
                   <motion.div
@@ -164,12 +166,12 @@ export function Navbar({ params }: NavbarProps) {
               </AnimatePresence>
             </div>
 
-            {/* Botão de busca */}
+            {/* Search button */}
             <button className="p-2 rounded-full hover:bg-gray-100">
               <Search className="h-5 w-5 text-gray-500" />
             </button>
 
-            {/* Botão de área do cliente atualizado para redirecionar para a página de autenticação */}
+            {/* Client area button */}
             <Button className="ml-2 bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
               <User className="mr-2 h-4 w-4" />
               Área do Cliente
@@ -211,7 +213,7 @@ export function Navbar({ params }: NavbarProps) {
                       <button
                         className="flex items-center justify-between w-full text-base font-medium"
                         onClick={() => {
-                          // Aqui você pode adicionar lógica para abrir/fechar submenus no mobile
+                          // Add logic to toggle submenu if needed
                         }}
                       >
                         {item.label}
@@ -242,7 +244,7 @@ export function Navbar({ params }: NavbarProps) {
                 </div>
               ))}
 
-              {/* Dropdown de idiomas para mobile */}
+              {/* Language dropdown for mobile */}
               <div className="px-3 py-2">
                 <button
                   className="flex items-center justify-between w-full text-base font-medium"
@@ -250,7 +252,6 @@ export function Navbar({ params }: NavbarProps) {
                 >
                   <div className="flex items-center">
                     <Globe className="h-5 w-5 mr-2" />
-                    {/* Corrigido: lang.code === lang para language.code === lang */}
                     <span>{languages.find((language) => language.code === lang)?.name || "Language"}</span>
                   </div>
                   <ChevronDown className="h-4 w-4" />
