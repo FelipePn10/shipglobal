@@ -7,14 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Package, Menu, X, Globe, ChevronDown, User, Search } from "lucide-react";
 import i18next from "@/i18n";
 import { motion, AnimatePresence } from "framer-motion";
-import { use } from "react";
 
 interface NavbarProps {
-  params: Promise<{ lang: string }>;
+  lang: string; // Accept `lang` directly instead of a Promise
 }
 
-export function Navbar({ params }: NavbarProps) {
-  const { lang } = use(params); // Resolve the params Promise
+export function Navbar({ lang }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,7 +50,6 @@ export function Navbar({ params }: NavbarProps) {
       submenu: [
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
         { href: `/${lang}/consolidacao`, label: "Consolidação" },
-        // { href: `/${lang}/repackaging`, label: "Reembalagem" }, // Commented out
         { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
       ],
     },

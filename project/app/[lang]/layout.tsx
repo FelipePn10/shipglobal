@@ -15,17 +15,19 @@ export const metadata: Metadata = {
     "redirecionamento internacional, compras internacionais, personal shopper, consolidação de pacotes",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
+  params: { lang: string };
 }) {
+  const lang = params.lang;
+
   return (
-    <html lang="en" suppressHydrationWarning> {/* Fallback to 'en' until params is resolved */}
+    <html lang={lang} suppressHydrationWarning>
       <body className={inter.className}>
-        <Navbar params={params} /> {/* Pass the Promise directly */}
+        <Navbar lang={lang} />
         <main>{children}</main>
         <Footer />
         <Toaster />
