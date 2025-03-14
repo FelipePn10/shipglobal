@@ -11,6 +11,7 @@ import { CoverageMap } from '@/components/coverage-map';
 import OneStopService from '@/components/onetopservice';
 import BrandsCarousel from '@/components/brand-carousel';
 import ShippingServices from '@/components/shipping-service';
+import Link from 'next/link';
 
 export default function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = use(params);
@@ -139,9 +140,11 @@ export default function Home({ params }: { params: Promise<{ lang: string }> }) 
               {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="text-lg px-8 py-6">
-                {cta.primary}
-              </Button>
+              <Link href={`/${lang}/auth`}>
+                <Button size="lg" className="text-lg px-8 py-6">
+                  {cta.primary}
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="text-lg px-8 py-6">
                 {lang === 'en' ? 'How It Works' : lang === 'pt' ? 'Como Funciona' : 'Cómo Funciona'}
               </Button>
