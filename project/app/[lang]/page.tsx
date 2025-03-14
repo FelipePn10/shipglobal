@@ -145,9 +145,11 @@ export default function Home({ params }: { params: Promise<{ lang: string }> }) 
                   {cta.primary}
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6">
+              <Link href={`/${lang}/explanation`}>
+                <Button size="lg" variant="outline" className="text-lg px-8 py-6">
                 {lang === 'en' ? 'How It Works' : lang === 'pt' ? 'Como Funciona' : 'Cómo Funciona'}
               </Button>
+              </Link>
             </div>
           </motion.div>
         </div>

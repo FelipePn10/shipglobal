@@ -1,4 +1,17 @@
 {
+  "service": {
+    "ourCompleteSolution": "Our Complete Solution",
+    "completeService": "Complete Service of",
+    "buyAndShip": "Buy and Ship",
+    "fromClickToDoor": "From click to your door: we simplify the entire international shopping process with our integrated solution that takes care of every detail.",
+    "buyProducts": "Buy Products",
+    "warehouseShipping": "Warehouse Shipping",
+    "qualityAssurance": "Quality Assurance",
+    "economicalShipping": "Economical Shipping",
+    "learnMore": "Learn More",
+    "startImporting": "Start Importing Now",
+    "successfulClients": "We have already helped over 10,000 clients to import successfully"
+  },
   "navbar": {
     "howItWorks": "How It Works",
     "services": "Services",

@@ -1,4 +1,17 @@
 {
+  "service": {
+    "ourCompleteSolution": "Nuestra solución completa",
+    "completeService": "Servicio Completo de",
+    "buyAndShip": "Compra y Envío",
+    "fromClickToDoor": "Desde el clic hasta tu puerta: simplificamos todo el proceso de compras internacionales con nuestra solución integrada que se encarga de cada detalle.",
+    "buyProducts": "Compra de Productos",
+    "warehouseShipping": "Envío al Almacén",
+    "qualityAssurance": "Garantía de Calidad",
+    "economicalShipping": "Envío Económico",
+    "learnMore": "Saber más",
+    "startImporting": "Empieza a Importar Ahora",
+    "successfulClients": "Ya hemos ayudado a más de 10,000 clientes a importar con éxito"
+  },
   "footer": {
     "about": "Sobre",
     "howItWorks": "Cómo Funciona",

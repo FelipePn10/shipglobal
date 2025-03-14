@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useTranslation } from 'next-i18next';
 
 interface ServiceCardProps {
   color: string;
@@ -9,19 +11,26 @@ interface ServiceCardProps {
   title: string;
   description: string;
   index: number;
+  path: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, description, index }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, description, index, path }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
-  
+  const router = useRouter();
+  const { t } = useTranslation('common');
+
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
     }
   }, [isInView, controls]);
-  
+
+  const handleLearnMore = () => {
+    router.push(path);
+  };
+
   return (
     <motion.div
       ref={ref}
@@ -51,34 +60,28 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, descripti
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={handleLearnMore}
           className={`mt-4 self-start px-4 py-2 rounded-full text-sm font-medium text-white ${color.replace('border-l', 'bg')}`}
         >
-          Saiba mais
+          {t('service.learnMore')}
         </motion.button>
       </div>
     </motion.div>
   );
 };
 
-const StepConnector = () => (
-  <div className="hidden lg:flex flex-col items-center">
-    <div className="w-0.5 h-20 bg-gray-300"></div>
-    <div className="w-3 h-3 rounded-full bg-gray-300 my-4"></div>
-    <div className="w-0.5 h-20 bg-gray-300"></div>
-  </div>
-);
-
 const OneStopService = () => {
   const headerControls = useAnimation();
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
-  
+  const { t } = useTranslation('common');
+
   useEffect(() => {
     if (isHeaderInView) {
       headerControls.start({ opacity: 1, y: 0, transition: { duration: 0.7 } });
     }
   }, [isHeaderInView, headerControls]);
-  
+
   const serviceItems = [
     {
       color: "border-l-blue-500",
@@ -98,8 +101,9 @@ const OneStopService = () => {
           />
         </svg>
       ),
-      title: "Compra de Produtos",
-      description: "Compre qualquer item diretamente da China de forma simples e segura. Utilizamos tecnologia avançada para encontrar os melhores preços e realizar suas compras com rapidez e segurança."
+      title: t('service.buyProducts'),
+      description: "Compre qualquer item de qualquer lugar do MUNDO de forma simples e segura. Utilizamos tecnologia avançada para encontrar os melhores preços e realizar suas compras com rapidez e segurança.",
+      path: "/buy-products"
     },
     {
       color: "border-l-green-500",
@@ -119,8 +123,9 @@ const OneStopService = () => {
           />
         </svg>
       ),
-      title: "Envio para o Armazém",
-      description: "Compre de diferentes vendedores e consolidamos seus pedidos com eficiência. Nossa estratégia de consolidação significa menos taxas e menor risco de extravios durante o transporte internacional."
+      title: t('service.warehouseShipping'),
+      description: "Compre de diferentes vendedores e consolidamos seus pedidos com eficiência. Nossa estratégia de consolidação significa menos taxas e menor risco de extravios durante o transporte internacional.",
+      path: "/warehouse-shipping"
     },
     {
       color: "border-l-yellow-500",
@@ -140,8 +145,9 @@ const OneStopService = () => {
           />
         </svg>
       ),
-      title: "Garantia de Qualidade",
-      description: "Nossa equipe especializada realiza uma inspeção minuciosa de cada produto. Verificamos defeitos, conferimos tamanhos e cores, e garantimos que você receba exatamente o que pediu, evitando surpresas desagradáveis."
+      title: t('service.qualityAssurance'),
+      description: "Nossa equipe especializada realiza uma inspeção minuciosa de cada produto. Verificamos defeitos, conferimos tamanhos e cores, e garantimos que você receba exatamente o que pediu, evitando surpresas desagradáveis.",
+      path: "/quality-assurance"
     },
     {
       color: "border-l-red-500",
@@ -161,8 +167,9 @@ const OneStopService = () => {
           />
         </svg>
       ),
-      title: "Envio Econômico",
-      description: "Economize até 70% em fretes internacionais com nossa solução de transporte consolidado. Nossos parceiros logísticos estratégicos garantem a melhor relação custo-benefício em todas as entregas, sem abrir mão da segurança."
+      title: t('service.economicalShipping'),
+      description: "Economize até 70% em fretes internacionais com nossa solução de transporte consolidado. Nossos parceiros logísticos estratégicos garantem a melhor relação custo-benefício em todas as entregas, sem abrir mão da segurança.",
+      path: "/economical-shipping"
     }
   ];
 
@@ -176,13 +183,13 @@ const OneStopService = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-3">
-            Nossa solução completa
+            {t('service.ourCompleteSolution')}
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-            Serviço Completo de <span className="text-blue-600">Compra e Envio</span>
+            {t('service.completeService')} <span className="text-blue-600">{t('service.buyAndShip')}</span>
           </h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Do clique à sua porta: simplificamos todo o processo de compras internacionais com nossa solução integrada que cuida de cada detalhe.
+            {t('service.fromClickToDoor')}
           </p>
         </motion.div>
 
@@ -222,10 +229,10 @@ const OneStopService = () => {
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Comece a Importar Agora
+            {t('service.startImporting')}
           </motion.button>
           <p className="mt-4 text-sm text-gray-500">
-            Já ajudamos mais de 10.000 clientes a importar com sucesso
+            {t('service.successfulClients')}
           </p>
         </motion.div>
       </div>
