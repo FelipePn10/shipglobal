@@ -16,6 +16,136 @@
     "qualityAssuranceDesc": "Nuestro equipo especializado realiza una minuciosa inspección de cada producto. Comprobamos defectos, comprobamos tallas y colores, y nos aseguramos de que recibas exactamente lo que has pedido, evitando sorpresas desagradables.",
     "economicalShippingDesc": "Ahorre hasta un 70% en transporte internacional con nuestra solución de transporte consolidada. Nuestros socios logísticos estratégicos garantizan la mejor relación costo-beneficio en todas las entregas, sin comprometer la seguridad."
   },
+  "coverageMap": {
+    "title": "Cobertura Global",
+    "infoButton": "Acerca de",
+    "closeButton": "Cerrar",
+    "searchButton": "Buscar",
+    "searchPlaceholder": "Buscar por país o servicio...",
+    "noResults": "No se encontraron resultados",
+    "infoTitle": "Sobre Nuestra Cobertura",
+    "infoDescription": "Nuestra red global de centros de distribución le permite comprar en más de 16 países alrededor del mundo, con servicios personalizados para cada región.",
+    "availableServices": "Servicios Disponibles:",
+    "infoFooter": "Haga clic en los marcadores del mapa para ver detalles específicos de cada ubicación. Todos los centros operan 24/7 con seguimiento en tiempo real.",
+    "understandButton": "Entendido",
+    "backButton": "Volver",
+    "servicesLabel": "SERVICIOS DISPONIBLES",
+    "useAddressButton": "Usar esta dirección",
+    "legendDistribution": "Centro de Distribución",
+    "legendOtherCountries": "Otros Países"
+},
+"services": {
+    "forwarding": "Redireccionamiento",
+    "consolidation": "Consolidación",
+    "taxFree": "Libre de Impuestos",
+    "qualityInspection": "Inspección de Calidad",
+    "assistedPurchase": "Compra Asistida",
+    "extendedStorage": "Almacenamiento Extendido"
+  },
+  "locations": {
+    "usa": {
+      "title": "EE.UU.",
+      "address": "Estados Unidos",
+      "description": "Centro de distribución principal con servicios completos para todo el territorio americano."
+    },
+    "uk": {
+      "title": "Reino Unido",
+      "address": "Reino Unido",
+      "description": "Centro estratégico para compras en tiendas británicas y europeas, con enfoque en productos exclusivos."
+    },
+    "china": {
+      "title": "China",
+      "address": "China",
+      "description": "Especializado en productos electrónicos y manufacturados, con servicio de inspección detallada."
+    },
+    "japan": {
+      "title": "Japón",
+      "address": "Japón",
+      "description": "Acceso a productos exclusivos japoneses con asistencia en traducción y compras."
+    },
+    "germany": {
+      "title": "Alemania",
+      "address": "Alemania",
+      "description": "Hub europeo con especialización en productos automotrices y tecnológicos de alta calidad."
+    },
+    "australia": {
+      "title": "Australia",
+      "address": "Australia",
+      "description": "Atención para toda Oceanía con enfoque en productos naturales y marcas australianas."
+    },
+    "canada": {
+      "title": "Canadá",
+      "address": "Canadá",
+      "description": "Alternativa económica para compras norteamericanas con tasas reducidas."
+    },
+    "spain": {
+      "title": "España",
+      "address": "España",
+      "description": "Especializado en productos mediterráneos y moda española."
+    },
+    "france": {
+      "title": "Francia",
+      "address": "Francia",
+      "description": "Centro premium para productos de lujo y alta gastronomía con asistencia personalizada."
+    },
+    "italy": {
+      "title": "Italia",
+      "address": "Italia",
+      "description": "Especializado en moda italiana, diseño y productos artesanales exclusivos."
+    },
+    "portugal": {
+      "title": "Portugal",
+      "address": "Portugal",
+      "description": "Puerta de entrada para productos lusófonos y gateway para Europa."
+    },
+    "paraguay": {
+      "title": "Paraguay",
+      "address": "Paraguay",
+      "description": "Opción económica para importación con impuestos reducidos en América del Sur."
+    },
+    "turkey": {
+      "title": "Turquía",
+      "address": "Turquía",
+      "description": "Conexión entre Europa y Asia con acceso a productos únicos del mercado turco."
+    },
+    "brazil": {
+      "title": "Brasil",
+      "address": "Brasil",
+      "description": "Centro de distribución local con entregas rápidas para todo el territorio brasileño."
+    },
+    "thailand": {
+      "title": "Tailandia",
+      "address": "Tailandia",
+      "description": "Acceso a productos asiáticos con precios competitivos y opciones de consolidación."
+    },
+    "belgium": {
+      "title": "Bélgica",
+      "address": "Bélgica",
+      "description": "Hub estratégico central en Europa con beneficios fiscales para envíos internacionales."
+    }
+  },
+  "shippingCalculator": {
+    "title": "Calculadora de Envío Internacional",
+    "description": "Calcule el costo de envío internacional basado en el peso o dimensiones de su paquete",
+    "weightTab": "Por Peso",
+    "dimensionsTab": "Por Dimensiones",
+    "weightPlaceholder": "Peso en kg",
+    "lengthPlaceholder": "Largo (cm)",
+    "widthPlaceholder": "Ancho (cm)",
+    "heightPlaceholder": "Alto (cm)",
+    "fromCountryLabel": "País de Origen",
+    "toCountryLabel": "País de Destino",
+    "shippingMethodLabel": "Método de Envío",
+    "calculateButton": "Calcular Envío",
+    "calculatingButton": "Calculando...",
+    "resultTitle": "Resultado del Cálculo",
+    "costLabel": "Costo:",
+    "deliveryTimeLabel": "Plazo de Entrega:",
+    "weightUsedLabel": "Peso Considerado:",
+    "volumetric": "(volumétrico)",
+    "error": "Error al calcular el envío",
+    "selectCountry": "Seleccionar"
+  },
   "footer": {
     "about": "Sobre",
     "howItWorks": "Cómo Funciona",
@@ -130,6 +260,8 @@
       "title": "¡Comienza tu viaje global hoy!",
       "description": "Únete a miles de clientes satisfechos que ya han desbloqueado el poder de las compras internacionales con ShipGlobal.",
       "tryFree": "Prueba Gratis"
-    }
+    },
+    "days": "días",
+    "startingFrom": "A partir de {price}"
   }
 }

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useTranslation } from 'next-i18next';
 
 type Dimensions = {
   length: string;
@@ -21,7 +22,6 @@ type CalculationResult = {
   isVolumetric: boolean;
 };
 
-// Lista de 17 países solicitados
 const countries = [
   { value: 'US', label: 'United States (EUA)' },
   { value: 'GB', label: 'United Kingdom (Reino Unido)' },
@@ -47,6 +47,7 @@ const shippingMethods = [
 ];
 
 export function ShippingCalculator() {
+  const { t } = useTranslation('common');
   const [weight, setWeight] = useState<string>('');
   const [dimensions, setDimensions] = useState<Dimensions>({ length: '', width: '', height: '' });
   const [fromCountry, setFromCountry] = useState<string>('');
@@ -71,7 +72,7 @@ export function ShippingCalculator() {
   const handleCalculateShipping = async () => {
     setIsCalculating(true);
     setError(null);
-    setCalculationResult(null); // Limpa o resultado anterior
+    setCalculationResult(null);
 
     try {
       const fromAddress = {
@@ -117,11 +118,11 @@ export function ShippingCalculator() {
       if (response.ok) {
         setCalculationResult(data);
       } else {
-        setError(data.error || 'Erro ao calcular o frete');
+        setError(data.error || t('shippingCalculator.error'));
       }
     } catch (error) {
       console.error('Erro ao calcular o frete:', error);
-      setError('Erro ao conectar com o servidor');
+      setError(t('shippingCalculator.error'));
     } finally {
       setIsCalculating(false);
     }
@@ -140,25 +141,25 @@ export function ShippingCalculator() {
             <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
-            Calculadora de Frete Internacional
+            {t('shippingCalculator.title')}
           </CardTitle>
           <p className="text-blue-100 mt-2">
-            Calcule o custo de envio internacional com base no peso ou dimensões do seu pacote
+            {t('shippingCalculator.description')}
           </p>
         </CardHeader>
 
         <CardContent className="p-6">
           <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'weight' | 'dimensions')} className="mb-6">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="weight">Por Peso</TabsTrigger>
-              <TabsTrigger value="dimensions">Por Dimensões</TabsTrigger>
+              <TabsTrigger value="weight">{t('shippingCalculator.weightTab')}</TabsTrigger>
+              <TabsTrigger value="dimensions">{t('shippingCalculator.dimensionsTab')}</TabsTrigger>
             </TabsList>
             <TabsContent value="weight">
               <Input
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                placeholder="Peso em kg"
+                placeholder={t('shippingCalculator.weightPlaceholder')}
               />
             </TabsContent>
             <TabsContent value="dimensions">
@@ -167,19 +168,19 @@ export function ShippingCalculator() {
                   type="number"
                   value={dimensions.length}
                   onChange={(e) => setDimensions(prev => ({ ...prev, length: e.target.value }))}
-                  placeholder="Comprimento (cm)"
+                  placeholder={t('shippingCalculator.lengthPlaceholder')}
                 />
                 <Input
                   type="number"
                   value={dimensions.width}
                   onChange={(e) => setDimensions(prev => ({ ...prev, width: e.target.value }))}
-                  placeholder="Largura (cm)"
+                  placeholder={t('shippingCalculator.widthPlaceholder')}
                 />
                 <Input
                   type="number"
                   value={dimensions.height}
                   onChange={(e) => setDimensions(prev => ({ ...prev, height: e.target.value }))}
-                  placeholder="Altura (cm)"
+                  placeholder={t('shippingCalculator.heightPlaceholder')}
                 />
               </div>
             </TabsContent>
@@ -187,13 +188,13 @@ export function ShippingCalculator() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">País de Origem</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('shippingCalculator.fromCountryLabel')}</label>
               <select
                 value={fromCountry}
                 onChange={(e) => setFromCountry(e.target.value)}
                 className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
               >
-                <option value="">Selecione o país</option>
+                <option value="">{t('shippingCalculator.selectCountry')}</option>
                 {countries.map((country) => (
                   <option key={country.value} value={country.value}>
                     {country.label}
@@ -203,13 +204,13 @@ export function ShippingCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">País de Destino</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('shippingCalculator.toCountryLabel')}</label>
               <select
                 value={toCountry}
                 onChange={(e) => setToCountry(e.target.value)}
                 className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
               >
-                <option value="">Selecione o país</option>
+                <option value="">{t('shippingCalculator.selectCountry')}</option>
                 {countries.map((country) => (
                   <option key={country.value} value={country.value}>
                     {country.label}
@@ -220,7 +221,7 @@ export function ShippingCalculator() {
           </div>
 
           <div className="mt-6">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Método de Envio</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('shippingCalculator.shippingMethodLabel')}</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {shippingMethods.map((method) => (
                 <Button
@@ -244,19 +245,19 @@ export function ShippingCalculator() {
                 exit={{ opacity: 0, height: 0 }}
                 className="mt-6 p-6 bg-indigo-50 rounded-lg border border-indigo-200"
               >
-                <h3 className="text-lg font-semibold text-indigo-900 mb-4">Resultado do Cálculo</h3>
+                <h3 className="text-lg font-semibold text-indigo-900 mb-4">{t('shippingCalculator.resultTitle')}</h3>
                 <div className="grid grid-cols-1 gap-3 text-gray-800">
                   <p className="flex justify-between">
-                    <span className="font-medium">Custo:</span>
+                    <span className="font-medium">{t('shippingCalculator.costLabel')}</span>
                     <span>{calculationResult.currency} {calculationResult.price}</span>
                   </p>
                   <p className="flex justify-between">
-                    <span className="font-medium">Prazo de Entrega:</span>
+                    <span className="font-medium">{t('shippingCalculator.deliveryTimeLabel')}</span>
                     <span>{calculationResult.deliveryTime.min} - {calculationResult.deliveryTime.max} dias</span>
                   </p>
                   <p className="flex justify-between">
-                    <span className="font-medium">Peso Considerado:</span>
-                    <span>{calculationResult.weightUsed} kg {calculationResult.isVolumetric ? '(volumétrico)' : ''}</span>
+                    <span className="font-medium">{t('shippingCalculator.weightUsedLabel')}</span>
+                    <span>{calculationResult.weightUsed} kg {calculationResult.isVolumetric ? t('shippingCalculator.volumetric') : ''}</span>
                   </p>
                 </div>
               </motion.div>
@@ -286,10 +287,10 @@ export function ShippingCalculator() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Calculando...
+                {t('shippingCalculator.calculatingButton')}
               </span>
             ) : (
-              "Calcular Frete"
+              t('shippingCalculator.calculateButton')
             )}
           </Button>
         </CardFooter>

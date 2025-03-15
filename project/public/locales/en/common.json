@@ -23,7 +23,136 @@
     "locations": "Locations",
     "contact": "Contact",
     "clientArea": "Client Area"
+  },"coverageMap": {
+    "title": "Global Coverage",
+    "infoButton": "About",
+    "closeButton": "Close",
+    "searchButton": "Search",
+    "searchPlaceholder": "Search by country or service...",
+    "noResults": "No results found",
+    "infoTitle": "About Our Coverage",
+    "infoDescription": "Our global network of distribution centers allows you to shop in over 16 countries worldwide, with personalized services for each region.",
+    "availableServices": "Available Services:",
+    "infoFooter": "Click on the map markers to see specific details for each location. All centers operate 24/7 with real-time tracking.",
+    "understandButton": "Got it",
+    "backButton": "Back",
+    "servicesLabel": "AVAILABLE SERVICES",
+    "useAddressButton": "Use this address",
+    "legendDistribution": "Distribution Center",
+    "legendOtherCountries": "Other Countries"
+},
+"services": {
+    "forwarding": "Forwarding",
+    "consolidation": "Consolidation",
+    "taxFree": "Tax Free",
+    "qualityInspection": "Quality Inspection",
+    "assistedPurchase": "Assisted Purchase",
+    "extendedStorage": "Extended Storage"
   },
+  "locations": {
+    "usa": {
+      "title": "USA",
+      "address": "United States",
+      "description": "Main distribution center with full services for the entire American territory."
+    },
+    "uk": {
+      "title": "UK",
+      "address": "United Kingdom",
+      "description": "Strategic hub for shopping in British and European stores, focusing on exclusive products."
+    },
+    "china": {
+      "title": "China",
+      "address": "China",
+      "description": "Specialized in electronics and manufactured products, with detailed inspection services."
+    },
+    "japan": {
+      "title": "Japan",
+      "address": "Japan",
+      "description": "Access to exclusive Japanese products with translation and shopping assistance."
+    },
+    "germany": {
+      "title": "Germany",
+      "address": "Germany",
+      "description": "European hub specializing in automotive and high-quality technological products."
+    },
+    "australia": {
+      "title": "Australia",
+      "address": "Australia",
+      "description": "Service for all of Oceania, focusing on natural products and Australian brands."
+    },
+    "canada": {
+      "title": "Canada",
+      "address": "Canada",
+      "description": "Economical alternative for North American shopping with reduced rates."
+    },
+    "spain": {
+      "title": "Spain",
+      "address": "Spain",
+      "description": "Specialized in Mediterranean products and Spanish fashion."
+    },
+    "france": {
+      "title": "France",
+      "address": "France",
+      "description": "Premium center for luxury products and high gastronomy with personalized assistance."
+    },
+    "italy": {
+      "title": "Italy",
+      "address": "Italy",
+      "description": "Specialized in Italian fashion, design, and exclusive artisanal products."
+    },
+    "portugal": {
+      "title": "Portugal",
+      "address": "Portugal",
+      "description": "Gateway for Lusophone products and entry point to Europe."
+    },
+    "paraguay": {
+      "title": "Paraguay",
+      "address": "Paraguay",
+      "description": "Economical option for imports with reduced taxes in South America."
+    },
+    "turkey": {
+      "title": "Turkey",
+      "address": "Turkey",
+      "description": "Connection between Europe and Asia with access to unique Turkish market products."
+    },
+    "brazil": {
+      "title": "Brazil",
+      "address": "Brazil",
+      "description": "Local distribution center with fast deliveries across the Brazilian territory."
+    },
+    "thailand": {
+      "title": "Thailand",
+      "address": "Thailand",
+      "description": "Access to Asian products at competitive prices with consolidation options."
+    },
+    "belgium": {
+      "title": "Belgium",
+      "address": "Belgium",
+      "description": "Strategic central hub in Europe with tax benefits for international shipments."
+    }
+  },
+  "shippingCalculator": {
+    "title": "International Shipping Calculator",
+    "description": "Calculate international shipping cost based on the weight or dimensions of your package",
+    "weightTab": "By Weight",
+    "dimensionsTab": "By Dimensions",
+    "weightPlaceholder": "Weight in kg",
+    "lengthPlaceholder": "Length (cm)",
+    "widthPlaceholder": "Width (cm)",
+    "heightPlaceholder": "Height (cm)",
+    "fromCountryLabel": "Country of Origin",
+    "toCountryLabel": "Country of Destination",
+    "shippingMethodLabel": "Shipping Method",
+    "calculateButton": "Calculate Shipping",
+    "calculatingButton": "Calculating...",
+    "resultTitle": "Calculation Result",
+    "costLabel": "Cost:",
+    "deliveryTimeLabel": "Delivery Time:",
+    "weightUsedLabel": "Weight Used:",
+    "volumetric": "(volumetric)",
+    "error": "Error calculating shipping",
+    "selectCountry": "Select"
+    },
   "footer": {
     "about": "About",
     "howItWorks": "How It Works",
@@ -138,6 +267,8 @@
       "title": "Start your global journey today!",
       "description": "Join thousands of satisfied customers who have already unlocked the power of international shopping with ShipGlobal.",
       "tryFree": "Try for Free"
-    }
+    },
+    "days": "days",
+    "startingFrom": "Starting from {price}"
   }
 }

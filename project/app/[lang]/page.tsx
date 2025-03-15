@@ -12,7 +12,6 @@ import BrandsCarousel from '@/components/brand-carousel';
 import ShippingServices from '@/components/shipping-service';
 import Link from 'next/link';
 
-// Importante: Na versão atualizada do Next.js, os params não precisam ser awaited em uma página client
 export default function Home({ params }: { params: { lang: string } }) {
   const { lang } = params;
 

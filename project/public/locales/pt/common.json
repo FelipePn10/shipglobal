@@ -24,6 +24,136 @@
     "contact": "Contato",
     "clientArea": "Área do Cliente"
   },
+  "coverageMap": {
+    "title": "Cobertura Global",
+    "infoButton": "Sobre",
+    "closeButton": "Fechar",
+    "searchButton": "Buscar",
+    "searchPlaceholder": "Buscar por país ou serviço...",
+    "noResults": "Nenhum resultado encontrado",
+    "infoTitle": "Sobre Nossa Cobertura",
+    "infoDescription": "Nossa rede global de centros de distribuição permite que você compre em mais de 16 países ao redor do mundo, com serviços personalizados para cada região.",
+    "availableServices": "Serviços Disponíveis:",
+    "infoFooter": "Clique nos marcadores do mapa para ver detalhes específicos de cada localização. Todos os centros operam 24/7 com rastreamento em tempo real.",
+    "understandButton": "Entendi",
+    "backButton": "Voltar",
+    "servicesLabel": "SERVIÇOS DISPONÍVEIS",
+    "useAddressButton": "Usar este endereço",
+    "legendDistribution": "Centro de Distribuição",
+    "legendOtherCountries": "Outros Países"
+},
+  "shippingCalculator": {
+    "title": "Calculadora de Frete Internacional",
+    "description": "Calcule o custo de envio internacional com base no peso ou dimensões do seu pacote",
+    "weightTab": "Por Peso",
+    "dimensionsTab": "Por Dimensões",
+    "weightPlaceholder": "Peso em kg",
+    "lengthPlaceholder": "Comprimento (cm)",
+    "widthPlaceholder": "Largura (cm)",
+    "heightPlaceholder": "Altura (cm)",
+    "fromCountryLabel": "País de Origem",
+    "toCountryLabel": "País de Destino",
+    "shippingMethodLabel": "Método de Envio",
+    "calculateButton": "Calcular Frete",
+    "calculatingButton": "Calculando...",
+    "resultTitle": "Resultado do Cálculo",
+    "costLabel": "Custo:",
+    "deliveryTimeLabel": "Prazo de Entrega:",
+    "weightUsedLabel": "Peso Considerado:",
+    "volumetric": "(volumétrico)",
+    "error": "Erro ao calcular o frete",
+    "selectCountry": "Selecionar"
+  },
+  "services": {
+    "forwarding": "Redirecionamento",
+    "consolidation": "Consolidação",
+    "taxFree": "Tax Free",
+    "qualityInspection": "Inspeção de Qualidade",
+    "assistedPurchase": "Compra Assistida",
+    "extendedStorage": "Armazenamento Estendido"
+  },
+  "locations": {
+    "usa": {
+      "title": "EUA",
+      "address": "Estados Unidos",
+      "description": "Centro de distribuição principal com serviços completos para todo o território americano."
+    },
+    "uk": {
+      "title": "Reino Unido",
+      "address": "Reino Unido",
+      "description": "Centro estratégico para compras em lojas britânicas e europeias, com foco em produtos exclusivos."
+    },
+    "china": {
+      "title": "China",
+      "address": "China",
+      "description": "Especializado em produtos eletrônicos e manufaturados, com serviço de inspeção detalhada."
+    },
+    "japan": {
+      "title": "Japão",
+      "address": "Japão",
+      "description": "Acesso a produtos exclusivos japoneses com assistência em tradução e compras."
+    },
+    "germany": {
+      "title": "Alemanha",
+      "address": "Alemanha",
+      "description": "Hub europeu com especialização em produtos automotivos e tecnológicos de alta qualidade."
+    },
+    "australia": {
+      "title": "Austrália",
+      "address": "Austrália",
+      "description": "Atendimento para toda Oceania com foco em produtos naturais e marcas australianas."
+    },
+    "canada": {
+      "title": "Canadá",
+      "address": "Canadá",
+      "description": "Alternativa econômica para compras norte-americanas com taxas reduzidas."
+    },
+    "spain": {
+      "title": "Espanha",
+      "address": "Espanha",
+      "description": "Especializado em produtos mediterrâneos e moda espanhola."
+    },
+    "france": {
+      "title": "França",
+      "address": "França",
+      "description": "Centro premium para produtos de luxo e alta gastronomia com assistência personalizada."
+    },
+    "italy": {
+      "title": "Itália",
+      "address": "Itália",
+      "description": "Especializado em moda italiana, design e produtos artesanais exclusivos."
+    },
+    "portugal": {
+      "title": "Portugal",
+      "address": "Portugal",
+      "description": "Porta de entrada para produtos lusófonos e gateway para Europa."
+    },
+    "paraguay": {
+      "title": "Paraguai",
+      "address": "Paraguai",
+      "description": "Opção econômica para importação com impostos reduzidos na América do Sul."
+    },
+    "turkey": {
+      "title": "Turquia",
+      "address": "Turquia",
+      "description": "Conexão entre Europa e Ásia com acesso a produtos únicos do mercado turco."
+    },
+    "brazil": {
+      "title": "Brasil",
+      "address": "Brasil",
+      "description": "Centro de distribuição local com entregas rápidas para todo o território brasileiro."
+    },
+    "thailand": {
+      "title": "Tailândia",
+      "address": "Tailândia",
+      "description": "Acesso a produtos asiáticos com preços competitivos e opções de consolidação."
+    },
+    "belgium": {
+      "title": "Bélgica",
+      "address": "Bélgica",
+      "description": "Hub estratégico central na Europa com benefícios fiscais para envios internacionais."
+    }
+  },
   "footer": {
     "about": "Sobre",
     "howItWorks": "Como Funciona",
@@ -138,6 +268,8 @@
       "title": "Comece sua jornada global hoje!",
       "description": "Junte-se a milhares de clientes satisfeitos que já desbloquearam o poder das compras internacionais com a ShipGlobal.",
       "tryFree": "Experimente Gratuitamente"
-    }
+    },
+  "days": "dias",
+  "startingFrom": "A partir de {price}"
   }
 }
