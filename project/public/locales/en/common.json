@@ -270,5 +270,37 @@
     },
     "days": "days",
     "startingFrom": "Starting from {price}"
+  },
+  "shippingServices": {
+    "partnersTitle": "Global Partners",
+    "title": "Our",
+    "highlightedText": "Shipping Solutions",
+    "subtitle": "Strategic partnerships with the best carriers to ensure your products arrive safely, on time, and at the best cost.",
+    "fedex": {
+      "name": "FedEx",
+      "description": "International express delivery with real-time tracking"
+    },
+    "dhl": {
+      "name": "DHL",
+      "description": "Global logistics with guaranteed delivery times"
+    },
+    "express": {
+      "name": "Express",
+      "description": "Economical service with wide international coverage"
+    },
+    "dpd": {
+      "name": "DPD",
+      "description": "Logistics experts with extensive European coverage"
+    },
+    "ars": {
+      "name": "ARS",
+      "description": "Flexible shipping solutions for different needs"
+    },
+    "aramex": {
+      "name": "Aramex",
+      "description": "Premium service focused on emerging markets"
+    },
+    "viewDetails": "View details",
+    "realTimeTracking": "Real-time tracking available for all carriers"
   }
 }

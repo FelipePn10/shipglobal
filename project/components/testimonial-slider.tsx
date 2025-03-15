@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge'
 export function TestimonialSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [autoplay, setAutoplay] = useState(true)
-  const [direction, setDirection] = useState(1) // 1 para avançar, -1 para retroceder
+  const [direction, setDirection] = useState(1)
   
   const testimonials = [
     {
@@ -81,7 +81,7 @@ export function TestimonialSlider() {
   const nextTestimonial = () => {
     setDirection(1)
     setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    setAutoplay(false) // Pausa o autoplay quando o usuário interage
+    setAutoplay(false)
   }
 
   const prevTestimonial = () => {

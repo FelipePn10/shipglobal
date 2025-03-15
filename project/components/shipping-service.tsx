@@ -3,46 +3,47 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 const ShippingServices: React.FC = () => {
+  const { t } = useTranslation("common");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Lista de serviços de envio com descrições
   const services = [
     {
-      name: "FedEx",
-      logo: "/image/R.png", // Corrigido o caminho da imagem
-      description: "Entrega expressa internacional com rastreamento em tempo real",
+      name: t("shippingServices.fedex.name"),
+      logo: "/image/R.png",
+      description: t("shippingServices.fedex.description"),
       color: "#4d148c",
     },
     {
-      name: "DHL",
+      name: t("shippingServices.dhl.name"),
       logo: "/logos/dhl.png",
-      description: "Logística global com prazos de entrega garantidos",
+      description: t("shippingServices.dhl.description"),
       color: "#ffcc00",
     },
     {
-      name: "Express",
+      name: t("shippingServices.express.name"),
       logo: "/logos/express.png",
-      description: "Serviço econômico com ampla cobertura internacional",
+      description: t("shippingServices.express.description"),
       color: "#007bff",
     },
     {
-      name: "DPD",
+      name: t("shippingServices.dpd.name"),
       logo: "/logos/dpd.png",
-      description: "Especialistas em logística com grande cobertura europeia",
+      description: t("shippingServices.dpd.description"),
       color: "#dc0032",
     },
     {
-      name: "ARS",
+      name: t("shippingServices.ars.name"),
       logo: "/logos/ars.png",
-      description: "Soluções de envio flexíveis para diferentes necessidades",
+      description: t("shippingServices.ars.description"),
       color: "#ff6b00",
     },
     {
-      name: "Aramex",
+      name: t("shippingServices.aramex.name"),
       logo: "/logos/aramex.png",
-      description: "Serviço premium com foco em mercados emergentes",
+      description: t("shippingServices.aramex.description"),
       color: "#ee1c25",
     },
   ];
@@ -58,14 +59,14 @@ const ShippingServices: React.FC = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-3">
-            Parceiros Globais
+            {t("shippingServices.partnersTitle")}
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-            Nossas Soluções de <span className="text-indigo-600">Envio</span>
+            {t("shippingServices.title")}{" "}
+            <span className="text-indigo-600">{t("shippingServices.highlightedText")}</span>
           </h2>
           <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-            Parcerias estratégicas com as melhores transportadoras para garantir que seus
-            produtos cheguem em segurança, no prazo e com o melhor custo-benefício.
+            {t("shippingServices.subtitle")}
           </p>
         </motion.div>
 
@@ -127,7 +128,7 @@ const ShippingServices: React.FC = () => {
                           width={48}
                           height={48}
                           className="object-contain"
-                          priority={index < 3} // Carregamento prioritário para as primeiras 3 imagens
+                          priority={index < 3}
                         />
                       </div>
                     </div>
@@ -149,7 +150,7 @@ const ShippingServices: React.FC = () => {
                         className="inline-flex items-center text-sm font-medium"
                         style={{ color: service.color }}
                       >
-                        Ver detalhes
+                        {t("shippingServices.viewDetails")}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 ml-1"
@@ -192,7 +193,7 @@ const ShippingServices: React.FC = () => {
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-md">
             <span className="inline-block w-2 h-2 rounded-full bg-green-500"></span>
             <p className="text-sm text-gray-600">
-              Rastreamento em tempo real disponível para todas as transportadoras
+              {t("shippingServices.realTimeTracking")}
             </p>
           </div>
         </motion.div>

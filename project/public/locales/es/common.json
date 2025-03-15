@@ -263,5 +263,38 @@
     },
     "days": "días",
     "startingFrom": "A partir de {price}"
+  },
+
+  "shippingServices": {
+    "partnersTitle": "Socios Globales",
+    "title": "Nuestras Soluciones de",
+    "highlightedText": "Envío",
+    "subtitle": "Asociaciones estratégicas con los mejores transportistas para garantizar que sus productos lleguen de manera segura, a tiempo y con la mejor relación costo-beneficio.",
+    "fedex": {
+      "name": "FedEx",
+      "description": "Entrega expresa internacional con seguimiento en tiempo real"
+    },
+    "dhl": {
+      "name": "DHL",
+      "description": "Logística global con plazos de entrega garantizados"
+    },
+    "express": {
+      "name": "Express",
+      "description": "Servicio económico con amplia cobertura internacional"
+    },
+    "dpd": {
+      "name": "DPD",
+      "description": "Especialistas en logística con gran cobertura europea"
+    },
+    "ars": {
+      "name": "ARS",
+      "description": "Soluciones de envío flexibles para diferentes necesidades"
+    },
+    "aramex": {
+      "name": "Aramex",
+      "description": "Servicio premium con enfoque en mercados emergentes"
+    },
+    "viewDetails": "Ver detalles",
+    "realTimeTracking": "Seguimiento en tiempo real disponible para todos los transportistas"
   }
 }
