@@ -345,6 +345,63 @@
       "text": "The international purchase process became simple and hassle-free. I recommend it to all my friends.",
       "role": "Corporate Customer",
       "date": "2 months ago"
-    }
+    },
+    "footer": {
+    "brandName": "ShipGlobal",
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "subtitle": "Receive news and exclusive offers directly in your email",
+      "placeholder": "Your best email",
+      "button": "Subscribe"
+    },
+    "about": {
+      "title": "About",
+      "links": {
+        "aboutUs": "About Us",
+        "howItWorks": "How It Works",
+        "reviews": "Reviews",
+        "jobs": "Jobs"
+      }
+    },
+    "services": {
+      "title": "Services",
+      "links": {
+        "personalShopper": "Personal Shopper",
+        "consolidation": "Consolidation",
+        "repackaging": "Repackaging",
+        "returns": "Returns"
+      }
+    },
+    "support": {
+      "title": "Support",
+      "links": {
+        "faq": "FAQ",
+        "contact": "Contact",
+        "blog": "Blog",
+        "hours": "Hours"
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "links": {
+        "terms": "Terms of Use",
+        "privacy": "Privacy",
+        "cookies": "Cookies",
+        "lgpd": "LGPD"
+      }
+    },
+    "contact": {
+      "email": "contact@shipglobal.com",
+      "phone": "+55 (44) 99180-5405",
+      "address": "Maringá, PR - Brazil"
+    },
+    "socialLinks": {
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook"
+    },
+    "copyright": "ShipGlobal. All rights reserved."
+  }
   }
 }

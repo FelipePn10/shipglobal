@@ -346,6 +346,63 @@
       "text": "O processo de compra internacional se tornou simples e descomplicado. Recomendo para todos os meus amigos.",
       "role": "Cliente Corporativo",
       "date": "Há 2 meses"
-    }
+    },
+    "footer": {
+    "brandName": "ShipGlobal",
+    "newsletter": {
+      "title": "Assine nossa newsletter",
+      "subtitle": "Receba novidades e ofertas exclusivas diretamente no seu email",
+      "placeholder": "Seu melhor email",
+      "button": "Assinar"
+    },
+    "about": {
+      "title": "Sobre",
+      "links": {
+        "aboutUs": "Sobre Nós",
+        "howItWorks": "Como Funciona",
+        "reviews": "Avaliações",
+        "jobs": "Vagas"
+      }
+    },
+    "services": {
+      "title": "Serviços",
+      "links": {
+        "personalShopper": "Personal Shopper",
+        "consolidation": "Consolidação",
+        "repackaging": "Reembalagem",
+        "returns": "Devoluções"
+      }
+    },
+    "support": {
+      "title": "Suporte",
+      "links": {
+        "faq": "FAQ",
+        "contact": "Contato",
+        "blog": "Blog",
+        "hours": "Horários"
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "links": {
+        "terms": "Termos de Uso",
+        "privacy": "Privacidade",
+        "cookies": "Cookies",
+        "lgpd": "LGPD"
+      }
+    },
+    "contact": {
+      "email": "contato@shipglobal.com.br",
+      "phone": "+55 (44) 99180-5405",
+      "address": "Maringá, PR - Brasil"
+    },
+    "socialLinks": {
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook"
+    },
+    "copyright": "ShipGlobal. Todos os direitos reservados."
+  }
   }
 }
