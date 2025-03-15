@@ -103,7 +103,7 @@ const OneStopService = () => {
       ),
       title: t('service.buyProducts'),
       description: "Compre qualquer item de qualquer lugar do MUNDO de forma simples e segura. Utilizamos tecnologia avançada para encontrar os melhores preços e realizar suas compras com rapidez e segurança.",
-      path: "/buy-products"
+      path: "/purchase"
     },
     {
       color: "border-l-green-500",
@@ -147,7 +147,7 @@ const OneStopService = () => {
       ),
       title: t('service.qualityAssurance'),
       description: "Nossa equipe especializada realiza uma inspeção minuciosa de cada produto. Verificamos defeitos, conferimos tamanhos e cores, e garantimos que você receba exatamente o que pediu, evitando surpresas desagradáveis.",
-      path: "/quality-assurance"
+      path: "/quality"
     },
     {
       color: "border-l-red-500",

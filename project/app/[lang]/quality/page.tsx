@@ -37,16 +37,16 @@ const GarantiaQualidadePage = () => {
         </div>
       </section>
       {/* Processo de Inspeção */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+        <div className="container mx-auto px-4 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="text-center mb-16"
+            className='text-center mb-16'
           >
-            <h2 className="text-3xl font-bold mb-4 text-blue-800">Nosso Processo de Inspeção</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+             <h2 className="text-white text-3xl font-bold mb-4 text-blue-800">Nosso Processo de Inspeção</h2>
+            <p className="text-white text-lg text-gray-600 max-w-3xl mx-auto">
               Cada produto passa por um rigoroso protocolo de verificação antes de ser enviado ao cliente.
             </p>
           </motion.div>

@@ -24,7 +24,7 @@ const CompraPage = () => {
             variants={fadeInUp}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-blue-800">
+            <h1 className="mt-8 text-4xl md:text-5xl font-bold mb-6 text-blue-800">
               Compra de Produtos Internacionais
             </h1>
             <p className="text-xl text-gray-600 mb-8">
