@@ -10,7 +10,11 @@
     "economicalShipping": "Envío Económico",
     "learnMore": "Saber más",
     "startImporting": "Empieza a Importar Ahora",
-    "successfulClients": "Ya hemos ayudado a más de 10,000 clientes a importar con éxito"
+    "successfulClients": "Ya hemos ayudado a más de 10,000 clientes a importar con éxito",
+    "buyProductsDesc": "Compra cualquier artículo desde cualquier parte del MUNDO de forma sencilla y segura. Utilizamos tecnología avanzada para encontrar los mejores precios y realizar tus compras de forma rápida y segura.",
+    "warehouseShippingDesc": "Compre a diferentes vendedores y consolidaremos sus pedidos de manera eficiente. Nuestra estrategia de consolidación significa menos tarifas y menos riesgo de pérdida durante el envío internacional.",
+    "qualityAssuranceDesc": "Nuestro equipo especializado realiza una minuciosa inspección de cada producto. Comprobamos defectos, comprobamos tallas y colores, y nos aseguramos de que recibas exactamente lo que has pedido, evitando sorpresas desagradables.",
+    "economicalShippingDesc": "Ahorre hasta un 70% en transporte internacional con nuestra solución de transporte consolidada. Nuestros socios logísticos estratégicos garantizan la mejor relación costo-beneficio en todas las entregas, sin comprometer la seguridad."
   },
   "footer": {
     "about": "Sobre",

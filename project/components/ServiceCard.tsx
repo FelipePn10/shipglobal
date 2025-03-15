@@ -56,7 +56,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, descripti
       
       <div className="flex flex-col">
         <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-        <p className="mt-3 text-base text-gray-600">{description}</p>
+        <p className="mt-3 text-base text-gray-600">{t(description)}</p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

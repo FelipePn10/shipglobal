@@ -10,7 +10,11 @@
     "economicalShipping": "Economical Shipping",
     "learnMore": "Learn More",
     "startImporting": "Start Importing Now",
-    "successfulClients": "We have already helped over 10,000 clients to import successfully"
+    "successfulClients": "We have already helped over 10,000 clients to import successfully",
+    "buyProductsDesc": "Buy any item from anywhere in the WORLD in a simple and secure way. We use advanced technology to find the best prices and make your purchases quickly and safely.",
+    "warehouseShippingDesc": "Buy from different sellers and we consolidate your orders efficiently. Our consolidation strategy means fewer fees and less risk of loss during international shipping.",
+    "qualityAssuranceDesc": "Our specialized team performs a thorough inspection of each product. We check for defects, size and color, and ensure that you receive exactly what you ordered, avoiding unpleasant surprises.",
+    "economicalShippingDesc": "Save up to 70% on international shipping with our consolidated shipping solution. Our strategic logistics partners guarantee the best cost-benefit ratio on all deliveries, without sacrificing security."
   },
   "navbar": {
     "howItWorks": "How It Works",

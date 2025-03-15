@@ -56,7 +56,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, descripti
       
       <div className="flex flex-col">
         <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-        <p className="mt-3 text-base text-gray-600">{description}</p>
+        <p className="mt-3 text-base text-gray-600">{t(description)}</p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -102,7 +102,7 @@ const OneStopService = () => {
         </svg>
       ),
       title: t('service.buyProducts'),
-      description: "Compre qualquer item de qualquer lugar do MUNDO de forma simples e segura. Utilizamos tecnologia avançada para encontrar os melhores preços e realizar suas compras com rapidez e segurança.",
+      description: "service.buyProductsDesc",
       path: "/purchase"
     },
     {
@@ -124,7 +124,7 @@ const OneStopService = () => {
         </svg>
       ),
       title: t('service.warehouseShipping'),
-      description: "Compre de diferentes vendedores e consolidamos seus pedidos com eficiência. Nossa estratégia de consolidação significa menos taxas e menor risco de extravios durante o transporte internacional.",
+      description: "service.warehouseShippingDesc",
       path: "/warehouse-shipping"
     },
     {
@@ -146,7 +146,7 @@ const OneStopService = () => {
         </svg>
       ),
       title: t('service.qualityAssurance'),
-      description: "Nossa equipe especializada realiza uma inspeção minuciosa de cada produto. Verificamos defeitos, conferimos tamanhos e cores, e garantimos que você receba exatamente o que pediu, evitando surpresas desagradáveis.",
+      description: "service.qualityAssuranceDesc",
       path: "/quality"
     },
     {
@@ -168,7 +168,7 @@ const OneStopService = () => {
         </svg>
       ),
       title: t('service.economicalShipping'),
-      description: "Economize até 70% em fretes internacionais com nossa solução de transporte consolidado. Nossos parceiros logísticos estratégicos garantem a melhor relação custo-benefício em todas as entregas, sem abrir mão da segurança.",
+      description: "service.economicalShippingDesc",
       path: "/economical-shipping"
     }
   ];
