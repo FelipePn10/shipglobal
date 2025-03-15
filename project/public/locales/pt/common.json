@@ -303,5 +303,49 @@
     },
     "viewDetails": "Ver detalhes",
     "realTimeTracking": "Rastreamento em tempo real disponível para todas as transportadoras"
+  },
+  "testimonials": {
+    "title": "O Que Nossos Clientes Dizem",
+    "subtitle": "Veja o que nossos clientes estão falando sobre nossa plataforma de compras internacionais",
+    "verified": "Verificado",
+    "viewFullTestimonial": "Ver depoimento completo",
+    "viewTestimonial": "Ver depoimento",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "anaSilva": {
+      "name": "Ana Silva",
+      "location": "São Paulo, SP",
+      "text": "Excelente serviço! Consegui comprar produtos dos EUA com facilidade e segurança. Entregas sempre dentro do prazo e suporte atencioso.",
+      "role": "Cliente Premium",
+      "date": "Há 2 semanas"
+    },
+    "pedroSantos": {
+      "name": "Pedro Santos",
+      "location": "Rio de Janeiro, RJ",
+      "text": "A consolidação de pacotes economizou muito no frete. Super recomendo! Nunca tive problemas com taxas ou atrasos nas entregas.",
+      "role": "Cliente desde 2022",
+      "date": "Há 1 mês"
+    },
+    "mariaCosta": {
+      "name": "Maria Costa",
+      "location": "Curitiba, PR",
+      "text": "Atendimento excepcional e entrega dentro do prazo prometido. O rastreamento em tempo real me deu muita tranquilidade.",
+      "role": "Cliente Frequente",
+      "date": "Há 3 dias"
+    },
+    "carlosMendes": {
+      "name": "Carlos Mendes",
+      "location": "Belo Horizonte, MG",
+      "text": "Já utilizei diversos serviços de redirecionamento, mas este supera todos em qualidade e preço. Extremamente satisfeito!",
+      "role": "Novo Cliente",
+      "date": "Há 1 semana"
+    },
+    "julianaFerreira": {
+      "name": "Juliana Ferreira",
+      "location": "Salvador, BA",
+      "text": "O processo de compra internacional se tornou simples e descomplicado. Recomendo para todos os meus amigos.",
+      "role": "Cliente Corporativo",
+      "date": "Há 2 meses"
+    }
   }
 }

@@ -302,5 +302,49 @@
     },
     "viewDetails": "View details",
     "realTimeTracking": "Real-time tracking available for all carriers"
+  },
+  "testimonials": {
+    "title": "What Our Customers Say",
+    "subtitle": "See what our customers are saying about our international shopping platform",
+    "verified": "Verified",
+    "viewFullTestimonial": "View full testimonial",
+    "viewTestimonial": "View testimonial",
+    "previous": "Previous",
+    "next": "Next",
+    "anaSilva": {
+      "name": "Ana Silva",
+      "location": "São Paulo, SP",
+      "text": "Excellent service! I was able to buy products from the USA with ease and security. Deliveries are always on time and the support is attentive.",
+      "role": "Premium Customer",
+      "date": "2 weeks ago"
+    },
+    "pedroSantos": {
+      "name": "Pedro Santos",
+      "location": "Rio de Janeiro, RJ",
+      "text": "Package consolidation saved a lot on shipping. Highly recommend! I never had issues with taxes or delivery delays.",
+      "role": "Customer since 2022",
+      "date": "1 month ago"
+    },
+    "mariaCosta": {
+      "name": "Maria Costa",
+      "location": "Curitiba, PR",
+      "text": "Exceptional service and delivery within the promised time. Real-time tracking gave me a lot of peace of mind.",
+      "role": "Frequent Customer",
+      "date": "3 days ago"
+    },
+    "carlosMendes": {
+      "name": "Carlos Mendes",
+      "location": "Belo Horizonte, MG",
+      "text": "I've used several forwarding services, but this one surpasses all in quality and price. Extremely satisfied!",
+      "role": "New Customer",
+      "date": "1 week ago"
+    },
+    "julianaFerreira": {
+      "name": "Juliana Ferreira",
+      "location": "Salvador, BA",
+      "text": "The international purchase process became simple and hassle-free. I recommend it to all my friends.",
+      "role": "Corporate Customer",
+      "date": "2 months ago"
+    }
   }
 }

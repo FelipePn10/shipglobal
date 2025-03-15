@@ -296,5 +296,49 @@
     },
     "viewDetails": "Ver detalles",
     "realTimeTracking": "Seguimiento en tiempo real disponible para todos los transportistas"
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "subtitle": "Vea lo que nuestros clientes están diciendo sobre nuestra plataforma de compras internacionales",
+    "verified": "Verificado",
+    "viewFullTestimonial": "Ver testimonio completo",
+    "viewTestimonial": "Ver testimonio",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "anaSilva": {
+      "name": "Ana Silva",
+      "location": "São Paulo, SP",
+      "text": "¡Excelente servicio! Pude comprar productos de EE. UU. con facilidad y seguridad. Entregas siempre a tiempo y soporte atento.",
+      "role": "Cliente Premium",
+      "date": "Hace 2 semanas"
+    },
+    "pedroSantos": {
+      "name": "Pedro Santos",
+      "location": "Río de Janeiro, RJ",
+      "text": "La consolidación de paquetes ahorró mucho en el flete. ¡Lo recomiendo mucho! Nunca tuve problemas con impuestos o retrasos en las entregas.",
+      "role": "Cliente desde 2022",
+      "date": "Hace 1 mes"
+    },
+    "mariaCosta": {
+      "name": "María Costa",
+      "location": "Curitiba, PR",
+      "text": "Atención excepcional y entrega dentro del plazo prometido. El seguimiento en tiempo real me dio mucha tranquilidad.",
+      "role": "Cliente Frecuente",
+      "date": "Hace 3 días"
+    },
+    "carlosMendes": {
+      "name": "Carlos Mendes",
+      "location": "Belo Horizonte, MG",
+      "text": "He utilizado varios servicios de redireccionamiento, pero este supera a todos en calidad y precio. ¡Extremadamente satisfecho!",
+      "role": "Nuevo Cliente",
+      "date": "Hace 1 semana"
+    },
+    "julianaFerreira": {
+      "name": "Juliana Ferreira",
+      "location": "Salvador, BA",
+      "text": "El proceso de compra internacional se volvió simple y sin complicaciones. Lo recomiendo a todos mis amigos.",
+      "role": "Cliente Corporativo",
+      "date": "Hace 2 meses"
+    }
   }
 }
