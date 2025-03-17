@@ -268,7 +268,7 @@ export default function Home({ params }: { params: { lang: string } }) {
                       <motion.a
                         whileHover={{ x: 5 }}
                         transition={{ type: 'spring', stiffness: 400 }}
-                        href="#"
+                        href="/explanation"
                         className="inline-flex items-center text-sm font-medium text-primary"
                       >
                         Saiba mais
@@ -314,7 +314,7 @@ export default function Home({ params }: { params: { lang: string } }) {
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               <a
-                href="#contact"
+                href="/auth"
                 className="inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium transition-colors hover:bg-primary/90"
               >
                 Comece agora

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useTranslation } from 'next-i18next';
+import Link from "next/link";
 
 interface ServiceCardProps {
   color: string;
@@ -125,7 +126,7 @@ const OneStopService = () => {
       ),
       title: t('service.warehouseShipping'),
       description: "service.warehouseShippingDesc",
-      path: "/warehouse-shipping"
+      path: "/shipping"
     },
     {
       color: "border-l-yellow-500",
@@ -169,7 +170,7 @@ const OneStopService = () => {
       ),
       title: t('service.economicalShipping'),
       description: "service.economicalShippingDesc",
-      path: "/economical-shipping"
+      path: "/economic"
     }
   ];
 
@@ -224,13 +225,15 @@ const OneStopService = () => {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <motion.button
+          <Link href="/auth">
+            <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {t('service.startImporting')}
           </motion.button>
+          </Link>
           <p className="mt-4 text-sm text-gray-500">
             {t('service.successfulClients')}
           </p>
