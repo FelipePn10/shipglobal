@@ -1,0 +1,57 @@
+{
+  "brandName": "ShipGlobal",
+  "newsletter": {
+    "title": "Suscríbete a nuestro boletín",
+    "subtitle": "Recibe novedades y ofertas exclusivas directamente en tu correo",
+    "placeholder": "Tu mejor correo electrónico",
+    "button": "Suscribirse"
+  },
+  "about": {
+    "title": "Acerca de",
+    "links": {
+      "aboutUs": "Sobre Nosotros",
+      "howItWorks": "Cómo Funciona",
+      "reviews": "Evaluaciones",
+      "jobs": "Trabaja con Nosotros"
+    }
+  },
+  "services": {
+    "title": "Servicios",
+    "links": {
+      "personalShopper": "Personal Shopper",
+      "consolidation": "Consolidación",
+      "repackaging": "Reembalaje",
+      "returns": "Devoluciones"
+    }
+  },
+  "support": {
+    "title": "Soporte",
+    "links": {
+      "faq": "Preguntas Frecuentes",
+      "contact": "Contacto",
+      "blog": "Blog",
+      "hours": "Horarios"
+    }
+  },
+  "legal": {
+    "title": "Legal",
+    "links": {
+      "terms": "Términos de Uso",
+      "privacy": "Privacidad",
+      "cookies": "Cookies",
+      "lgpd": "LGPD"
+    }
+  },
+  "contact": {
+    "email": "contact@shipglobal.com",
+    "phone": "+55 (44) 99180-5405",
+    "address": "Maringá, PR - Brasil"
+  },
+  "socialLinks": {
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "facebook": "Facebook"
+  },
+  "copyright": "ShipGlobal. Todos los derechos reservados."
+}

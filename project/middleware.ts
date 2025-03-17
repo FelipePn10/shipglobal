@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { i18n } from "./next-i18next.config";
+
+const locales = ['pt', 'en', 'es'];
+const defaultLocale = 'pt';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const locales = i18n.locales;
-  const defaultLocale = i18n.defaultLocale;
-
-  // Verifique se o caminho já inclui um locale válido
-  const pathLocale = locales.find((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
-
-  if (!pathLocale) {
-    // Redirecione para o locale padrão
+  
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+  
+  if (!pathnameHasLocale) {
     return NextResponse.redirect(new URL(`/${defaultLocale}${pathname}`, request.url));
   }
-
+  
   return NextResponse.next();
 }
 
