@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { I18nProvider } from "@/hooks/i18n-client-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,22 +16,29 @@ export const metadata: Metadata = {
     "redirecionamento internacional, compras internacionais, personal shopper, consolidação de pacotes",
 };
 
-export default async function RootLayout({
+// Defina os idiomas suportados
+export async function generateStaticParams() {
+  return [{ lang: "pt" }, { lang: "en" }, { lang: "es" }];
+}
+
+export default function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  const lang = params.lang;
+  const lang = params.lang || "pt";
   
   return (
     <html lang={lang} suppressHydrationWarning>
       <body className={inter.className}>
-        <Navbar lang={lang} />
-        <main>{children}</main>
-        <Footer />
-        <Toaster />
+        <I18nProvider locale={lang}>
+          <Navbar lang={lang} />
+          <main>{children}</main>
+          <Footer />
+          <Toaster />
+        </I18nProvider>
       </body>
     </html>
   );

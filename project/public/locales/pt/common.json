@@ -351,8 +351,8 @@
     "brandName": "ShipGlobal",
     "newsletter": {
       "title": "Assine nossa newsletter",
-      "subtitle": "Receba novidades e ofertas exclusivas diretamente no seu email",
-      "placeholder": "Seu melhor email",
+      "subtitle": "Receba novidades e ofertas exclusivas diretamente no seu e-mail",
+      "placeholder": "Seu melhor e-mail",
       "button": "Assinar"
     },
     "about": {
@@ -361,7 +361,7 @@
         "aboutUs": "Sobre Nós",
         "howItWorks": "Como Funciona",
         "reviews": "Avaliações",
-        "jobs": "Vagas"
+        "jobs": "Trabalhe Conosco"
       }
     },
     "services": {
@@ -376,7 +376,7 @@
     "support": {
       "title": "Suporte",
       "links": {
-        "faq": "FAQ",
+        "faq": "Perguntas Frequentes",
         "contact": "Contato",
         "blog": "Blog",
         "hours": "Horários"
@@ -392,7 +392,7 @@
       }
     },
     "contact": {
-      "email": "contato@shipglobal.com.br",
+      "email": "contact@shipglobal.com",
       "phone": "+55 (44) 99180-5405",
       "address": "Maringá, PR - Brasil"
     },
@@ -403,6 +403,6 @@
       "facebook": "Facebook"
     },
     "copyright": "ShipGlobal. Todos os direitos reservados."
-  }
+    }
   }
 }
