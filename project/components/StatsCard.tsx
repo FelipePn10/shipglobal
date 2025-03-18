@@ -5,16 +5,17 @@ import { motion, useInView, useAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useTranslation } from 'react-i18next'; // Corrigido de 'next-i18next' para 'react-i18next'
 
-interface ServiceCardProps {
+interface StatsCardProps {
   color: string;
   icon: React.ReactNode;
   title: string;
   description: string;
+  value: number;
   index: number;
   path: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, description, index, path }) => {
+const StatsCard: React.FC<StatsCardProps> = ({ color, icon, title, description, index, path }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
@@ -70,4 +71,4 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, descripti
   );
 };
 
-export default ServiceCard;
+export default StatsCard;

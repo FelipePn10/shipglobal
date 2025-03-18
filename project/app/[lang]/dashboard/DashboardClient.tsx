@@ -1,5 +1,3 @@
-// 2. Agora vamos criar o Client Component para a UI
-// app/[lang]/dashboard/DashboardClient.tsx
 "use client";
 
 import React from 'react';
@@ -8,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CurrencyStats } from '@/components/CurrencyStats';
 import { UserAddress } from '@/components/UserAddress';
-import { StatsCard } from '@/components/StatsCard';
+import StatsCard from '@/components/StatsCard';
 import { LocaleSelector } from '@/components/LocaleSelector';
 import { PackageAnimation } from '@/components/PackageAnimation';
 import { useDashboard } from './useDashboard';
@@ -167,26 +165,22 @@ export default function DashboardClient({ initialUserData, lang }: DashboardClie
                 title={t('products')}
                 value={initialUserData.stats.products}
                 icon={<Database className="h-6 w-6" />}
-                color="blue"
-              />
+                color="blue" description={''} index={0} path={''}              />
               <StatsCard
                 title={t('packages')}
                 value={initialUserData.stats.packages}
                 icon={<Box className="h-6 w-6" />}
-                color="blue"
-              />
+                color="blue" description={''} index={0} path={''}              />
               <StatsCard
                 title={t('services')}
                 value={initialUserData.stats.services}
                 icon={<Headphones className="h-6 w-6" />}
-                color="blue"
-              />
+                color="blue" description={''} index={0} path={''}              />
               <StatsCard
                 title={t('shipments')}
                 value={initialUserData.stats.shipments}
                 icon={<Send className="h-6 w-6" />}
-                color="blue"
-              />
+                color="blue" description={''} index={0} path={''}              />
             </div>
 
             {/* Country selector and address card */}

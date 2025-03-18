@@ -1,7 +1,16 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
-import { Globe, Package, Search, TrendingUp, Clock, Shield, Truck } from 'lucide-react';
+import React, { useState, useMemo } from "react";
+import Image from "next/image";
+import {
+  Globe,
+  Package,
+  Search,
+  TrendingUp,
+  Clock,
+  Shield,
+  Truck,
+} from "lucide-react";
 
 interface ShippingProvider {
   id: string;
@@ -15,81 +24,142 @@ interface ShippingProvider {
 }
 
 const EUROPEAN_COUNTRIES = [
-  'Reino Unido',
-  'França',
-  'Alemanha',
-  'Espanha',
-  'Itália',
-  'Portugal',
-  'Países Baixos',
-  'Europa'
+  "Reino Unido",
+  "França",
+  "Alemanha",
+  "Espanha",
+  "Itália",
+  "Portugal",
+  "Países Baixos",
+  "Europa",
 ];
 
 const ShippingPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<string>("all");
 
   const shippingProviders: ShippingProvider[] = [
     {
-      id: 'fedex',
-      name: 'FedEx',
-      description: 'Entrega expressa internacional com rastreamento em tempo real',
-      logo: '/api/placeholder/80/40',
-      features: ['Rastreamento em tempo real', 'Entrega expressa', 'Cobertura global', 'Seguro de envio'],
-      countries: ['EUA', 'Canadá', 'Europa', 'Ásia', 'América Latina', 'Oceania', 'África'],
-      estimatedTime: '1-3 dias úteis',
-      priceRange: '€€€'
+      id: "fedex",
+      name: "FedEx",
+      description:
+        "Entrega expressa internacional com rastreamento em tempo real",
+      logo: "/api/placeholder/80/40",
+      features: [
+        "Rastreamento em tempo real",
+        "Entrega expressa",
+        "Cobertura global",
+        "Seguro de envio",
+      ],
+      countries: [
+        "EUA",
+        "Canadá",
+        "Europa",
+        "Ásia",
+        "América Latina",
+        "Oceania",
+        "África",
+      ],
+      estimatedTime: "1-3 dias úteis",
+      priceRange: "€€€",
     },
     {
-      id: 'dhl',
-      name: 'DHL',
-      description: 'Logística global com prazos de entrega garantidos',
-      logo: '/api/placeholder/80/40',
-      features: ['Prazos garantidos', 'Coleta programada', 'Atendimento alfandegário', 'Opções premium'],
-      countries: ['EUA', 'Europa', 'Ásia', 'Oceania', 'América Latina', 'África', 'Oriente Médio'],
-      estimatedTime: '1-4 dias úteis',
-      priceRange: '€€€'
+      id: "dhl",
+      name: "DHL",
+      description: "Logística global com prazos de entrega garantidos",
+      logo: "/api/placeholder/80/40",
+      features: [
+        "Prazos garantidos",
+        "Coleta programada",
+        "Atendimento alfandegário",
+        "Opções premium",
+      ],
+      countries: [
+        "EUA",
+        "Europa",
+        "Ásia",
+        "Oceania",
+        "América Latina",
+        "África",
+        "Oriente Médio",
+      ],
+      estimatedTime: "1-4 dias úteis",
+      priceRange: "€€€",
     },
     {
-      id: 'express',
-      name: 'Express',
-      description: 'Serviço econômico com ampla cobertura internacional',
-      logo: '/api/placeholder/80/40',
-      features: ['Econômico', 'Ampla cobertura', 'Bom custo-benefício', 'Rastreamento básico'],
-      countries: ['EUA', 'Europa', 'Ásia', 'América Latina'],
-      estimatedTime: '5-10 dias úteis',
-      priceRange: '€'
+      id: "express",
+      name: "Express",
+      description: "Serviço econômico com ampla cobertura internacional",
+      logo: "/api/placeholder/80/40",
+      features: [
+        "Econômico",
+        "Ampla cobertura",
+        "Bom custo-benefício",
+        "Rastreamento básico",
+      ],
+      countries: ["EUA", "Europa", "Ásia", "América Latina"],
+      estimatedTime: "5-10 dias úteis",
+      priceRange: "€",
     },
     {
-      id: 'dpd',
-      name: 'DPD',
-      description: 'Especialistas em logística com grande cobertura europeia',
-      logo: '/api/placeholder/80/40',
-      features: ['Especialista europeu', 'Predict service', 'Entregas programadas', 'Opções sustentáveis'],
-      countries: ['Reino Unido', 'França', 'Alemanha', 'Espanha', 'Itália', 'Portugal', 'Países Baixos'],
-      estimatedTime: '2-5 dias úteis',
-      priceRange: '€€'
+      id: "dpd",
+      name: "DPD",
+      description: "Especialistas em logística com grande cobertura europeia",
+      logo: "/api/placeholder/80/40",
+      features: [
+        "Especialista europeu",
+        "Predict service",
+        "Entregas programadas",
+        "Opções sustentáveis",
+      ],
+      countries: [
+        "Reino Unido",
+        "França",
+        "Alemanha",
+        "Espanha",
+        "Itália",
+        "Portugal",
+        "Países Baixos",
+      ],
+      estimatedTime: "2-5 dias úteis",
+      priceRange: "€€",
     },
     {
-      id: 'ars',
-      name: 'ARS',
-      description: 'Soluções de envio flexíveis para diferentes necessidades',
-      logo: '/api/placeholder/80/40',
-      features: ['Flexibilidade', 'Soluções personalizadas', 'Diversos métodos de envio', 'Suporte 24/7'],
-      countries: ['EUA', 'Europa', 'Ásia', 'América Latina', 'Canadá'],
-      estimatedTime: '3-7 dias úteis',
-      priceRange: '€€'
+      id: "ars",
+      name: "ARS",
+      description: "Soluções de envio flexíveis para diferentes necessidades",
+      logo: "/api/placeholder/80/40",
+      features: [
+        "Flexibilidade",
+        "Soluções personalizadas",
+        "Diversos métodos de envio",
+        "Suporte 24/7",
+      ],
+      countries: ["EUA", "Europa", "Ásia", "América Latina", "Canadá"],
+      estimatedTime: "3-7 dias úteis",
+      priceRange: "€€",
     },
     {
-      id: 'aramex',
-      name: 'Aramex',
-      description: 'Serviço premium com foco em mercados emergentes',
-      logo: '/api/placeholder/80/40',
-      features: ['Especialista em mercados emergentes', 'Entregas em áreas remotas', 'Soluções premium', 'Suporte multi-idioma'],
-      countries: ['Oriente Médio', 'África', 'Ásia', 'América Latina', 'Oceania'],
-      estimatedTime: '2-6 dias úteis',
-      priceRange: '€€'
-    }
+      id: "aramex",
+      name: "Aramex",
+      description: "Serviço premium com foco em mercados emergentes",
+      logo: "/api/placeholder/80/40",
+      features: [
+        "Especialista em mercados emergentes",
+        "Entregas em áreas remotas",
+        "Soluções premium",
+        "Suporte multi-idioma",
+      ],
+      countries: [
+        "Oriente Médio",
+        "África",
+        "Ásia",
+        "América Latina",
+        "Oceania",
+      ],
+      estimatedTime: "2-6 dias úteis",
+      priceRange: "€€",
+    },
   ];
 
   const filteredProviders = useMemo(() => {
@@ -98,22 +168,29 @@ const ShippingPage: React.FC = () => {
       const matchesSearch =
         provider.name.toLowerCase().includes(searchLower) ||
         provider.description.toLowerCase().includes(searchLower) ||
-        provider.countries.some((country) => country.toLowerCase().includes(searchLower));
+        provider.countries.some((country) =>
+          country.toLowerCase().includes(searchLower)
+        );
 
       switch (activeTab) {
-        case 'all':
+        case "all":
           return matchesSearch;
-        case 'express':
-          return matchesSearch && provider.estimatedTime.includes('1-');
-        case 'economic':
-          return matchesSearch && provider.priceRange === '€';
-        case 'europe':
-          return matchesSearch && provider.countries.some((country) => EUROPEAN_COUNTRIES.includes(country));
+        case "express":
+          return matchesSearch && provider.estimatedTime.includes("1-");
+        case "economic":
+          return matchesSearch && provider.priceRange === "€";
+        case "europe":
+          return (
+            matchesSearch &&
+            provider.countries.some((country) =>
+              EUROPEAN_COUNTRIES.includes(country)
+            )
+          );
         default:
           return false;
       }
     });
-  }, [searchTerm, activeTab]);
+  }, [searchTerm, activeTab, shippingProviders]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -124,8 +201,12 @@ const ShippingPage: React.FC = () => {
       <header className="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-4">Soluções de Frete Internacional</h1>
-            <p className="text-xl mb-8">Conectamos você ao mundo com as melhores transportadoras em 17 países</p>
+            <h1 className="text-4xl font-bold mb-4">
+              Soluções de Frete Internacional
+            </h1>
+            <p className="text-xl mb-8">
+              Conectamos você ao mundo com as melhores transportadoras em 17 países
+            </p>
             <div className="relative bg-white rounded-full p-1 flex items-center max-w-xl mx-auto shadow-lg">
               <input
                 type="text"
@@ -153,21 +234,30 @@ const ShippingPage: React.FC = () => {
               <Globe className="text-blue-600" size={28} aria-hidden="true" />
             </div>
             <h2 className="text-xl font-semibold mb-2">Cobertura Global</h2>
-            <p className="text-gray-600">Entregamos suas compras em 17 países com os melhores serviços de frete do mundo.</p>
+            <p className="text-gray-600">
+              Entregamos suas compras em 17 países com os melhores serviços de
+              frete do mundo.
+            </p>
           </article>
           <article className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="bg-blue-100 p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
               <TrendingUp className="text-blue-600" size={28} aria-hidden="true" />
             </div>
             <h2 className="text-xl font-semibold mb-2">Rastreamento Avançado</h2>
-            <p className="text-gray-600">Acompanhe suas encomendas em tempo real durante todo o processo de entrega.</p>
+            <p className="text-gray-600">
+              Acompanhe suas encomendas em tempo real durante todo o processo de
+              entrega.
+            </p>
           </article>
           <article className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="bg-blue-100 p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
               <Shield className="text-blue-600" size={28} aria-hidden="true" />
             </div>
             <h2 className="text-xl font-semibold mb-2">Segurança Garantida</h2>
-            <p className="text-gray-600">Suas encomendas são tratadas com o máximo cuidado e seguradas durante todo o trajeto.</p>
+            <p className="text-gray-600">
+              Suas encomendas são tratadas com o máximo cuidado e seguradas durante
+              todo o trajeto.
+            </p>
           </article>
         </section>
 
@@ -175,15 +265,17 @@ const ShippingPage: React.FC = () => {
           <h1 className="text-2xl font-bold mb-6">Nossos Parceiros de Frete</h1>
           <div className="flex flex-wrap gap-2 mb-6" role="tablist">
             {[
-              { id: 'all', label: 'Todos' },
-              { id: 'express', label: 'Expressos' },
-              { id: 'economic', label: 'Econômicos' },
-              { id: 'europe', label: 'Europa' },
+              { id: "all", label: "Todos" },
+              { id: "express", label: "Expressos" },
+              { id: "economic", label: "Econômicos" },
+              { id: "europe", label: "Europa" },
             ].map((tab) => (
               <button
                 key={tab.id}
                 className={`px-4 py-2 rounded-full transition-colors ${
-                  activeTab === tab.id ? 'bg-blue-600 text-white' : 'bg-gray-200 hover:bg-gray-300'
+                  activeTab === tab.id
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 hover:bg-gray-300"
                 }`}
                 onClick={() => setActiveTab(tab.id)}
                 aria-selected={activeTab === tab.id}
@@ -204,14 +296,14 @@ const ShippingPage: React.FC = () => {
               >
                 <div className="p-6 md:flex items-start">
                   <div className="md:w-1/6 mb-4 md:mb-0 flex items-center justify-center">
-                    <div className="bg-gray-100 p-4 rounded">
-                      <img
-                        src={provider.logo}
-                        alt={`Logo da ${provider.name}`}
-                        className="w-16 h-8 object-contain"
-                        loading="lazy"
-                      />
-                    </div>
+                    <Image
+                      src={provider.logo}
+                      alt={`Logo da ${provider.name}`}
+                      width={80}
+                      height={40}
+                      className="w-16 h-8 object-contain"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="md:w-2/3 md:px-6">
                     <h2 className="text-xl font-bold">{provider.name}</h2>
@@ -264,29 +356,16 @@ const ShippingPage: React.FC = () => {
           ) : (
             <div className="text-center py-12" role="alert">
               <Package size={48} className="mx-auto text-gray-400 mb-4" aria-hidden="true" />
-              <h2 className="text-xl font-medium mb-2">Nenhuma transportadora encontrada</h2>
-              <p className="text-gray-600">Tente outros termos de busca ou filtros diferentes.</p>
+              <h2 className="text-xl font-medium mb-2">
+                Nenhuma transportadora encontrada
+              </h2>
+              <p className="text-gray-600">
+                Tente outros termos de busca ou filtros diferentes.
+              </p>
             </div>
           )}
         </section>
       </main>
-
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl font-bold mb-4">Pronto para enviar suas compras?</h1>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Nossa equipe está disponível para ajudar você a escolher a melhor opção de frete para suas necessidades.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
-              Solicitar orçamento
-            </button>
-            <button className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-3 rounded-lg font-medium transition-colors">
-              Fale conosco
-            </button>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
