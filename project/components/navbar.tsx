@@ -5,11 +5,29 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Package, Menu, X, Globe, ChevronDown, User, Search } from "lucide-react";
-import i18next from "@/i18n";
+import i18n from "@/i18n"; // Importa a instância inicializada
 import { motion, AnimatePresence } from "framer-motion";
 
+// Interfaces
 interface NavbarProps {
-  lang: string; // Accept `lang` directly instead of a Promise
+  lang: string;
+}
+
+interface MenuItem {
+  href: string;
+  label: string;
+  hasSubmenu?: boolean;
+  submenu?: SubmenuItem[];
+}
+
+interface SubmenuItem {
+  href: string;
+  label: string;
+}
+
+interface Language {
+  code: string;
+  name: string;
 }
 
 export function Navbar({ lang }: NavbarProps) {
@@ -19,29 +37,13 @@ export function Navbar({ lang }: NavbarProps) {
   const langMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Supported languages
-  const languages = [
+  const languages: Language[] = [
     { code: "en", name: "English" },
     { code: "pt", name: "Português" },
     { code: "es", name: "Español" },
   ];
 
-  // Function to change the language
-  const changeLanguage = (code: string) => {
-    i18next.changeLanguage(code).catch((err) => {
-      console.error("Failed to change language:", err);
-    });
-    router.push(`/${code}`); // Navigate to the root of the new language
-    setIsLangOpen(false);
-  };
-
-  // Redirect to the authentication page
-  const goToAuthPage = () => {
-    router.push(`/${lang}/auth`);
-  };
-
-  // Menu items
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { href: `/${lang}/operation`, label: "Como Funciona" },
     {
       href: `/${lang}/servicos`,
@@ -58,7 +60,22 @@ export function Navbar({ lang }: NavbarProps) {
     { href: `/${lang}/contact`, label: "Contato" },
   ];
 
-  // Detect scroll to change navbar appearance
+  const changeLanguage = (code: string) => {
+    i18n.changeLanguage(code)
+      .then(() => {
+        router.push(`/${code}`);
+        setIsLangOpen(false);
+      })
+      .catch((err) => {
+        console.error("Erro ao trocar idioma:", err);
+      });
+  };
+
+  const goToAuthPage = () => {
+    router.push(`/${lang}/auth`);
+  };
+
+  // Detecta scroll para mudar a aparência da navbar
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -67,7 +84,7 @@ export function Navbar({ lang }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close language dropdown when clicking outside
+  // Fecha o dropdown de idiomas ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
@@ -93,7 +110,7 @@ export function Navbar({ lang }: NavbarProps) {
             </Link>
           </div>
 
-          {/* Desktop menu */}
+          {/* Menu desktop */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {menuItems.map((item) => (
               <div key={item.href} className="relative group">
@@ -111,7 +128,7 @@ export function Navbar({ lang }: NavbarProps) {
                   </Link>
                 )}
 
-                {/* Submenu for desktop */}
+                {/* Submenu desktop */}
                 {item.hasSubmenu && (
                   <div className="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     {item.submenu?.map((subItem) => (
@@ -128,18 +145,17 @@ export function Navbar({ lang }: NavbarProps) {
               </div>
             ))}
 
-            {/* Language dropdown for desktop */}
+            {/* Dropdown de idiomas desktop */}
             <div className="relative" ref={langMenuRef}>
               <button
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium hover:text-blue-600 hover:bg-gray-50 rounded-md"
                 onClick={() => setIsLangOpen(!isLangOpen)}
               >
                 <Globe className="h-4 w-4" />
-                <span>{languages.find((language) => language.code === lang)?.name || "Language"}</span>
+                <span>{languages.find((l) => l.code === lang)?.name || "Language"}</span>
                 <ChevronDown className="h-3 w-3" />
               </button>
 
-              {/* Language dropdown menu */}
               <AnimatePresence>
                 {isLangOpen && (
                   <motion.div
@@ -163,19 +179,19 @@ export function Navbar({ lang }: NavbarProps) {
               </AnimatePresence>
             </div>
 
-            {/* Search button */}
+            {/* Botão de busca */}
             <button className="p-2 rounded-full hover:bg-gray-100">
               <Search className="h-5 w-5 text-gray-500" />
             </button>
 
-            {/* Client area button */}
+            {/* Botão da área do cliente */}
             <Button className="ml-2 bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
               <User className="mr-2 h-4 w-4" />
               Área do Cliente
             </Button>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Botão de menu mobile */}
           <div className="md:hidden flex items-center space-x-2">
             <button className="p-2 rounded-full hover:bg-gray-100">
               <Search className="h-5 w-5 text-gray-500" />
@@ -192,7 +208,7 @@ export function Navbar({ lang }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Menu mobile */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -207,12 +223,7 @@ export function Navbar({ lang }: NavbarProps) {
                 <div key={item.href}>
                   {item.hasSubmenu ? (
                     <div className="px-3 py-2">
-                      <button
-                        className="flex items-center justify-between w-full text-base font-medium"
-                        onClick={() => {
-                          // Add logic to toggle submenu if needed
-                        }}
-                      >
+                      <button className="flex items-center justify-between w-full text-base font-medium">
                         {item.label}
                         <ChevronDown className="h-4 w-4" />
                       </button>
@@ -221,7 +232,7 @@ export function Navbar({ lang }: NavbarProps) {
                           <Link
                             key={subItem.href}
                             href={subItem.href}
-                            className="block py-2 text-sm text-gray-700"
+                            className="block py-2 text-sm text-gray-700 hover:text-blue-600"
                             onClick={() => setIsMenuOpen(false)}
                           >
                             {subItem.label}
@@ -241,7 +252,7 @@ export function Navbar({ lang }: NavbarProps) {
                 </div>
               ))}
 
-              {/* Language dropdown for mobile */}
+              {/* Dropdown de idiomas mobile */}
               <div className="px-3 py-2">
                 <button
                   className="flex items-center justify-between w-full text-base font-medium"
@@ -249,7 +260,7 @@ export function Navbar({ lang }: NavbarProps) {
                 >
                   <div className="flex items-center">
                     <Globe className="h-5 w-5 mr-2" />
-                    <span>{languages.find((language) => language.code === lang)?.name || "Language"}</span>
+                    <span>{languages.find((l) => l.code === lang)?.name || "Language"}</span>
                   </div>
                   <ChevronDown className="h-4 w-4" />
                 </button>
@@ -266,7 +277,7 @@ export function Navbar({ lang }: NavbarProps) {
                       {languages.map((language) => (
                         <button
                           key={language.code}
-                          className="block w-full py-2 text-left text-sm text-gray-700"
+                          className="block w-full py-2 text-left text-sm text-gray-700 hover:text-blue-600"
                           onClick={() => changeLanguage(language.code)}
                         >
                           {language.name}
@@ -277,6 +288,7 @@ export function Navbar({ lang }: NavbarProps) {
                 </AnimatePresence>
               </div>
 
+              {/* Botão da área do cliente no mobile */}
               <div className="px-3 py-2">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
                   <User className="mr-2 h-4 w-4" />

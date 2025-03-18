@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import Link from "next/link";
 
 interface ServiceCardProps {
@@ -20,7 +20,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, descripti
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t, ready } = useTranslation('common');
 
   useEffect(() => {
     if (isInView) {
@@ -31,6 +31,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ color, icon, title, descripti
   const handleLearnMore = () => {
     router.push(path);
   };
+
+  // Não renderize nada até que as traduções estejam prontas
+  if (!ready) return null;
 
   return (
     <motion.div
@@ -75,13 +78,21 @@ const OneStopService = () => {
   const headerControls = useAnimation();
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
-  const { t } = useTranslation('common');
+  const { t, ready } = useTranslation('common');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (isHeaderInView) {
       headerControls.start({ opacity: 1, y: 0, transition: { duration: 0.7 } });
     }
   }, [isHeaderInView, headerControls]);
+
+  // Importante: não tente renderizar até que o componente esteja montado no cliente
+  // e as traduções estejam prontas
+  if (!mounted || !ready) {
+    return <div className="min-h-[400px]"></div>; // Espaço reservado para evitar layout shift
+  }
 
   const serviceItems = [
     {

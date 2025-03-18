@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
@@ -8,6 +8,11 @@ import { useTranslation } from "next-i18next";
 const ShippingServices: React.FC = () => {
   const { t } = useTranslation("common");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const services = [
     {
@@ -48,8 +53,13 @@ const ShippingServices: React.FC = () => {
     },
   ];
 
+  // Placeholder minimalista para SSR
+  if (!isMounted) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <section className="py-16 bg-gradient-to-br from-gray-100 to-gray-200">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -143,6 +153,7 @@ const ShippingServices: React.FC = () => {
                         opacity: hoveredIndex === index ? 1 : 0,
                         scale: hoveredIndex === index ? 1 : 0.8,
                       }}
+                      transition={{ duration: 0.3 }}
                       className="mt-6"
                     >
                       <a

@@ -21,20 +21,23 @@ export async function generateStaticParams() {
   return [{ lang: "pt" }, { lang: "en" }, { lang: "es" }];
 }
 
-export default function RootLayout({
+// Tornar o RootLayout assíncrono para aguardar os params
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>; // params agora é uma Promise
 }) {
-  const lang = params.lang || "pt";
-  
+  // Aguardar a resolução dos params
+  const { lang } = await params;
+  const resolvedLang = lang || "pt"; // Fallback para "pt" se lang não estiver definido
+
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={resolvedLang} suppressHydrationWarning>
       <body className={inter.className}>
-        <I18nProvider locale={lang}>
-          <Navbar lang={lang} />
+        <I18nProvider locale={resolvedLang}>
+          <Navbar lang={resolvedLang} />
           <main>{children}</main>
           <Footer />
           <Toaster />

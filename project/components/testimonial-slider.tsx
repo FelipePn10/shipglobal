@@ -13,6 +13,7 @@ export function TestimonialSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const [direction, setDirection] = useState(1);
+  const [isClient, setIsClient] = useState(false); // Estado para verificar se está no cliente
 
   // Lista de depoimentos com informações traduzidas
   const testimonials = [
@@ -68,18 +69,23 @@ export function TestimonialSlider() {
     },
   ];
 
+  // Verifica se está no cliente
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Autoplay com intervalo de 5 segundos
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
-    if (autoplay) {
+    if (autoplay && isClient) {
       interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % testimonials.length);
       }, 5000);
     }
 
     return () => clearInterval(interval);
-  }, [autoplay, testimonials.length]);
+  }, [autoplay, testimonials.length, isClient]);
 
   const nextTestimonial = () => {
     setDirection(1);
