@@ -9,7 +9,7 @@ interface CallToActionProps {
 
 export const CallToAction: React.FC<CallToActionProps> = ({ currentLanguage, router }) => {
   return (
-    <section className="bg-blue-900 py-12 rounded-xl text-center mb-16">
+    <section className="bg-blue-600 py-12 rounded-xl text-center mb-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
