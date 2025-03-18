@@ -49,7 +49,7 @@ export function Navbar({ lang }: NavbarProps) {
       hasSubmenu: true,
       submenu: [
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
-        { href: `/${lang}/consolidacao`, label: "Consolidação" },
+        { href: `/${lang}/consolidation`, label: "Consolidação" },
         { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
       ],
     },
