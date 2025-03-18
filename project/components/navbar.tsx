@@ -50,7 +50,7 @@ export function Navbar({ lang }: NavbarProps) {
       submenu: [
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
         { href: `/${lang}/consolidation`, label: "Consolidação" },
-        { href: `/${lang}/servicos/devolucoes`, label: "Devoluções" },
+        { href: `/${lang}/servicos/returns`, label: "Devoluções" },
       ],
     },
     { href: `/${lang}/price`, label: "Preços" },
