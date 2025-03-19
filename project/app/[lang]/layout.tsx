@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { Toaster } from "@/components/ui/sonner";
+import { Footer } from "@/components/Footer/footer";
+import { Toaster } from "react-hot-toast";
 import { I18nProvider } from "@/hooks/i18n-client-provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -42,6 +42,7 @@ export default async function RootLayout({
           <Footer />
           <Toaster />
         </I18nProvider>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

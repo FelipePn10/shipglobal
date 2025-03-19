@@ -1,11 +1,5 @@
 {
   "brandName": "ShipGlobal",
-  "newsletter": {
-    "title": "Assine nossa newsletter",
-    "subtitle": "Receba novidades e ofertas exclusivas diretamente no seu e-mail",
-    "placeholder": "Seu melhor e-mail",
-    "button": "Assinar"
-  },
   "about": {
     "title": "Sobre",
     "links": {
@@ -53,5 +47,14 @@
     "linkedin": "LinkedIn",
     "facebook": "Facebook"
   },
-  "copyright": "ShipGlobal. Todos os direitos reservados."
+  "copyright": "ShipGlobal. Todos os direitos reservados.",
+  "newsletter": {
+    "title": "Assine nossa newsletter",
+    "subtitle": "Receba as últimas novidades e promoções diretamente no seu e-mail.",
+    "placeholder": "Seu e-mail",
+    "button": "Assinar",
+    "loading": "Enviando...",
+    "successMessage": "Inscrição realizada com sucesso!",
+    "errorMessage": "Erro ao se inscrever. Tente novamente."
+  }
 }

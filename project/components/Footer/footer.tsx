@@ -5,9 +5,13 @@ import { Package, Twitter, Instagram, Linkedin, Facebook, Mail, MapPin, Phone } 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "next-i18next";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export function Footer() {
   const { t } = useTranslation("footer");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const footerSections = [
     {
@@ -60,6 +64,36 @@ export function Footer() {
     { icon: <MapPin size={16} />, text: t("contact.address") },
   ];
 
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erro ao se inscrever na newsletter");
+      }
+
+      // Notificação de sucesso
+      toast.success(t("newsletter.successMessage"));
+      setEmail(""); // Limpa o campo de e-mail após a inscrição
+    } catch (error: any) {
+      // Notificação de erro
+      toast.error(error.message || t("newsletter.errorMessage"));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="bg-gradient-to-r from-blue-600 to-blue-900 text-white">
       {/* Newsletter Section */}
@@ -70,16 +104,24 @@ export function Footer() {
               <h3 className="text-xl font-bold">{t("newsletter.title")}</h3>
               <p className="text-blue-100 mt-1">{t("newsletter.subtitle")}</p>
             </div>
-            <div className="flex w-full md:w-auto">
+            <form onSubmit={handleSubscribe} className="flex w-full md:w-auto">
               <input
                 type="email"
                 placeholder={t("newsletter.placeholder")}
                 className="px-4 py-2 rounded-l-md w-full md:w-64 text-gray-900 focus:outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-              <Button variant="default" className="rounded-l-none bg-blue-900 hover:bg-blue-800">
-                {t("newsletter.button")}
+              <Button
+                type="submit"
+                variant="default"
+                className="rounded-l-none bg-blue-900 hover:bg-blue-800"
+                disabled={loading}
+              >
+                {loading ? t("newsletter.loading") : t("newsletter.button")}
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
