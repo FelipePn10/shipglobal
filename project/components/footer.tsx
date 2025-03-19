@@ -9,13 +9,12 @@ import { useTranslation } from "next-i18next";
 export function Footer() {
   const { t } = useTranslation("footer");
 
-  // Dados do footer usando as traduções
   const footerSections = [
     {
       title: t("about.title"),
       links: [
         { label: t("about.links.aboutUs"), href: "/sobre" },
-        { label: t("about.links.howItWorks"), href: "/como-funciona" },
+        { label: t("about.links.howItWorks"), href: "/explanation" },
         { label: t("about.links.reviews"), href: "/avaliacoes" },
         { label: t("about.links.jobs"), href: "/vagas" },
       ],
@@ -23,18 +22,17 @@ export function Footer() {
     {
       title: t("services.title"),
       links: [
-        { label: t("services.links.personalShopper"), href: "/servicos/personal-shopper" },
-        { label: t("services.links.consolidation"), href: "/servicos/consolidacao" },
+        { label: t("services.links.personalShopper"), href: "/personalshopper" },
+        { label: t("services.links.consolidation"), href: "/consolidation" },
         { label: t("services.links.repackaging"), href: "/servicos/reembalagem" },
-        { label: t("services.links.returns"), href: "/servicos/devolucoes" },
+        { label: t("services.links.returns"), href: "/returns" },
       ],
     },
     {
       title: t("support.title"),
       links: [
         { label: t("support.links.faq"), href: "/faq" },
-        { label: t("support.links.contact"), href: "/contato" },
-        { label: t("support.links.blog"), href: "/blog" },
+        { label: t("support.links.contact"), href: "/contact" },
         { label: t("support.links.hours"), href: "/horarios" },
       ],
     },
