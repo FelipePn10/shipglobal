@@ -4,13 +4,19 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Package, Menu, X, Globe, ChevronDown, User, Search } from "lucide-react";
-import i18n from "@/i18n"; // Importa a instância inicializada
+import { Package, Menu, X, Globe, ChevronDown, User } from "lucide-react";
+import i18n from "@/i18n";
 import { motion, AnimatePresence } from "framer-motion";
+import { Search } from "@/components/Search";
+import { footerSearchItems } from "@/components/Footer/footer";
 
-// Interfaces
 interface NavbarProps {
   lang: string;
+}
+
+interface SearchItem {
+  href: string;
+  label: string;
 }
 
 interface MenuItem {
@@ -94,6 +100,11 @@ export function Navbar({ lang }: NavbarProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const navbarSearchItems: SearchItem[] = menuItems.map((item) => ({
+  href: item.href,
+  label: item.label,
+}));
 
   return (
     <nav
@@ -180,9 +191,11 @@ export function Navbar({ lang }: NavbarProps) {
             </div>
 
             {/* Botão de busca */}
-            <button className="p-2 rounded-full hover:bg-gray-100">
-              <Search className="h-5 w-5 text-gray-500" />
-            </button>
+           <Search
+            navbarItems={navbarSearchItems}
+            footerItems={footerSearchItems}
+            lang={lang}
+          />
 
             {/* Botão da área do cliente */}
             <Button className="ml-2 bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
@@ -193,9 +206,12 @@ export function Navbar({ lang }: NavbarProps) {
 
           {/* Botão de menu mobile */}
           <div className="md:hidden flex items-center space-x-2">
-            <button className="p-2 rounded-full hover:bg-gray-100">
-              <Search className="h-5 w-5 text-gray-500" />
-            </button>
+           <Search
+            navbarItems={navbarSearchItems}
+            footerItems={footerSearchItems}
+            lang={lang}
+          />
+
             <Button
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}

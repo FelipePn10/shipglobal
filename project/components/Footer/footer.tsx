@@ -8,60 +8,74 @@ import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+interface SearchItem {
+  href: string;
+  label: string;
+}
+
+// Defina os itens de busca fora da função Footer
+const footerSections = [
+  {
+    title: "Sobre Nós", // Substitua por t("about.title") se estiver usando i18n
+    links: [
+      { label: "Quem Somos", href: "/about" }, // Substitua por t("about.links.aboutUs")
+      { label: "Como Funciona", href: "/explanation" }, // Substitua por t("about.links.howItWorks")
+      { label: "Avaliações", href: "/avaliacoes" }, // Substitua por t("about.links.reviews")
+      { label: "Trabalhe Conosco", href: "/workus" }, // Substitua por t("about.links.jobs")
+    ],
+  },
+  {
+    title: "Serviços", // Substitua por t("services.title")
+    links: [
+      { label: "Personal Shopper", href: "/personalshopper" }, // Substitua por t("services.links.personalShopper")
+      { label: "Consolidação", href: "/consolidation" }, // Substitua por t("services.links.consolidation")
+      { label: "Reembalagem", href: "/servicos/reembalagem" }, // Substitua por t("services.links.repackaging")
+      { label: "Devoluções", href: "/returns" }, // Substitua por t("services.links.returns")
+    ],
+  },
+  {
+    title: "Suporte", // Substitua por t("support.title")
+    links: [
+      { label: "FAQ", href: "/questions" }, // Substitua por t("support.links.faq")
+      { label: "Contato", href: "/contact" }, // Substitua por t("support.links.contact")
+      { label: "Horários", href: "/hours" }, // Substitua por t("support.links.hours")
+    ],
+  },
+  {
+    title: "Legal", // Substitua por t("legal.title")
+    links: [
+      { label: "Termos de Uso", href: "/termos" }, // Substitua por t("legal.links.terms")
+      { label: "Privacidade", href: "/privacidade" }, // Substitua por t("legal.links.privacy")
+      { label: "Cookies", href: "/cookies" }, // Substitua por t("legal.links.cookies")
+      { label: "LGPD", href: "/lgpd" }, // Substitua por t("legal.links.lgpd")
+    ],
+  },
+];
+
+// Exportação dos itens de busca
+export const footerSearchItems: SearchItem[] = footerSections.flatMap((section) =>
+  section.links.map((link) => ({
+    href: link.href,
+    label: link.label,
+  }))
+);
+
 export function Footer() {
   const { t } = useTranslation("footer");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const footerSections = [
-    {
-      title: t("about.title"),
-      links: [
-        { label: t("about.links.aboutUs"), href: "/about" },
-        { label: t("about.links.howItWorks"), href: "/explanation" },
-        { label: t("about.links.reviews"), href: "/avaliacoes" },
-        { label: t("about.links.jobs"), href: "/workus" },
-      ],
-    },
-    {
-      title: t("services.title"),
-      links: [
-        { label: t("services.links.personalShopper"), href: "/personalshopper" },
-        { label: t("services.links.consolidation"), href: "/consolidation" },
-        { label: t("services.links.repackaging"), href: "/servicos/reembalagem" },
-        { label: t("services.links.returns"), href: "/returns" },
-      ],
-    },
-    {
-      title: t("support.title"),
-      links: [
-        { label: t("support.links.faq"), href: "/questions" },
-        { label: t("support.links.contact"), href: "/contact" },
-        { label: t("support.links.hours"), href: "/hours" },
-      ],
-    },
-    {
-      title: t("legal.title"),
-      links: [
-        { label: t("legal.links.terms"), href: "/termos" },
-        { label: t("legal.links.privacy"), href: "/privacidade" },
-        { label: t("legal.links.cookies"), href: "/cookies" },
-        { label: t("legal.links.lgpd"), href: "/lgpd" },
-      ],
-    },
-  ];
-
   const socialLinks = [
-    { icon: <Twitter size={20} />, href: "#", label: t("socialLinks.twitter") },
-    { icon: <Instagram size={20} />, href: "#", label: t("socialLinks.instagram") },
-    { icon: <Linkedin size={20} />, href: "#", label: t("socialLinks.linkedin") },
-    { icon: <Facebook size={20} />, href: "#", label: t("socialLinks.facebook") },
+    { icon: <Twitter size={20} />, href: "#", label: "Twitter" }, // Substitua por t("socialLinks.twitter")
+    { icon: <Instagram size={20} />, href: "#", label: "Instagram" }, // Substitua por t("socialLinks.instagram")
+    { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" }, // Substitua por t("socialLinks.linkedin")
+    { icon: <Facebook size={20} />, href: "#", label: "Facebook" }, // Substitua por t("socialLinks.facebook")
   ];
 
   const contactInfo = [
-    { icon: <Mail size={16} />, text: t("contact.email") },
-    { icon: <Phone size={16} />, text: t("contact.phone") },
-    { icon: <MapPin size={16} />, text: t("contact.address") },
+    { icon: <Mail size={16} />, text: "contato@shipglobal.com" }, // Substitua por t("contact.email")
+    { icon: <Phone size={16} />, text: "+55 11 1234-5678" }, // Substitua por t("contact.phone")
+    { icon: <MapPin size={16} />, text: "Rua Exemplo, 123 - São Paulo, SP" }, // Substitua por t("contact.address")
   ];
 
   const handleSubscribe = async (e: React.FormEvent) => {
@@ -83,12 +97,10 @@ export function Footer() {
         throw new Error(data.error || "Erro ao se inscrever na newsletter");
       }
 
-      // Notificação de sucesso
-      toast.success(t("newsletter.successMessage"));
-      setEmail(""); // Limpa o campo de e-mail após a inscrição
+      toast.success("Inscrição realizada com sucesso!"); // Substitua por t("newsletter.successMessage")
+      setEmail("");
     } catch (error: any) {
-      // Notificação de erro
-      toast.error(error.message || t("newsletter.errorMessage"));
+      toast.error(error.message || "Erro ao se inscrever na newsletter"); // Substitua por t("newsletter.errorMessage")
     } finally {
       setLoading(false);
     }
@@ -101,13 +113,15 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold">{t("newsletter.title")}</h3>
-              <p className="text-blue-100 mt-1">{t("newsletter.subtitle")}</p>
+              <h3 className="text-xl font-bold">Assine nossa newsletter</h3> {/* Substitua por t("newsletter.title") */}
+              <p className="text-blue-100 mt-1">
+                Receba as últimas novidades e promoções.
+              </p> {/* Substitua por t("newsletter.subtitle") */}
             </div>
             <form onSubmit={handleSubscribe} className="flex w-full md:w-auto">
               <input
                 type="email"
-                placeholder={t("newsletter.placeholder")}
+                placeholder="Seu e-mail" // Substitua por t("newsletter.placeholder")
                 className="px-4 py-2 rounded-l-md w-full md:w-64 text-gray-900 focus:outline-none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -119,7 +133,7 @@ export function Footer() {
                 className="rounded-l-none bg-blue-900 hover:bg-blue-800"
                 disabled={loading}
               >
-                {loading ? t("newsletter.loading") : t("newsletter.button")}
+                {loading ? "Carregando..." : "Assinar"} {/* Substitua por t("newsletter.button") */}
               </Button>
             </form>
           </div>
@@ -133,7 +147,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
               <Package className="h-8 w-8 text-white" />
-              <span className="font-bold text-white text-2xl">{t("brandName")}</span>
+              <span className="font-bold text-white text-2xl">ShipGlobal</span> {/* Substitua por t("brandName") */}
             </div>
             <div className="space-y-3">
               {contactInfo.map((item, index) => (
@@ -170,8 +184,8 @@ export function Footer() {
         {/* Social Links */}
         <div className="flex flex-col md:flex-row items-center justify-between">
           <p className="text-blue-100 mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} {t("copyright")}
-          </p>
+            &copy; {new Date().getFullYear()} ShipGlobal. Todos os direitos reservados.
+          </p> {/* Substitua por t("copyright") */}
           <div className="flex space-x-4">
             {socialLinks.map((social, index) => (
               <Link
