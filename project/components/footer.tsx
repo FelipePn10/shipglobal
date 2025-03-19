@@ -16,7 +16,7 @@ export function Footer() {
         { label: t("about.links.aboutUs"), href: "/about" },
         { label: t("about.links.howItWorks"), href: "/explanation" },
         { label: t("about.links.reviews"), href: "/avaliacoes" },
-        { label: t("about.links.jobs"), href: "/vagas" },
+        { label: t("about.links.jobs"), href: "/workus" },
       ],
     },
     {
