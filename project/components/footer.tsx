@@ -33,7 +33,7 @@ export function Footer() {
       links: [
         { label: t("support.links.faq"), href: "/faq" },
         { label: t("support.links.contact"), href: "/contact" },
-        { label: t("support.links.hours"), href: "/horarios" },
+        { label: t("support.links.hours"), href: "/hours" },
       ],
     },
     {
