@@ -50,7 +50,7 @@ export function Navbar({ lang }: NavbarProps) {
   ];
 
   const menuItems: MenuItem[] = [
-    { href: `/${lang}/operation`, label: "Como Funciona" },
+    { href: `/${lang}/explanation`, label: "Como Funciona" },
     {
       href: `/${lang}/servicos`,
       label: "Serviços",
