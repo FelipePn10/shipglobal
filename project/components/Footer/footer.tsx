@@ -44,10 +44,10 @@ const footerSections = [
   {
     title: "Legal", // Substitua por t("legal.title")
     links: [
-      { label: "Termos de Uso", href: "/termos" }, // Substitua por t("legal.links.terms")
-      { label: "Privacidade", href: "/privacidade" }, // Substitua por t("legal.links.privacy")
+      { label: "Termos de Uso", href: "/terms" }, // Substitua por t("legal.links.terms")
+      { label: "Privacidade", href: "/pricy" }, // Substitua por t("legal.links.privacy")
       { label: "Cookies", href: "/cookies" }, // Substitua por t("legal.links.cookies")
-      { label: "LGPD", href: "/lgpd" }, // Substitua por t("legal.links.lgpd")
+      { label: "LGPD", href: "/policy" }, // Substitua por t("legal.links.lgpd")
     ],
   },
 ];
