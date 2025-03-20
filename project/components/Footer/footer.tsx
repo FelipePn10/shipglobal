@@ -66,16 +66,16 @@ export function Footer() {
   const [loading, setLoading] = useState(false);
 
   const socialLinks = [
-    { icon: <Twitter size={20} />, href: "#", label: "Twitter" }, // Substitua por t("socialLinks.twitter")
-    { icon: <Instagram size={20} />, href: "#", label: "Instagram" }, // Substitua por t("socialLinks.instagram")
-    { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" }, // Substitua por t("socialLinks.linkedin")
-    { icon: <Facebook size={20} />, href: "#", label: "Facebook" }, // Substitua por t("socialLinks.facebook")
+    { icon: <Twitter size={20} />, href: "#", label: "Twitter" },
+    { icon: <Instagram size={20} />, href: "#", label: "Instagram" },
+    { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" },
+    { icon: <Facebook size={20} />, href: "#", label: "Facebook" },
   ];
 
   const contactInfo = [
-    { icon: <Mail size={16} />, text: "contato@shipglobal.com" }, // Substitua por t("contact.email")
-    { icon: <Phone size={16} />, text: "+55 11 1234-5678" }, // Substitua por t("contact.phone")
-    { icon: <MapPin size={16} />, text: "Rua Exemplo, 123 - São Paulo, SP" }, // Substitua por t("contact.address")
+    { icon: <Mail size={16} />, text: "contato@shipglobal.com" },
+    { icon: <Phone size={16} />, text: "+55 44 99180-5405" },
+    { icon: <MapPin size={16} />, text: "Avenida Lucio De Held, 1279 - Maringá, PR - Brazil" },
   ];
 
   const handleSubscribe = async (e: React.FormEvent) => {
@@ -97,10 +97,10 @@ export function Footer() {
         throw new Error(data.error || "Erro ao se inscrever na newsletter");
       }
 
-      toast.success("Inscrição realizada com sucesso!"); // Substitua por t("newsletter.successMessage")
+      toast.success(t("newsletter.successMessage"));
       setEmail("");
     } catch (error: any) {
-      toast.error(error.message || "Erro ao se inscrever na newsletter"); // Substitua por t("newsletter.errorMessage")
+      toast.error(error.message || (t("newsletter.errorMessage")));
     } finally {
       setLoading(false);
     }
@@ -113,20 +113,20 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold">Assine nossa newsletter</h3> {/* Substitua por t("newsletter.title") */}
+              <h3 className="text-xl font-bold">{t("newsletter.title")}</h3>
               <p className="text-blue-100 mt-1">
-                Receba as últimas novidades e promoções.
-              </p> {/* Substitua por t("newsletter.subtitle") */}
+                {t("newsletter.subtitle")}
+              </p>
             </div>
             <form onSubmit={handleSubscribe} className="flex w-full md:w-auto">
               <input
                 type="email"
-                placeholder="Seu e-mail" // Substitua por t("newsletter.placeholder")
+                placeholder={t("newsletter.placeholder")}
                 className="px-4 py-2 rounded-l-md w-full md:w-64 text-gray-900 focus:outline-none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-              />
+            />
               <Button
                 type="submit"
                 variant="default"
@@ -147,7 +147,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
               <Package className="h-8 w-8 text-white" />
-              <span className="font-bold text-white text-2xl">ShipGlobal</span> {/* Substitua por t("brandName") */}
+              <span className="font-bold text-white text-2xl">{t("brandName")}</span>
             </div>
             <div className="space-y-3">
               {contactInfo.map((item, index) => (
