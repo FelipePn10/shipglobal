@@ -29,7 +29,7 @@ const footerSections = [
     links: [
       { label: "Personal Shopper", href: "/personalshopper" }, // Substitua por t("services.links.personalShopper")
       { label: "Consolidação", href: "/consolidation" }, // Substitua por t("services.links.consolidation")
-      { label: "Reembalagem", href: "/servicos/reembalagem" }, // Substitua por t("services.links.repackaging")
+      { label: "Reembalagem", href: "/repackaging" }, // Substitua por t("services.links.repackaging")
       { label: "Devoluções", href: "/returns" }, // Substitua por t("services.links.returns")
     ],
   },

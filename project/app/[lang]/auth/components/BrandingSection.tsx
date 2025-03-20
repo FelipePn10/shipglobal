@@ -71,7 +71,7 @@ export const BrandingSection: React.FC<BrandingSectionProps> = ({ currentLanguag
             Receba um endereço exclusivo em cada um dos 17 países disponíveis.
           </p>
           <Link
-            href={`/${currentLanguage}/register`}
+            href={`/${currentLanguage}/explanation`}
             className="mt-4 inline-block text-white underline hover:text-blue-200"
           >
             Saiba mais
