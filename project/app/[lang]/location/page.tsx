@@ -1,15 +1,14 @@
 "use client";
 
-import React from 'react';
-import { HeaderBanner } from './components/HeaderBanner';
-import { StatsSection } from './components/StatsSection';
-import { NavigationTabs } from './components/NavigationTabs';
-import { CountryList } from './components/CountryList';
-import { StatsAndInsights } from './components/StatsAndInsights';
-import { CountryDetails } from './components/CountryDetails';
-import { countries } from './data/countries';
-import { shippingStats } from './data/shipping';
-import { useLocations } from './useLocations';
+import { CountryDetails } from "./components/CountryDetails";
+import { CountryList } from "./components/CountryList";
+import { HeaderBanner } from "./components/HeaderBanner";
+import { NavigationTabs } from "./components/NavigationTabs";
+import { StatsAndInsights } from "./components/StatsAndInsights";
+import { StatsSection } from "./components/StatsSection";
+import { useLocations } from "./useLocations";
+
+
 
 export default function LocationsPage() {
   const {
@@ -41,11 +40,8 @@ export default function LocationsPage() {
         <div className="container mx-auto px-4">
           {activeTab === 'list' && (
             <CountryList
-              groupedCountries={groupedCountries}
-              filteredCountries={filteredCountries}
               searchTerm={searchTerm}
-              setSelectedCountry={setSelectedCountry}
-            />
+              setSelectedCountry={setSelectedCountry} groupedCountries={{}} filteredCountries={[]}            />
           )}
           {activeTab === 'stats' && <StatsAndInsights />}
         </div>
