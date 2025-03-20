@@ -27,10 +27,6 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
                   : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50'
               }`}
             >
-              <div className="flex items-center">
-                <Globe className="w-5 h-5 mr-2" />
-                Mapa Interativo
-              </div>
             </button>
             <button
               onClick={() => setActiveTab('list')}

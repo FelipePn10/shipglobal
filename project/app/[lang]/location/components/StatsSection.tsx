@@ -25,7 +25,7 @@ export const StatsSection: React.FC<{ continents: number }> = ({ continents }) =
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-pink-100 text-pink-600">
               <Package className="w-6 h-6" />
             </div>
-            <div className="text-4xl font-bold text-pink-500 mb-2">+500k</div>
+            <div className="text-4xl font-bold text-pink-500 mb-2">+15k</div>
             <div className="text-gray-600">Entregas Realizadas</div>
           </div>
           <div className="p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-300">

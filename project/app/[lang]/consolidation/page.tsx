@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const ConsolidacaoProdutos = () => {
@@ -301,13 +302,15 @@ const ConsolidacaoProdutos = () => {
       </main>
 
       {/* CTA */}
-      <section className="bg-blue-600 text-white py-8">
+      <section className="bg-blue-600 text-white py-8 mb-28">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Pronto para economizar em suas compras internacionais?</h2>
           <p className="mb-6">Cadastre-se agora e receba seu endereço internacional exclusivo em 17 países</p>
-          <button className="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300">
+          <Link href="/auth">
+            <button className="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300">
             Começar Agora
           </button>
+          </Link>
         </div>
       </section>
     </div>

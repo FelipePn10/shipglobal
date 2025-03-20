@@ -59,7 +59,7 @@ export function Navbar({ lang }: NavbarProps) {
         { href: `/${lang}/personalshopper`, label: "Personal Shopper" },
         { href: `/${lang}/consolidation`, label: "Consolidação" },
         { href: `/${lang}/repackaging`, label: "Reembalagem" },
-        { href: `/${lang}/servicos/returns`, label: "Devoluções" },
+        { href: `/${lang}/returns`, label: "Devoluções" },
       ],
     },
     { href: `/${lang}/price`, label: "Preços" },

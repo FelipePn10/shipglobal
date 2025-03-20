@@ -4,7 +4,6 @@ import React from 'react';
 import { HeaderBanner } from './components/HeaderBanner';
 import { StatsSection } from './components/StatsSection';
 import { NavigationTabs } from './components/NavigationTabs';
-import { InteractiveMap } from './components/InteractiveMap';
 import { CountryList } from './components/CountryList';
 import { StatsAndInsights } from './components/StatsAndInsights';
 import { CountryDetails } from './components/CountryDetails';
@@ -40,17 +39,6 @@ export default function LocationsPage() {
       />
       <div className="py-8 bg-white">
         <div className="container mx-auto px-4">
-          {activeTab === 'map' && (
-            <InteractiveMap
-              countries={countries}
-              selectedCountry={selectedCountry}
-              setSelectedCountry={setSelectedCountry}
-              isMapExpanded={isMapExpanded}
-              setIsMapExpanded={setIsMapExpanded}
-              hoveredCountry={hoveredCountry}
-              setHoveredCountry={setHoveredCountry}
-            />
-          )}
           {activeTab === 'list' && (
             <CountryList
               groupedCountries={groupedCountries}

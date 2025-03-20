@@ -149,10 +149,10 @@ const CookiePolicyPage = () => {
                   <h3 className="font-bold text-lg mb-3 text-blue-600">Configurações do Navegador</h3>
                   <p className="mb-3">Você pode configurar seu navegador para bloquear ou alertar sobre cookies:</p>
                   <ul className="list-disc pl-5 space-y-2">
-                    <li><span className="font-semibold">Google Chrome:</span> Menu > Configurações > Privacidade e segurança > Cookies e outros dados do site</li>
-                    <li><span className="font-semibold">Mozilla Firefox:</span> Menu > Opções > Privacidade e Segurança > Cookies e dados do site</li>
-                    <li><span className="font-semibold">Safari:</span> Preferências > Privacidade > Cookies e dados do site</li>
-                    <li><span className="font-semibold">Microsoft Edge:</span> Menu > Configurações > Privacidade, pesquisa e serviços > Cookies</li>
+                    <li><span className="font-semibold">Google Chrome:</span> Menu &gt; Configurações &gt; Privacidade e segurança &gt; Cookies e outros dados do site</li>
+                    <li><span className="font-semibold">Mozilla Firefox:</span> Menu &gt; Opções &gt; Privacidade e Segurança &gt; Cookies e dados do site</li>
+                    <li><span className="font-semibold">Safari:</span> Preferências &gt; Privacidade &gt; Cookies e dados do site</li>
+                    <li><span className="font-semibold">Microsoft Edge:</span> Menu &gt; Configurações &gt; Privacidade, pesquisa e serviços &gt; Cookies</li>
                   </ul>
                 </div>
                 
