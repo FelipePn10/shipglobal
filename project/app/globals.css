@@ -46,8 +46,12 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 207 90% 54%;
+    --chart-2: 207 70% 44%;
+    --chart-3: 207 50% 34%;
+    --chart-4: 207 30% 24%;
+    --chart-5: 207 10% 14%;
   }
-
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -76,50 +80,61 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 207 90% 64%;
+    --chart-2: 207 70% 54%;
+    --chart-3: 207 50% 44%;
+    --chart-4: 207 30% 34%;
+    --chart-5: 207 10% 24%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-0;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
-.map-container {
-  @apply relative w-full rounded-xl shadow-lg overflow-hidden bg-white;
-}
-
-.testimonial-card {
-  @apply bg-card rounded-xl p-8 shadow-lg border border-border/5;
-}
-
-.testimonial-image {
-  @apply w-20 h-20 rounded-full object-cover mb-6 ring-2 ring-primary/10;
-}
-
-.calculator-card {
-  @apply bg-card rounded-xl p-8 shadow-lg border border-border/5;
-}
-
-.calculator-input {
-  @apply w-full rounded-lg border border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-}
-
-.section-title {
-  @apply text-4xl font-bold tracking-tight text-foreground mb-4;
-}
-
-.section-description {
-  @apply text-lg text-muted-foreground max-w-3xl mx-auto mb-12;
-}
-
-.section-container {
-  @apply py-20 px-4;
-}
-
-.section-content {
-  @apply max-w-7xl mx-auto;
+@layer components {
+  .map-container {
+    @apply relative w-full rounded-xl shadow-lg overflow-hidden bg-white;
+  }
+  .testimonial-card {
+    @apply bg-white rounded-xl p-8 shadow-lg border;
+    border-color: hsl(var(--border));
+  }
+  .testimonial-image {
+    @apply w-20 h-20 rounded-full object-cover mb-6;
+    box-shadow: 0 0 0 2px hsla(var(--primary), 0.1);
+  }
+  .calculator-card {
+    @apply bg-white rounded-xl p-8 shadow-lg border;
+    border-color: hsl(var(--border));
+  }
+  .calculator-input {
+    @apply w-full rounded-lg border px-4 py-3 text-sm;
+    border-color: hsl(var(--input));
+    background-color: hsl(var(--background));
+  }
+  .calculator-input:focus-visible {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px transparent;
+  }
+  .section-title {
+    @apply text-4xl font-bold tracking-tight mb-4;
+    color: hsl(var(--foreground));
+  }
+  .section-description {
+    @apply text-lg max-w-3xl mx-auto mb-12;
+    color: hsl(var(--muted-foreground));
+  }
+  .section-container {
+    @apply py-20 px-4;
+  }
+  .section-content {
+    @apply max-w-7xl mx-auto;
+  }
 }

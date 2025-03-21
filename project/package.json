@@ -43,13 +43,13 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.8",
+    "@tailwindcss/postcss": "^4.0.15",
     "@types/bcrypt": "^5.0.2",
     "@types/i18next": "^13.0.0",
     "@types/next-auth": "^3.15.0",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "auth-next": "^1.0.4",
-    "autoprefixer": "10.4.15",
     "axios": "^1.8.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
@@ -76,7 +76,6 @@
     "next-i18next": "^15.4.2",
     "next-intl": "^4.0.2",
     "next-themes": "^0.3.0",
-    "postcss": "8.4.30",
     "prisma": "^6.5.0",
     "react": "^19.0.0",
     "react-cookie": "^8.0.0",
@@ -92,7 +91,6 @@
     "shippo": "^2.15.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "vaul": "^0.9.9",
@@ -101,7 +99,10 @@
   "devDependencies": {
     "@types/node": "^22.13.9",
     "@types/react-i18next": "^8.1.0",
+    "autoprefixer": "^10.4.21",
     "ignore-loader": "^0.1.2",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.15",
     "terser-webpack-plugin": "^5.3.14"
   }
 }
