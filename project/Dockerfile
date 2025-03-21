@@ -5,20 +5,20 @@ FROM node:18
 WORKDIR /app
 
 # Copiar os arquivos de dependências
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 
-# Instalar as dependências
-RUN yarn install
+# Instalar as dependências usando Yarn
+RUN yarn install --frozen-lockfile
 
 # Copiar o restante do código
 COPY . .
 
 # Gerar o cliente Prisma para ambos os esquemas
-RUN npx prisma generate --schema=project/prisma/schema.prisma
-RUN npx prisma generate --schema=project/prisma/businessSchema.prisma
+RUN npx prisma generate --schema=./prisma/schema.prisma
+RUN npx prisma generate --schema=./prisma/businessSchema.prisma
 
 # Expor a porta 3000
 EXPOSE 3000
 
 # Comando para rodar o app
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]
