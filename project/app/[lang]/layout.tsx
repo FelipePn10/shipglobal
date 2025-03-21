@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/navbar";
@@ -27,9 +27,9 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }>; // params agora é uma Promise
+  params: Promise<{ lang: string }>;
 }) {
-  // Aguardar a resolução dos params
+
   const { lang } = await params;
   const resolvedLang = lang || "pt"; // Fallback para "pt" se lang não estiver definido
 

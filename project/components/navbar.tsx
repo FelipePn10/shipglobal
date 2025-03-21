@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Package, Menu, X, Globe, ChevronDown, User } from "lucide-react";
+import { Package, Menu, X, Globe, ChevronDown, User, Building2 } from "lucide-react";
 import i18n from "@/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search } from "@/components/Search";
@@ -80,6 +80,9 @@ export function Navbar({ lang }: NavbarProps) {
 
   const goToAuthPage = () => {
     router.push(`/${lang}/auth`);
+  };
+  const goToPageBussines = () => {
+    router.push(`/${lang}/bussines`);
   };
 
   // Detecta scroll para mudar a aparência da navbar
@@ -202,6 +205,11 @@ export function Navbar({ lang }: NavbarProps) {
             <Button className="ml-2 bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
               <User className="mr-2 h-4 w-4" />
               Área do Cliente
+            </Button>
+
+            <Button className="ml-2 bg-green-600 hover:bg-green-700" onClick={goToPageBussines}>
+              <Building2 className="mr-2 h-4 w-4" />
+              Para empresas
             </Button>
           </div>
 

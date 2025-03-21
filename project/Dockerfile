@@ -8,10 +8,14 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Instalar as dependências
-RUN npm install
+RUN yarn install
 
 # Copiar o restante do código
 COPY . .
+
+# Gerar o cliente Prisma para ambos os esquemas
+RUN npx prisma generate --schema=project/prisma/schema.prisma
+RUN npx prisma generate --schema=project/prisma/businessSchema.prisma
 
 # Expor a porta 3000
 EXPOSE 3000

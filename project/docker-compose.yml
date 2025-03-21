@@ -1,15 +1,52 @@
 services:
-  db:
-    image: postgres:latest
-    container_name: postgres_db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: mydb
+      - DATABASE_URL=postgresql://postgres:admin@localhost:5420/mydb?schema=public
+      - BUSINESS_DATABASE_URL=postgresql://postgres:admin@localhost:5420/shipglobal_business?schema=public
+      - NEXTAUTH_SECRET=your-secret-key
+      - NEXTAUTH_URL=http://localhost:3000
+    depends_on:
+      - db_users
+      - db_business
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - shipglobal-network
+
+  db_users:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=shipglobal_users
+    volumes:
+      - db_users_data:/var/lib/postgresql/data
     ports:
       - "5421:5432"
+    networks:
+      - shipglobal-network
+
+  db_business:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=shipglobal_business
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db_business_data:/var/lib/postgresql/data
+    networks:
+      - shipglobal-network
+
+networks:
+  shipglobal-network:
+    driver: bridge
 
 volumes:
-  postgres_data:
+  db_users_data:
+  db_business_data:

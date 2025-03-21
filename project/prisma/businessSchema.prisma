@@ -1,0 +1,61 @@
+generator client {
+ provider = "prisma-client-js"
+ output = "../app/[lang]/business/lib/prisma-business-client" // Gera o cliente Prisma em um local específico
+}
+
+datasource db {
+ provider = "postgresql"
+ url = env("BUSINESS_DATABASE_URL")
+}
+
+model BusinessUser {
+ id String @id @default(uuid())
+ email String @unique
+ password String? // Senha será armazenada como hash (opcional para @auth/next)
+ companyName String
+ taxId String @unique
+ contactName String
+ phone String
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+ role Role @default(BUSINESS_USER)
+ accounts Account[] // Relação com contas do @auth/next
+ sessions Session[] // Relação com sessões do @auth/next
+}
+
+enum Role {
+ BUSINESS_USER
+ ADMIN
+}
+
+model Account {
+ id String @id @default(uuid())
+ userId String
+ user BusinessUser @relation(fields: [userId], references: [id])
+ type String
+ provider String
+ providerAccountId String
+ refresh_token String? @db.Text
+ access_token String? @db.Text
+ expires_at Int?
+ token_type String?
+ scope String?
+ id_token String? @db.Text
+ session_state String?
+ @@unique([provider, providerAccountId])
+}
+
+model Session {
+ id String @id @default(uuid())
+ sessionToken String @unique
+ userId String
+ user BusinessUser @relation(fields: [userId], references: [id])
+ expires DateTime
+}
+
+model VerificationToken {
+ identifier String
+ token String @unique
+ expires DateTime
+ @@unique([identifier, token])
+}
