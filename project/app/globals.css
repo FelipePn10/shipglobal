@@ -90,7 +90,7 @@
 
 @layer base {
   * {
-    @apply border-0;
+    @apply border-border;
   }
   body {
     background-color: hsl(var(--background));
