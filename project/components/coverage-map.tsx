@@ -445,10 +445,10 @@ export function CoverageMap() {
   }
 
   return (
-    <div className="relative w-full bg-gradient-to-b from-blue-50 to-white rounded-xl shadow-lg overflow-hidden">
+    <div className="coverage-map">
       <div className="relative">
         {/* Título e controles */}
-        <div className="absolute top-4 left-4 z-10 flex flex-col md:flex-row gap-2 md:items-center">
+        <div className="map-controls">
           <h2 className="flex items-center gap-2 text-xl font-bold text-blue-900 bg-white/90 py-1 px-3 rounded-lg shadow-sm">
             <Globe className="h-5 w-5 text-blue-600" />
             <span>{t('coverageMap.title')}</span>
@@ -464,55 +464,6 @@ export function CoverageMap() {
               {isInfoVisible ? <X className="h-4 w-4 mr-1" /> : <Info className="h-4 w-4 mr-1" />}
               {isInfoVisible ? t('coverageMap.closeButton') : t('coverageMap.infoButton')}
             </Button>
-
-            <div className="relative">
-              <Button
-                variant="outline"
-                size="sm"
-                className="bg-white/90 border-gray-200 hover:bg-white"
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-              >
-                {isSearchOpen ? <X className="h-4 w-4 mr-1" /> : <Search className="h-4 w-4 mr-1" />}
-                {isSearchOpen ? t('coverageMap.closeButton') : t('coverageMap.searchButton')}
-              </Button>
-
-              {isSearchOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 md:w-96 bg-white rounded-lg shadow-lg p-4 z-20">
-                  <div className="relative mb-3">
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder={t('coverageMap.searchPlaceholder')}
-                      className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-                    />
-                    <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                  </div>
-
-                  <div className="max-h-64 overflow-y-auto">
-                    {filteredLocations.length > 0 ? (
-                      <ul className="space-y-2">
-                        {filteredLocations.map((location) => (
-                          <li
-                            key={location.id}
-                            onClick={() => handleLocationSelect(location)}
-                            className="flex items-center gap-3 p-2 rounded-md hover:bg-blue-50 cursor-pointer"
-                          >
-                            <MapPin className="h-4 w-4 text-blue-500" />
-                            <div>
-                              <p className="font-medium text-gray-900">{location.title}</p>
-                              <p className="text-xs text-gray-500">{location.address}</p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-sm text-gray-500 text-center py-2">{t('coverageMap.noResults')}</p>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
 

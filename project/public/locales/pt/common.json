@@ -404,5 +404,41 @@
     },
     "copyright": "ShipGlobal. Todos os direitos reservados."
     }
+  },
+  "benefits": {
+    "title": "Benefícios Exclusivos",
+    "subtitle": "Descubra por que milhares de clientes escolhem a ShipGlobal para suas compras internacionais",
+    "freeConsolidation": {
+      "title": "Consolidação Gratuita",
+      "description": "Combine múltiplos pacotes em um único envio e economize em taxas de frete"
+    },
+    "secureShipping": {
+      "title": "Envio Seguro",
+      "description": "Seus produtos são segurados durante todo o processo de envio"
+    },
+    "fastDelivery": {
+      "title": "Entrega Rápida",
+      "description": "Prazos de entrega otimizados para todo o Brasil"
+    },
+    "globalCoverage": {
+      "title": "Cobertura Global",
+      "description": "Acesso a mais de 50 países para suas compras internacionais"
+    },
+    "tracking": {
+      "title": "Rastreamento em Tempo Real",
+      "description": "Acompanhe seu pedido em cada etapa do processo"
+    },
+    "securePayment": {
+      "title": "Pagamento Seguro",
+      "description": "Múltiplas opções de pagamento com total segurança"
+    },
+    "support": {
+      "title": "Suporte Dedicado",
+      "description": "Equipe especializada pronta para ajudar em todas as suas necessidades"
+    },
+    "packaging": {
+      "title": "Embalagem Profissional",
+      "description": "Seus produtos são embalados com cuidado e proteção adequada"
+    }
   }
 }

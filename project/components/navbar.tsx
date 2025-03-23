@@ -94,7 +94,6 @@ export function Navbar({ lang }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fecha o dropdown de idiomas ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
@@ -112,9 +111,9 @@ export function Navbar({ lang }: NavbarProps) {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur shadow-md" : "bg-white/80"
-      } supports-[backdrop-filter]:bg-white/60 border-b border-gray-200`}
+      className={`navbar ${
+        isScrolled ? "navbar-scrolled" : ""
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
@@ -202,12 +201,12 @@ export function Navbar({ lang }: NavbarProps) {
           />
 
             {/* Botão da área do cliente */}
-            <Button className="ml-2 bg-blue-600 hover:bg-blue-700" onClick={goToAuthPage}>
+            <Button className="ml-2 bg-blue-600 text-white hover:bg-blue-700" onClick={goToAuthPage}>
               <User className="mr-2 h-4 w-4" />
               Área do Cliente
             </Button>
 
-            <Button className="ml-2 bg-green-600 hover:bg-green-700" onClick={goToPageBussines}>
+            <Button className="ml-2 bg-green-600 text-white hover:bg-green-700" onClick={goToPageBussines}>
               <Building2 className="mr-2 h-4 w-4" />
               Para empresas
             </Button>

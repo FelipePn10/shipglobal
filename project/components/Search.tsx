@@ -43,7 +43,7 @@ export function Search({ navbarItems, footerItems, lang }: SearchProps) {
   };
 
   return (
-    <div className="relative">
+    <div className="search-container">
       {/* Botão para abrir/fechar a busca */}
       <button
         className="p-2 rounded-full hover:bg-gray-100"
@@ -66,7 +66,7 @@ export function Search({ navbarItems, footerItems, lang }: SearchProps) {
             <input
               type="text"
               placeholder="Pesquisar..."
-              className="w-full px-4 py-2 rounded-t-md focus:outline-none"
+              className="search-input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               autoFocus

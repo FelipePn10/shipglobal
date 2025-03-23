@@ -11,11 +11,14 @@ import { CoverageMap } from '@/components/coverage-map';
 import OneStopService from '@/components/onetopservice';
 import BrandsCarousel from '@/components/brand-carousel';
 import ShippingServices from '@/components/shipping-service';
+import BenefitsSection from '@/components/benefits-section';
 import Link from 'next/link';
+import StatsSection from '@/components/hero-section';
+import CallToAction from '@/components/callToAction';
 
 export default function Home() {
   const params = useParams();
-  const lang = (params?.lang as string) || 'pt'; // Usa 'pt' como fallback
+  const lang = (params?.lang as string) || 'pt';
 
   type ContentType = {
     [key: string]: {
@@ -142,38 +145,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/50 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">
-              {title}
-              <br />
-              <span className="text-primary">{subtitle}</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12">
-              {description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href={`/${lang}/auth`}>
-                <Button size="lg" className="text-lg px-8 py-6">
-                  {cta.primary}
-                </Button>
-              </Link>
-              <Link href={`/${lang}/explanation`}>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                  {cta.howItWorks}
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <StatsSection />
 
       {/* Brands Carousel Section */}
       <section className="py-16">
@@ -216,175 +188,7 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gradient-to-b from-background to-background/50 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
-          <div className="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-primary/30 blur-3xl"></div>
-          <div className="absolute -left-32 top-1/3 w-72 h-72 rounded-full bg-primary/20 blur-3xl"></div>
-          <div className="absolute right-1/4 bottom-0 w-64 h-64 rounded-full bg-secondary/20 blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary rounded-full inline-block mb-4"
-            >
-              {lang === 'en' ? 'Why Choose Us' : lang === 'pt' ? 'Por que nos escolher' : 'Por qué elegirnos'}
-            </motion.span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-              {lang === 'en' ? 'Exclusive Benefits' : lang === 'pt' ? 'Benefícios Exclusivos' : 'Beneficios Exclusivos'}
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              {lang === 'en'
-                ? 'We offer innovative solutions that transform the way you manage your international shipments.'
-                : lang === 'pt'
-                ? 'Oferecemos soluções inovadoras que transformam a maneira como você gerencia seus envios internacionais.'
-                : 'Ofrecemos soluciones innovadoras que transforman la forma en que gestionas tus envíos internacionales.'}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15, duration: 0.5 }}
-              >
-                <motion.div
-                  whileHover={{
-                    y: -10,
-                    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-                  }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="h-full border bg-card rounded-2xl overflow-hidden"
-                >
-                  <div className="h-2 bg-gradient-to-r from-primary to-primary/60"></div>
-                  <div className="p-8">
-                    <motion.div
-                      initial={{ scale: 0.8 }}
-                      whileInView={{ scale: 1 }}
-                      whileHover={{ rotate: [0, -5, 5, 0], transition: { duration: 0.5 } }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.2, duration: 0.5 }}
-                      className="mb-6 text-primary bg-primary/10 p-4 rounded-2xl inline-flex"
-                    >
-                      {benefit.icon}
-                    </motion.div>
-                    <h3 className="text-xl font-semibold mb-4">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.2 + 0.3 }}
-                      className="mt-6"
-                    >
-                      <Link href={`/${lang}/explanation`}>
-                        <motion.span
-                          whileHover={{ x: 5 }}
-                          transition={{ type: 'spring', stiffness: 400 }}
-                          className="inline-flex items-center text-sm font-medium text-primary"
-                        >
-                          {lang === 'en' ? 'Learn More' : lang === 'pt' ? 'Saiba mais' : 'Saber más'}
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </motion.span>
-                      </Link>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-            className="mt-16 bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between"
-          >
-            <div className="md:w-2/3 mb-8 md:mb-0">
-              <h3 className="text-2xl font-bold mb-4">
-                {lang === 'en' ? 'Ready to Transform Your Logistics?' : lang === 'pt' ? 'Pronto para transformar sua logística?' : '¿Listo para transformar tu logística?'}
-              </h3>
-              <p className="text-muted-foreground">
-                {lang === 'en'
-                  ? 'Join thousands of businesses already saving time and money with our solutions.'
-                  : lang === 'pt'
-                  ? 'Junte-se a milhares de empresas que já estão economizando tempo e dinheiro com nossas soluções.'
-                  : 'Únete a miles de empresas que ya están ahorrando tiempo y dinero con nuestras soluciones.'}
-              </p>
-            </div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            >
-              <Link href={`/${lang}/auth`}>
-                <span className="inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium transition-colors hover:bg-primary/90">
-                  {cta.primary}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </span>
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-            className="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-4 text-muted-foreground text-sm"
-          >
-            <div className="flex items-center">
-              <svg className="h-5 w-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>{lang === 'en' ? 'Over 10,000 satisfied customers' : lang === 'pt' ? 'Mais de 10.000 clientes satisfeitos' : 'Más de 10,000 clientes satisfechos'}</span>
-            </div>
-            <div className="flex items-center">
-              <svg className="h-5 w-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>{lang === 'en' ? 'Presence in 50+ countries' : lang === 'pt' ? 'Presença em 50+ países' : 'Presencia en más de 50 países'}</span>
-            </div>
-            <div className="flex items-center">
-              <svg className="h-5 w-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>{lang === 'en' ? '24/7 Support' : lang === 'pt' ? 'Suporte 24/7' : 'Soporte 24/7'}</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <BenefitsSection lang={lang} benefits={benefits} />
 
       {/* Shipping Calculator Section */}
       <section className="bg-accent/30 py-16">
@@ -396,24 +200,12 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-indigo-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-bold mb-6">{cta.readyTitle}</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">{cta.readyDescription}</p>
-            <Link href={`/${lang}/auth`}>
-              <Button size="lg" variant="secondary" className="text-lg px-8 py-6 rounded-xl hover:bg-white/90 transition-all">
-                {cta.primary} <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      <CallToAction 
+        title={cta.readyTitle}
+        description={cta.readyDescription}
+        buttonText={cta.primary}
+        lang={lang}
+      />
 
       {/* Testimonials Section */}
       <section className="bg-background py-16">
