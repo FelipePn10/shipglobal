@@ -63,7 +63,6 @@ export function Navbar({ lang }: NavbarProps) {
       ],
     },
     { href: `/${lang}/price`, label: "Preços" },
-    { href: `/${lang}/location`, label: "Localizações" },
     { href: `/${lang}/contact`, label: "Contato" },
   ];
 

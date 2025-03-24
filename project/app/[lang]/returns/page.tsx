@@ -99,7 +99,7 @@ const ReturnPolicyPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 md:px-8 py-8">
+      <div className="container mx-auto px-4 md:px-8 py-8 pl-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content Column */}
           <div className="lg:col-span-2">
@@ -251,7 +251,7 @@ const ReturnPolicyPage = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 pl-8">
             {/* Country Selector */}
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
               <h3 className="text-lg font-semibold mb-3">Informações por País</h3>

@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import PricingSection from "../price/page";
+
 import BenefitsSection from "./componentes/BenefitsSection";
 import ComparisonTableSection from "./componentes/ComparisonTableSection";
 import ContactSection from "./componentes/ContactSection";
@@ -9,6 +11,7 @@ import HowItWorksSection from "./componentes/HowItWorksSection";
 import TestimonialsSection from "./componentes/TestimonialsSection";
 import { content } from "./content/businessContent";
 import { Pricing } from "./types/contentTypes";
+import PricingSection from "./componentes/PricingSection";
 
 
 // Explicitly type the PricingSection component
