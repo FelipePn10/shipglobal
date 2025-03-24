@@ -14,12 +14,12 @@ const FAQ = () => {
   const faqData = [
     {
       question: "Como funciona o redirecionamento de compras?",
-      answer: "Nosso serviço de redirecionamento funciona em 3 passos simples: 1) Você faz suas compras em lojas internacionais e usa nosso endereço para entrega; 2) Recebemos seus pacotes em nosso centro de distribuição; 3) Consolidamos suas compras e enviamos para seu endereço em seu país. Atuamos em 17 países para garantir que você possa comprar de qualquer lugar do mundo.",
+      answer: "Nosso serviço de redirecionamento funciona em 3 passos simples: 1) Você faz suas compras em lojas internacionais e usa nosso endereço para entrega; 2) Recebemos seus pacotes em nosso centro de distribuição; 3) Consolidamos suas compras e enviamos para seu endereço em seu país. Atuamos em 16 países para garantir que você possa comprar de qualquer lugar do mundo.",
       icon: <Globe className="text-blue-500" size={24} />
     },
     {
       question: "Quais países são atendidos pelo serviço?",
-      answer: "Atualmente, oferecemos serviços de redirecionamento para 15 países ao redor do mundo",
+      answer: "Atualmente, oferecemos serviços de redirecionamento para 16 países ao redor do mundo",
       icon: <Globe className="text-purple-400" size={24} />
     },
     {
@@ -57,9 +57,9 @@ const FAQ = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-600 to-purple-400 py-16">
+      <div className="relative bg-blue-600 py-16">
         <div className="container mx-auto px-4 text-center mt-12">
-          <h1 className="text-4xl font-bold text-white mb-4">Perguntas Frequentes</h1>
+          <h1 className="text-4xl font-bold text-white mb-4 mt-8">Perguntas Frequentes</h1>
           <p className="text-xl text-white max-w-2xl mx-auto">
             Tudo o que você precisa saber sobre nossos serviços de redirecionamento internacional em 17 países
           </p>
@@ -85,7 +85,7 @@ const FAQ = () => {
           {faqData.map((item, index) => (
             <div key={index} className="mb-4">
               <div 
-                className={`flex items-center justify-between p-4 cursor-pointer rounded-lg transition-all duration-300 ${
+                className={`flex items-center justify-between p-3 cursor-pointer rounded-lg transition-all duration-300${
                   openIndex === index 
                     ? 'bg-gradient-to-r from-blue-100 to-purple-100' 
                     : 'hover:bg-blue-50'
@@ -126,7 +126,7 @@ const FAQ = () => {
               </div>
             </div>
             <div className="mt-6">
-              <h3 className="text-xl font-bold text-gray-800">Ainda tem dúvidas?</h3>
+              <h3 className="text-xl font-bold text-gray-800 mt-8">Ainda tem dúvidas?</h3>
               <p className="text-gray-600 mt-2">
                 Nossa equipe está pronta para ajudar você com qualquer pergunta adicional.
               </p>

@@ -366,9 +366,6 @@ export default function ContatoPage() {
             </CardContent>
           </Card>
         </div>
-        <div className="text-center mt-8">
-          <Button className="bg-blue-500 text-white hover:bg-blue-700">Ver todas as perguntas frequentes</Button>
-        </div>
       </section>
 
       {/* CTA Section */}

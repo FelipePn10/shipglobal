@@ -42,7 +42,7 @@ const StatsSection: React.FC = () => {
                 color: '#6B48FF',
               }}
             >
-              Serviços para empresas
+              Para empresas
             </a>
           </div>
 

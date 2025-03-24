@@ -1,326 +1,245 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Package, PackagePlus, Truck, Globe, CheckCircle, Box, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Package2, 
+  ClipboardCheck, 
+  Truck, 
+  Shield, 
+  ChevronDown,
+  ArrowRight,
+  PackageCheck,
+  Sparkles,
+  Clock,
+  BadgeCheck
+} from 'lucide-react';
+import Link from 'next/link';
 
-export default function RepackagingExplainer() {
-  const [activeStep, setActiveStep] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
+type Step = {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+};
+
+type Benefit = {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+};
+
+type FAQ = {
+  question: string;
+  answer: string;
+};
+
+const steps: Step[] = [
+  {
+    title: 'Initial Assessment',
+    description: 'Our experts analyze your current packaging needs and challenges to develop a tailored solution.',
+    icon: <ClipboardCheck className="w-8 h-8" />,
+  },
+  {
+    title: 'Custom Solution Design',
+    description: 'We create a customized repackaging strategy that optimizes costs and enhances product protection.',
+    icon: <Sparkles className="w-8 h-8" />,
+  },
+  {
+    title: 'Repackaging Process',
+    description: 'Our skilled team carefully executes the repackaging plan using state-of-the-art materials and techniques.',
+    icon: <Package2 className="w-8 h-8" />,
+  },
+  {
+    title: 'Quality Control & Delivery',
+    description: 'Rigorous quality checks ensure perfect packaging before swift delivery to your destination.',
+    icon: <Truck className="w-8 h-8" />,
+  },
+];
+
+const benefits: Benefit[] = [
+  {
+    title: 'Cost Efficiency',
+    description: 'Reduce packaging costs while maintaining premium quality',
+    icon: <PackageCheck className="w-6 h-6" />,
+  },
+  {
+    title: 'Enhanced Protection',
+    description: 'Superior materials and techniques for maximum product safety',
+    icon: <Shield className="w-6 h-6" />,
+  },
+  {
+    title: 'Quick Turnaround',
+    description: 'Fast and efficient repackaging process with minimal delays',
+    icon: <Clock className="w-6 h-6" />,
+  },
+  {
+    title: 'Quality Assured',
+    description: 'Comprehensive quality control at every step',
+    icon: <BadgeCheck className="w-6 h-6" />,
+  },
+];
+
+const faqs: FAQ[] = [
+  {
+    question: 'What types of products do you repackage?',
+    answer: 'We handle a wide range of products from consumer goods to industrial equipment, ensuring each item receives appropriate packaging care.',
+  },
+  {
+    question: 'How long does the repackaging process take?',
+    answer: 'Typical turnaround time is 24-48 hours, depending on quantity and complexity. We offer expedited services for urgent needs.',
+  },
+  {
+    question: 'Do you provide custom packaging solutions?',
+    answer: 'Yes, we create tailored packaging solutions based on your specific product requirements and branding needs.',
+  },
+  {
+    question: 'What quality standards do you follow?',
+    answer: 'We adhere to international packaging standards and maintain strict quality control processes throughout the repackaging journey.',
+  },
+];
+
+export default function RepackagingLanding() {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!isPlaying) return
-
     const interval = setInterval(() => {
-      setActiveStep((prev) => (prev === 3 ? 0 : prev + 1))
-    }, 5000)
+      setCurrentStep((prev) => (prev + 1) % steps.length);
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [isPlaying])
-
-  const steps = [
-    {
-      title: "Receiving Your Packages",
-      description: "We receive your packages from different retailers and store them in our warehouse.",
-      icon: <Package className="h-12 w-12 text-blue-500" />,
-      animation: (
-        <motion.div 
-          className="relative h-40 w-full bg-blue-50 rounded-lg overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div 
-            className="absolute top-4 left-4"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            <Box className="h-16 w-16 text-blue-500" />
-          </motion.div>
-          <motion.div 
-            className="absolute top-4 right-4"
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-          >
-            <Box className="h-12 w-12 text-purple-400" />
-          </motion.div>
-          <motion.div 
-            className="absolute bottom-4 left-1/4"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-          >
-            <Box className="h-10 w-10 text-yellow-400" />
-          </motion.div>
-        </motion.div>
-      )
-    },
-    {
-      title: "Removing Excess Packaging",
-      description: "We carefully remove unnecessary packaging materials to reduce weight and volume.",
-      icon: <PackagePlus className="h-12 w-12 text-purple-500" />,
-      animation: (
-        <motion.div 
-          className="relative h-40 w-full bg-purple-50 rounded-lg overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            initial={{ scale: 1.5 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Box className="h-20 w-20 text-purple-500" />
-          </motion.div>
-          <motion.div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-dashed border-purple-300 rounded-lg"
-            initial={{ width: "90%", height: "90%" }}
-            animate={{ width: "60%", height: "60%" }}
-            transition={{ delay: 0.5, duration: 1 }}
-          />
-        </motion.div>
-      )
-    },
-    {
-      title: "Consolidating Multiple Items",
-      description: "We combine multiple packages into one, saving you significant shipping costs.",
-      icon: <CheckCircle className="h-12 w-12 text-green-500" />,
-      animation: (
-        <motion.div 
-          className="relative h-40 w-full bg-green-50 rounded-lg overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div 
-            className="absolute top-4 left-4"
-            initial={{ x: 0, y: 0 }}
-            animate={{ x: 60, y: 40 }}
-            transition={{ delay: 0.3, duration: 1 }}
-          >
-            <Box className="h-12 w-12 text-blue-500" />
-          </motion.div>
-          <motion.div 
-            className="absolute top-4 right-4"
-            initial={{ x: 0, y: 0 }}
-            animate={{ x: -60, y: 40 }}
-            transition={{ delay: 0.3, duration: 1 }}
-          >
-            <Box className="h-10 w-10 text-purple-400" />
-          </motion.div>
-          <motion.div 
-            className="absolute bottom-4 left-1/4"
-            initial={{ x: 0, y: 0 }}
-            animate={{ x: 60, y: -20 }}
-            transition={{ delay: 0.3, duration: 1 }}
-          >
-            <Box className="h-8 w-8 text-yellow-400" />
-          </motion.div>
-          <motion.div 
-            className="absolute bottom-4 right-1/4 opacity-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3, duration: 0.5 }}
-          >
-            <Package className="h-20 w-20 text-green-500" />
-          </motion.div>
-        </motion.div>
-      )
-    },
-    {
-      title: "International Shipping",
-      description: "Your repackaged items are securely shipped to your destination in any of our 17 service countries.",
-      icon: <Globe className="h-12 w-12 text-yellow-500" />,
-      animation: (
-        <motion.div 
-          className="relative h-40 w-full bg-yellow-50 rounded-lg overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div 
-            className="absolute left-0 top-1/2 transform -translate-y-1/2"
-            initial={{ x: -50 }}
-            animate={{ x: 300 }}
-            transition={{ delay: 0.3, duration: 2, ease: "easeInOut" }}
-          >
-            <Truck className="h-16 w-16 text-yellow-500" />
-          </motion.div>
-          <motion.div 
-            className="absolute right-4 top-1/2 transform -translate-y-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 0.5 }}
-          >
-            <Globe className="h-16 w-16 text-blue-500" />
-          </motion.div>
-        </motion.div>
-      )
-    }
-  ]
-
-  const benefits = [
-    {
-      title: "Cost Savings",
-      description: "Save up to 80% on international shipping costs by reducing package volume and weight.",
-      icon: <CheckCircle className="h-6 w-6 text-green-500" />
-    },
-    {
-      title: "Environmental Impact",
-      description: "Reduce your carbon footprint by minimizing packaging waste and shipping volume.",
-      icon: <CheckCircle className="h-6 w-6 text-green-500" />
-    },
-    {
-      title: "Simplified Customs",
-      description: "Consolidated packages mean fewer customs declarations and potential fees.",
-      icon: <CheckCircle className="h-6 w-6 text-green-500" />
-    },
-    {
-      title: "Protection",
-      description: "Professional repackaging ensures your items arrive safely at their destination.",
-      icon: <CheckCircle className="h-6 w-6 text-green-500" />
-    }
-  ]
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="bg-white min-h-screen">
-
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-purple-50 to-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-6">
-              REEMBALAGEM: Smarter International Shipping
-            </h1>
-            <p className="text-xl text-gray-700 mb-8">
-              Our professional repackaging service helps you save money, reduce waste, and ensure your items arrive safely at their destination in any of our 17 service countries.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button className="bg-blue-600 hover:bg-blue-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 via-purple-500 to-green-400 bg-clip-text text-transparent mt-16">
+            Transform Your Packaging Experience
+          </h1>
+          <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
+            Professional repackaging solutions that enhance protection, reduce costs, and elevate your product presentation.
+          </p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href={"/auth"}>
+            <button className="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center gap-2">
+                Get Started <ArrowRight className="w-5 h-5" />
+            </button>
+          </Link>
+          <Link href={"/explanation"}>
+            <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-colors duration-300">
                 Learn More
-              </Button>
-              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-                Get a Quote
-              </Button>
+            </button>
+          </Link>
+          </div>
+        </motion.div>
+
+        {/* Process Visualizer */}
+        <div className="mt-24">
+          <h2 className="text-3xl font-bold text-center mb-12">Our Process</h2>
+          <div className="relative">
+            <div className="h-2 bg-gray-200 rounded-full max-w-3xl mx-auto">
+              <motion.div
+                className="h-full bg-blue-600 rounded-full"
+                initial={{ width: '0%' }}
+                animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+              {steps.map((step, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: currentStep === index ? 1 : 0.5,
+                    y: 0,
+                    scale: currentStep === index ? 1.05 : 1
+                  }}
+                  className="bg-white p-6 rounded-xl shadow-lg"
+                >
+                  <div className="flex items-center justify-center mb-4">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-center">{step.title}</h3>
+                  <p className="text-gray-600 text-center">{step.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Process Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">How Repackaging Works</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our professional repackaging service optimizes your shipments in four simple steps
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            {steps.map((step, index) => (
-              <Card 
-                key={index} 
-                className={`overflow-hidden transition-all duration-300 ${activeStep === index ? 'ring-2 ring-blue-500 shadow-lg' : 'hover:shadow-md'}`}
-                onClick={() => {
-                  setActiveStep(index)
-                  setIsPlaying(false)
-                }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <div className="bg-blue-50 p-2 rounded-full">
-                      {step.icon}
-                    </div>
-                    <span className="text-2xl font-bold text-blue-600">{index + 1}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 mb-4">{step.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Benefits of Repackaging</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover why thousands of customers choose our repackaging service for international shipping
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Benefits Grid */}
+        <div className="mt-24">
+          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Us</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    {benefit.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white p-6 rounded-xl shadow-lg border-2 border-transparent hover:border-blue-600/20"
+              >
+                <div className="flex items-center justify-center mb-4 text-blue-600">
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-center">{benefit.title}</h3>
+                <p className="text-gray-600 text-center">{benefit.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get answers to common questions about our repackaging service
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Is repackaging safe for fragile items?</h3>
-                <p className="text-gray-600">
-                  Yes! Our professional team is trained to handle delicate items with care. We use appropriate cushioning materials and techniques to ensure your fragile items are well-protected.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">How much can I save with repackaging?</h3>
-                <p className="text-gray-600">
-                  Customers typically save 30-80% on international shipping costs through our repackaging service, depending on the original packaging and number of items consolidated.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Will you discard the original packaging?</h3>
-                <p className="text-gray-600">
-                  By default, we remove and recycle original packaging. If you wish to keep original boxes (for warranties, etc.), you can specify this in your shipping preferences.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">Which countries do you serve?</h3>
-                <p className="text-gray-600">
-                  We currently provide repackaging and forwarding services to 17 countries across North America, Europe, Asia, and Australia. Check our Countries page for the full list.
-                </p>
-              </CardContent>
-            </Card>
+        {/* FAQ Accordion */}
+        <div className="mt-24">
+          <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+          <div className="max-w-3xl mx-auto">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={false}
+                className="mb-4"
+              >
+                <button
+                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
+                  className="w-full flex items-center justify-between p-4 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-colors duration-300"
+                  aria-expanded={expandedFAQ === index}
+                >
+                  <span className="font-semibold text-left">{faq.question}</span>
+                  <ChevronDown
+                    className={`w-5 h-5 transform transition-transform duration-300 ${
+                      expandedFAQ === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {expandedFAQ === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-4 bg-gray-50 rounded-b-lg">
+                        <p className="text-gray-600">{faq.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
     </div>
-  )
+  );
 }

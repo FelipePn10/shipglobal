@@ -18,7 +18,7 @@ const ConsolidacaoProdutos = () => {
     <div className="bg-white text-gray-800 font-sans">
       <header className="bg-blue-600 text-white py-8">
         <div className="container mx-auto px-4 mt-10">
-          <h1 className="text-3xl font-bold mb-4">Consolidação de Produtos</h1>
+          <h1 className="text-3xl font-bold mb-4 mt-16">Consolidação de Produtos</h1>
           <p className="text-xl">Economize em frete internacional com nossa solução de consolidação</p>
         </div>
       </header>
@@ -75,7 +75,7 @@ const ConsolidacaoProdutos = () => {
                   A consolidação de produtos é um serviço que permite reunir várias compras de diferentes lojas em um único pacote antes do envio internacional, reduzindo significativamente os custos de frete.
                 </p>
                 <p className="mb-4">
-                  Nosso processo de consolidação é simples e eficiente, proporcionando economia e conveniência para suas compras internacionais.
+                
                 </p>
               </div>
               <div className="md:w-1/2 bg-blue-50 p-4 rounded-lg">

@@ -540,7 +540,7 @@ export function CoverageMap() {
 
               <div className="flex justify-between items-center">
                 <p className="text-sm font-bold text-blue-800">{selectedLocation.price}</p>
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                <Button size="sm" className="text-white bg-blue-600 hover:bg-blue-700">
                   <Navigation className="h-3 w-3 mr-1" />
                   {t('coverageMap.useAddressButton')}
                 </Button>

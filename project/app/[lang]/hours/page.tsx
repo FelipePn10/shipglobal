@@ -1,191 +1,416 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Globe, Clock, MapPin, Sun, Moon, Sunrise, Sunset } from 'lucide-react';
+import React, { useState } from 'react';
 
-const HorariosEmpresa = () => {
-  const [currentTab, setCurrentTab] = useState('americas');
-  const [isVisible, setIsVisible] = useState(false);
+interface HorarioProps {
+  pais: string;
+  bandeira: string;
+  suporte: string;
+  atendimento: string;
+  logistica: string;
+  fuso: string;
+}
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+const HorariosPage = () => {
+  const [filtroAberto, setFiltroAberto] = useState(true);
+  const [paisSelecionado, setPaisSelecionado] = useState<string | null>(null);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState<string>("todos");
+  
+  const paises: HorarioProps[] = [
+    {
+      pais: "Brasil",
+      bandeira: "🇧🇷",
+      suporte: "8h às 22h (Segunda a Sexta), 9h às 18h (Sábado)",
+      atendimento: "9h às 19h (Segunda a Sexta)",
+      logistica: "8h às 18h (Segunda a Sexta)",
+      fuso: "GMT-3",
+    },
+    {
+      pais: "Estados Unidos",
+      bandeira: "🇺🇸",
+      suporte: "7h às 21h (Segunda a Sábado)",
+      atendimento: "8h às 18h (Segunda a Sexta)",
+      logistica: "7h às 19h (Segunda a Sexta)",
+      fuso: "GMT-5 a GMT-8",
+    },
+    {
+      pais: "Portugal",
+      bandeira: "🇵🇹",
+      suporte: "9h às 19h (Segunda a Sexta)",
+      atendimento: "10h às 18h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+1",
+    },
+    {
+      pais: "Alemanha",
+      bandeira: "🇩🇪",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+2",
+    },
+    {
+      pais: "Reino Unido",
+      bandeira: "🇬🇧",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+1",
+    },
+    {
+      pais: "França",
+      bandeira: "🇫🇷",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+2",
+    },
+    {
+      pais: "Espanha",
+      bandeira: "🇪🇸",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+2",
+    },
+    {
+      pais: "Itália",
+      bandeira: "🇮🇹",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+2",
+    },
+    {
+      pais: "Canadá",
+      bandeira: "🇨🇦",
+      suporte: "8h às 18h (Segunda a Sexta)",
+      atendimento: "9h às 17h (Segunda a Sexta)",
+      logistica: "8h às 17h (Segunda a Sexta)",
+      fuso: "GMT-4 a GMT-8",
+    },
+    {
+      pais: "México",
+      bandeira: "🇲🇽",
+      suporte: "8h às 18h (Segunda a Sexta)",
+      atendimento: "9h às 17h (Segunda a Sexta)",
+      logistica: "8h às 17h (Segunda a Sexta)",
+      fuso: "GMT-6",
+    },
+    {
+      pais: "Chile",
+      bandeira: "🇨🇱",
+      suporte: "8h às 18h (Segunda a Sexta)",
+      atendimento: "9h às 17h (Segunda a Sexta)",
+      logistica: "8h às 17h (Segunda a Sexta)",
+      fuso: "GMT-3",
+    },
+    {
+      pais: "Austrália",
+      bandeira: "🇦🇺",
+      suporte: "9h às 17h (Segunda a Sexta)",
+      atendimento: "10h às 16h (Segunda a Sexta)",
+      logistica: "9h às 16h (Segunda a Sexta)",
+      fuso: "GMT+10",
+    },
+    {
+      pais: "Japão",
+      bandeira: "🇯🇵",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+9",
+    },
+    {
+      pais: "China",
+      bandeira: "🇨🇳",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+8",
+    },
+    {
+      pais: "Índia",
+      bandeira: "🇮🇳",
+      suporte: "9h às 18h (Segunda a Sexta)",
+      atendimento: "10h às 17h (Segunda a Sexta)",
+      logistica: "9h às 17h (Segunda a Sexta)",
+      fuso: "GMT+5:30",
+    },
+    {
+      pais: "Emirados Árabes",
+      bandeira: "🇦🇪",
+      suporte: "9h às 18h (Domingo a Quinta)",
+      atendimento: "10h às 17h (Domingo a Quinta)",
+      logistica: "9h às 17h (Domingo a Quinta)",
+      fuso: "GMT+4",
+    }
+  ];
 
-  type RegioesType = {
-    [key: string]: {
-      pais: string;
-      cidade: string;
-      fuso: string;
-      horarioComercial: string;
-      bandeira: string;
-    }[];
+  // Filtra os países com base na seleção
+  const paisesFiltrados = paisSelecionado 
+    ? paises.filter(p => p.pais === paisSelecionado) 
+    : paises;
+
+  // Obtém a hora atual em diferentes fusos
+  const getHoraAtual = (fuso: string) => {
+    try {
+      // Extrai o valor do GMT
+      const match = fuso.match(/GMT([+-])(\d+)(?::(\d+))?/);
+      if (!match) return "Indisponível";
+      
+      const sinal = match[1] === "+" ? 1 : -1;
+      const horas = parseInt(match[2]) * sinal;
+      const minutos = match[3] ? parseInt(match[3]) * sinal : 0;
+      
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const localTime = new Date(utc + (3600000 * horas) + (60000 * minutos));
+      
+      return localTime.toLocaleTimeString('pt-BR', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+    } catch (e) {
+      return "Indisponível";
+    }
   };
 
-  const regioes: RegioesType = {
-    americas: [
-      { pais: 'Brasil', cidade: 'São Paulo', fuso: 'GMT-3', horarioComercial: '9h às 18h', bandeira: '🇧🇷' },
-      { pais: 'Estados Unidos', cidade: 'Nova York', fuso: 'GMT-5', horarioComercial: '9h às 17h', bandeira: '🇺🇸' },
-      { pais: 'Canadá', cidade: 'Toronto', fuso: 'GMT-5', horarioComercial: '9h às 17h', bandeira: '🇨🇦' },
-      { pais: 'Paraguai', cidade: 'Assunção', fuso: 'GMT-4', horarioComercial: '8h às 17h', bandeira: '🇵🇾' },
-    ],
-    europa: [
-      { pais: 'Reino Unido', cidade: 'Londres', fuso: 'GMT+0', horarioComercial: '9h às 17h', bandeira: '🇬🇧' },
-      { pais: 'França', cidade: 'Paris', fuso: 'GMT+1', horarioComercial: '9h às 18h', bandeira: '🇫🇷' },
-      { pais: 'Alemanha', cidade: 'Berlim', fuso: 'GMT+1', horarioComercial: '9h às 18h', bandeira: '🇩🇪' },
-      { pais: 'Espanha', cidade: 'Madri', fuso: 'GMT+1', horarioComercial: '9h às 18h', bandeira: '🇪🇸' },
-      { pais: 'Itália', cidade: 'Roma', fuso: 'GMT+1', horarioComercial: '9h às 18h', bandeira: '🇮🇹' },
-      { pais: 'Bélgica', cidade: 'Bruxelas', fuso: 'GMT+1', horarioComercial: '9h às 18h', bandeira: '🇧🇪' },
-      { pais: 'Turquia', cidade: 'Istambul', fuso: 'GMT+3', horarioComercial: '9h às 18h', bandeira: '🇹🇷' },
-    ],
-    asia: [
-      { pais: 'Japão', cidade: 'Tóquio', fuso: 'GMT+9', horarioComercial: '9h às 18h', bandeira: '🇯🇵' },
-      { pais: 'China', cidade: 'Pequim', fuso: 'GMT+8', horarioComercial: '9h às 18h', bandeira: '🇨🇳' },
-      { pais: 'Tailândia', cidade: 'Bangkok', fuso: 'GMT+7', horarioComercial: '9h às 18h', bandeira: '🇹🇭' },
-    ],
-    oceania: [
-      { pais: 'Austrália', cidade: 'Sydney', fuso: 'GMT+11', horarioComercial: '9h às 17h', bandeira: '🇦🇺' },
-    ],
-  };
-
-  const handleTabChange = (tab: React.SetStateAction<string>) => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setCurrentTab(tab);
-      setIsVisible(true);
-    }, 300);
+  // Verifica se o serviço está disponível no momento
+  const verificarDisponibilidade = (horario: string, fuso: string) => {
+    try {
+      const horaLocal = getHoraAtual(fuso);
+      if (horaLocal === "Indisponível") return false;
+      
+      const [horaAtual, minAtual] = horaLocal.split(':').map(Number);
+      
+      const [periodo, dias] = horario.split(' (');
+      const [inicio, fim] = periodo.split(' às ');
+      
+      const [horaInicio] = inicio.split('h').map(Number);
+      const [horaFim] = fim.split('h').map(Number);
+      
+      // Verifica dias da semana
+      const diaSemanaAtual = new Date().getDay(); // 0 = Domingo, 1 = Segunda, ...
+      
+      const diaDisponivel = () => {
+        if (dias.includes("Segunda a Sexta") && diaSemanaAtual >= 1 && diaSemanaAtual <= 5) {
+          return true;
+        }
+        if (dias.includes("Segunda a Sábado") && diaSemanaAtual >= 1 && diaSemanaAtual <= 6) {
+          return true;
+        }
+        if (dias.includes("Domingo a Quinta") && (diaSemanaAtual === 0 || (diaSemanaAtual >= 1 && diaSemanaAtual <= 4))) {
+          return true;
+        }
+        if (dias.includes("Sábado") && diaSemanaAtual === 6) {
+          return true;
+        }
+        return false;
+      };
+      
+      return diaDisponivel() && horaAtual >= horaInicio && horaAtual < horaFim;
+    } catch (e) {
+      return false;
+    }
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-4 mt-16">Horários de Atendimento</h1>
-          <p className="text-lg text-blue-600 max-w-2xl mx-auto">
-            Estamos disponíveis para atendê-lo em diferentes fusos horários ao redor do mundo. Confira nossos horários de atendimento por região.
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      {/* Header */}
+      <header className="bg-blue-700 text-white py-8">
+        <div className="container mx-auto px-4 mt-16">
+          <h1 className="text-3xl md:text-4xl font-bold text-center">Horários de Funcionamento</h1>
+          <p className="text-center mt-2 text-blue-100">
+            Confira nossos horários de atendimento nos 16 países onde atuamos
           </p>
         </div>
-
-        {/* Ilustração animada */}
-        <div className="flex justify-center mb-10">
-          <div className="relative w-64 h-64">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Globe className="w-32 h-32 text-blue-500 animate-pulse" />
-            </div>
-            <div className="absolute top-0 left-0 animate-spin-slow">
-              <Clock className="w-10 h-10 text-purple-400" />
-            </div>
-            <div className="absolute bottom-0 right-0 animate-bounce">
-              <Sun className="w-10 h-10 text-yellow-400" />
-            </div>
-            <div className="absolute top-0 right-0 animate-bounce">
-              <Moon className="w-8 h-8 text-indigo-400" />
-            </div>
-            <div className="absolute bottom-0 left-0 animate-pulse">
-              <MapPin className="w-8 h-8 text-pink-400" />
+      </header>
+      
+      {/* Filtros */}
+      <div className="bg-white shadow-md">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <button 
+              onClick={() => setFiltroAberto(!filtroAberto)}
+              className="flex items-center text-blue-700 font-medium mb-4 md:mb-0"
+            >
+              {filtroAberto ? (
+                <>
+                  Ocultar filtros 
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                  </svg>
+                </>
+              ) : (
+                <>
+                  Mostrar filtros 
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </>
+              )}
+            </button>
+            
+            <div className="flex items-center space-x-4">
+              <select
+                value={categoriaSelecionada}
+                onChange={(e) => setCategoriaSelecionada(e.target.value)}
+                className="bg-blue-50 border border-blue-200 text-blue-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="todos">Todos os serviços</option>
+                <option value="suporte">Suporte</option>
+                <option value="atendimento">Atendimento</option>
+                <option value="logistica">Logística</option>
+              </select>
             </div>
           </div>
+          
+          {filtroAberto && (
+            <div className="mt-4 pt-4 border-t border-gray-100">
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setPaisSelecionado(null)}
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    paisSelecionado === null 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                  }`}
+                >
+                  Todos os países
+                </button>
+                
+                {paises.map((p) => (
+                  <button
+                    key={p.pais}
+                    onClick={() => setPaisSelecionado(p.pais)}
+                    className={`px-3 py-1 rounded-full text-sm font-medium flex items-center ${
+                      paisSelecionado === p.pais 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                    }`}
+                  >
+                    <span className="mr-1">{p.bandeira}</span> {p.pais}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Tabs de regiões */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {Object.keys(regioes).map((regiao) => (
-            <button
-              key={regiao}
-              onClick={() => handleTabChange(regiao)}
-              className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
-                currentTab === regiao
-                  ? 'bg-blue-600 text-white shadow-lg scale-105'
-                  : 'bg-white text-blue-600 hover:bg-blue-100'
-              }`}
-            >
-              {regiao === 'americas' && 'Américas'}
-              {regiao === 'europa' && 'Europa'}
-              {regiao === 'asia' && 'Ásia'}
-              {regiao === 'oceania' && 'Oceania'}
-            </button>
-          ))}
-        </div>
-
-        {/* Conteúdo da tab selecionada com animação */}
-        <div className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {regioes[currentTab].map((local, index) => (
-              <div 
-                key={local.pais} 
-                className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  animationFillMode: 'both',
-                }}
-              >
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <span className="text-4xl mr-3">{local.bandeira}</span>
-                    <div>
-                      <h3 className="text-xl font-bold text-blue-800">{local.pais}</h3>
-                      <p className="text-blue-600">{local.cidade}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center mb-2">
-                    <Clock className="w-5 h-5 text-blue-500 mr-2" />
-                    <p className="text-gray-700">Fuso horário: <span className="font-semibold">{local.fuso}</span></p>
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <div className="flex items-center mr-2">
-                      <Sunrise className="w-5 h-5 text-yellow-500 mr-1" />
-                      <Sunset className="w-5 h-5 text-pink-500" />
-                    </div>
-                    <p className="text-gray-700">Horário comercial: <span className="font-semibold">{local.horarioComercial}</span></p>
+      </div>
+      
+      {/* Conteúdo principal */}
+      <main className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {paisesFiltrados.map((pais) => (
+            <div key={pais.pais} className="bg-white rounded-xl shadow-lg overflow-hidden transform transition hover:scale-105">
+              <div className="bg-blue-600 py-4 px-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-bold text-white flex items-center">
+                    <span className="text-2xl mr-2">{pais.bandeira}</span> {pais.pais}
+                  </h2>
+                  <div className="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs font-medium">
+                    {pais.fuso}
                   </div>
                 </div>
+                <p className="text-blue-100 mt-1">
+                  Hora local: {getHoraAtual(pais.fuso)}
+                </p>
+              </div>
+              
+              <div className="p-6">
+                {(categoriaSelecionada === "todos" || categoriaSelecionada === "suporte") && (
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-gray-700">Suporte</h3>
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                        verificarDisponibilidade(pais.suporte, pais.fuso)
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-red-100 text-red-700'
+                      }`}>
+                        {verificarDisponibilidade(pais.suporte, pais.fuso) ? 'Disponível' : 'Indisponível'}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 mt-1">{pais.suporte}</p>
+                  </div>
+                )}
                 
-                <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-4">
-                  <p className="text-white text-center">
-                    Envie suas encomendas para redirecionamento
+                {(categoriaSelecionada === "todos" || categoriaSelecionada === "atendimento") && (
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-gray-700">Atendimento</h3>
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                        verificarDisponibilidade(pais.atendimento, pais.fuso)
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-red-100 text-red-700'
+                      }`}>
+                        {verificarDisponibilidade(pais.atendimento, pais.fuso) ? 'Disponível' : 'Indisponível'}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 mt-1">{pais.atendimento}</p>
+                  </div>
+                )}
+                
+                {(categoriaSelecionada === "todos" || categoriaSelecionada === "logistica") && (
+                  <div>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-gray-700">Logística</h3>
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                        verificarDisponibilidade(pais.logistica, pais.fuso)
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-red-100 text-red-700'
+                      }`}>
+                        {verificarDisponibilidade(pais.logistica, pais.fuso) ? 'Disponível' : 'Indisponível'}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 mt-1">{pais.logistica}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+      
+      {/* Seção informativa */}
+      <section className="bg-gradient-to-r from-purple-500 via-pink-400 to-yellow-200 py-12 mt-8">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Informações Importantes</h2>
+            <div className="bg-white bg-opacity-90 rounded-xl p-6 shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-700 mb-2">Feriados Locais</h3>
+                  <p className="text-gray-700">
+                    Nossos serviços podem sofrer alterações em feriados locais de cada país. 
+                    Consulte o calendário de feriados para informações detalhadas.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-700 mb-2">Atendimento de Emergência</h3>
+                  <p className="text-gray-700">
+                    Para situações urgentes fora do horário comercial, 
+                    disponibilizamos suporte de emergência através do nosso chat online.
                   </p>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-
-        {/* Informações adicionais */}
-        <div className="mt-12 bg-white rounded-xl shadow-lg p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">Informações Importantes</h2>
-          <div className="space-y-4">
-            <p className="text-gray-700">
-              <span className="font-semibold text-blue-600">Feriados:</span> Nossos horários podem sofrer alterações em feriados locais. Consulte nosso calendário de feriados para mais informações.
-            </p>
-            <p className="text-gray-700">
-              <span className="font-semibold text-blue-600">Atendimento de emergência:</span> Para casos urgentes, disponibilizamos um canal de atendimento 24 horas. Entre em contato com nossa central de suporte.
-            </p>
-            <p className="text-gray-700">
-              <span className="font-semibold text-blue-600">Agendamento:</span> Para melhor atendimento, recomendamos o agendamento prévio de consultas sobre suas encomendas internacionais.
-            </p>
+      </section>
+      
+      {/* Footer */}
+      <footer className="bg-blue-800 text-white py-6">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <p>© 2025 Sua Empresa de Redirecionamento de Compras. Todos os direitos reservados.</p>
+            <p className="mt-2 text-blue-200">Sede: Brasil | Atuação em 16 países</p>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };
 
-// Adicionar esta animação ao seu arquivo CSS ou através de um estilo global
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .animate-spin-slow {
-    animation: spin-slow 8s linear infinite;
-  }
-`;
-document.head.appendChild(style);
-
-export default HorariosEmpresa;
+export default HorariosPage;

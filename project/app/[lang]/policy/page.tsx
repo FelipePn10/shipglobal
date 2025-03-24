@@ -14,70 +14,9 @@ export default function PrivacyPolicyContent() {
   }
 
   return (
-    <div className="space-y-8 mt-16">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          How we protect your data across our international shipping operations in compliance with global regulations
-        </p>
-      </div>
-
+    <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <Card className="p-6 md:sticky md:top-24 h-fit">
-          <h2 className="text-xl font-semibold mb-4">Contents</h2>
-          <nav className="space-y-2">
-            <button
-              onClick={() => handleNavClick("intro")}
-              className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                openSection === "intro" ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted"
-              }`}
-            >
-              Introduction
-            </button>
-            <button
-              onClick={() => handleNavClick("gdpr")}
-              className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                openSection === "gdpr" ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted"
-              }`}
-            >
-              GDPR (European Union)
-            </button>
-            <button
-              onClick={() => handleNavClick("lgpd")}
-              className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                openSection === "lgpd" ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted"
-              }`}
-            >
-              LGPD (Brazil)
-            </button>
-            <button
-              onClick={() => handleNavClick("ccpa")}
-              className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                openSection === "ccpa" ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted"
-              }`}
-            >
-              CCPA (California, USA)
-            </button>
-            <button
-              onClick={() => handleNavClick("pipeda")}
-              className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                openSection === "pipeda" ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted"
-              }`}
-            >
-              PIPEDA (Canada)
-            </button>
-            <button
-              onClick={() => handleNavClick("cookies")}
-              className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
-                openSection === "cookies" ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted"
-              }`}
-            >
-              Cookie Policy
-            </button>
-          </nav>
-        </Card>
-
-        <div className="md:col-span-3 space-y-8">
+        <div className="md:col-span-3 space-y-8 mt-16">
           <section id="intro" className="scroll-mt-24">
             <Card className="p-8">
               <div className="flex items-center gap-4 mb-6">
@@ -86,7 +25,7 @@ export default function PrivacyPolicyContent() {
                 </div>
                 <h2 className="text-2xl font-bold">Introduction</h2>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 -mt-4">
                 <p>
                   At our international shipping company, we are committed to protecting your privacy and ensuring the
                   security of your personal information. This Privacy Policy explains how we collect, use, disclose, and
