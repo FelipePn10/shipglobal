@@ -178,14 +178,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* One Stop Service Section */}
+      {/* One Stop Service Section
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white rounded-lg shadow-xl overflow-hidden">
             <OneStopService />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Benefits Section */}
       <BenefitsSection lang={lang} benefits={benefits} />

@@ -1,62 +1,27 @@
-"use client";
+import { GalleryVerticalEnd } from "lucide-react"
+import { LoginForm } from "./components/login-form"
+import Image from "next/image"
 
-import React from 'react';
-import { use } from 'react'; // Importe o hook use
-import { useAuth } from './hooks/useAuth';
-import { AuthLayout } from './components/AuthLayout';
-import { BrandingSection } from './components/BrandingSection';
-import { LoginForm } from './components/LoginForm';
-import { RegisterForm } from './components/RegisterForm';
-import { countries } from './data/countries';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-export default function AuthPage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = use(params); // Desembrulha o params com React.use()
-  const {
-    currentLanguage,
-    showPassword,
-    isLoading,
-    error,
-    activeTab,
-    handleTabChange,
-    handlePasswordToggle,
-    handleLogin,
-    handleRegister,
-  } = useAuth(lang); // Passe o lang desembrulhado para useAuth
 
+export default function LoginPage() {
   return (
-    <AuthLayout>
-      <BrandingSection currentLanguage={currentLanguage} />
-      <div className="lg:pl-8">
-        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-          <div className="px-6">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="register">Cadastro</TabsTrigger>
-            </TabsList>
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <a href="#" className="flex items-center gap-2 font-medium">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <GalleryVerticalEnd className="size-4" />
+            </div>
+            Acme Inc.
+          </a>
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-xs">
+            <LoginForm />
           </div>
-          <LoginForm
-            countries={countries}
-            currentLanguage={currentLanguage}
-            showPassword={showPassword}
-            isLoading={isLoading}
-            error={error}
-            activeTab={activeTab}
-            handlePasswordToggle={handlePasswordToggle}
-            handleLogin={handleLogin}
-          />
-          <RegisterForm
-            countries={countries}
-            currentLanguage={currentLanguage}
-            showPassword={showPassword}
-            isLoading={isLoading}
-            error={error}
-            activeTab={activeTab}
-            handlePasswordToggle={handlePasswordToggle}
-            handleRegister={handleRegister}
-          />
-        </Tabs>
+        </div>
       </div>
-    </AuthLayout>
-  );
+    </div>
+  )
 }

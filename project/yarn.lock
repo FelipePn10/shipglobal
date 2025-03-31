@@ -1510,7 +1510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-label@npm:^2.1.0":
+"@radix-ui/react-label@npm:^2.1.2":
   version: 2.1.2
   resolution: "@radix-ui/react-label@npm:2.1.2"
   dependencies:
@@ -7764,7 +7764,7 @@ __metadata:
     "@radix-ui/react-dialog": "npm:^1.1.6"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.1"
     "@radix-ui/react-hover-card": "npm:^1.1.1"
-    "@radix-ui/react-label": "npm:^2.1.0"
+    "@radix-ui/react-label": "npm:^2.1.2"
     "@radix-ui/react-menubar": "npm:^1.1.1"
     "@radix-ui/react-navigation-menu": "npm:^1.2.0"
     "@radix-ui/react-popover": "npm:^1.1.1"
